@@ -278,3 +278,161 @@ This will sort records by `publishedAt` in descending order.
 $repository = $em->getRepository(Article::class);
 $articles = $repository->findBy(['published' => '1'], ['publishedAt' => 'DESC']);
 ```
+
+
+### Relations
+
+Let's add relation *Comment -> Article*:
+
+```
+php bin/console make:entity
+
+> Comment
+
+Your entity already exists! So let's add some new fields!
+
+New property name (press <return> to stop adding fields):
+> author
+
+Field type (enter ? to see all types) [string]:
+> relation
+
+What class should this entity be related to?:
+> Article
+
+Relation type? [ManyToOne, OneToMany, ManyToMany, OneToOne]:
+> ManyToOne
+```
+
+This command will update files: `src/Entity/Article.php`, `src/Entity/Comment.php`.
+Look at `src/Entity/Article.php`:
+
+```php
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
+ */
+class Article
+{
+    // ...
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="article")
+     */
+    private $comments;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
+    // ...
+}
+```
+
+Look at `src/Entity/Comment.php`:
+
+```php
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
+ */
+class Comment
+{
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Article", inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $article;
+}
+```
+
+And, it's easy to remember: the *owning side* is the side where the actual column appears in the database. 
+Because the `comment` table will have the `article_id` column, the `Comment.article` property is the owning side. 
+And so, `Article.comments` is the *inverse side*.
+
+The reason this is so important is that, when you relate two entities together and save, 
+Doctrine only looks at the *owning side* of the relationship to figure out what to persist to the database. 
+When Doctrine saves, it looks at the `article` property on `Comment` - the owning side - sees that it is `null`, and tries to save the `Comment` with no `Article`!
+
+The *owning side* is the only side where the data matters when saving. 
+In fact, the entire purpose of the inverse side of the relationship is just convenience! 
+It only exists because it's useful to be able to say `$article->getComments()`.
+
+### Sort in DESC order
+
+Add annotation `@ORM\OrderBy({"createdAt" = "DESC"})` to `src/Entity/Article.php`:
+
+```php
+class Article {
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="article")
+     * @ORM\OrderBy({"createdAt" = "DESC"})
+     */
+    private $comments;
+    // ...
+}
+```
+
+## Query Builder
+
+To write a custom query, you can either create a *DQL* (Doctrine query language) string directly, 
+or you can use the *query builder* that helps create a DQL string.
+
+Method returns a array of Comment objects. It does not, for example, now return Comment and Article objects.
+
+Instead, Doctrine takes that extra article data and stores it in the background for later. 
+But, the new `addSelect()` does not affect the return value. That's way different than using raw SQL.
+
+Edit `src/Repository/ArticleRepository.php`:
+
+```php
+class ArticleRepository extends ServiceEntityRepository
+{
+    public function findAllPublishedOrderedByNewest()
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.publishedAt IS NOT NULL')
+            ->orderBy('a.publishedAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+    // ...
+```
+
+### Join article to comment
+
+If your page has a lot of queries because Doctrine is making extra queries across a relationship, just join over that relationship and use `addSelect()` to fetch all the data you need at once.
+
+```php
+class CommentRepository extends ServiceEntityRepository
+{
+    public function findAllWithSearch(?string $term)
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->innerJoin('c.article', 'a')
+            ->addSelect('a');
+            
+        if ($term) {
+            $qb->andWhere('c.content LIKE :term OR c.authorName LIKE :term OR a.title LIKE :term')
+                ->setParameter('term', '%' . $term . '%')
+            ;
+        }
+        
+        return $qb
+            ->orderBy('c.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+```
+
+## Doctrine config
+
+Let's see the meaning of some keys at `config/packages/doctrine.yaml`:
+
+**Server version**
+
+```
+doctrine:
+    dbal:
+        server_version: '5.7'
+```
+
+This tells Doctrine that when it interacts with the database, it should expect that our DB has all the features supported by MySQL 5.7, including that native *JSON* column type.
