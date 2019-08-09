@@ -1,12 +1,6 @@
 # Useful Symfony components
 
-## Pagination
-
-Install [KnpPaginatorBundle](https://github.com/KnpLabs/KnpPaginatorBundle):
-
-```
-composer require knplabs/knp-paginator-bundle
-```
+[Symfony Components](https://symfony.com/doc/current/components/index.html) implement common features needed to develop websites. They are the foundation of the Symfony full-stack framework, but they can also be used standalone.
 
 ## symfony / asset
 
