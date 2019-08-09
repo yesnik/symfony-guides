@@ -170,3 +170,19 @@ We can open a file, and then decode its JSON:
 ```
 app.secrets: '%env(json:file:SECRETS_FILE)%'
 ```
+
+## Bundle config
+
+Each file in `config/packages/` configures a some bundle. Any configuration under `knp_markdown` is passed to the `KnpMarkdownBundle`. Any config under `framework` configures `FrameworkBundle`, which is Symfony's one, "core" bundle.
+
+### Show default bundle config
+
+```
+./bin/console config:dump TwigBundle
+```
+
+Also we can use alias:
+
+```
+./bin/console config:dump knp_markdown
+```
