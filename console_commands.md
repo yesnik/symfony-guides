@@ -206,6 +206,52 @@ php bin/console debug:twig
 php bin/console make:user
 ```
 
+### Generate migration file
+
+**Create migration manually**
+
+This command analyzes Entity's changes and creates the new migration file.
+
+```
+bin/console make:migration
+```
+
+This command will create file `src/Migrations/Version20181008115412.php`.
+
+**Generate migration based on schema changes**
+
+```
+php bin/console doctrine:migrations:diff
+```
+
+### Apply migration
+
+```
+bin/console doctrine:migrations:migrate
+```
+
+### Show status of migrations
+
+```
+bin/console doctrine:migrations:status
+```
+
+### Skip migration
+
+You can skip single migrations by explicitly adding them to the `migration_versions` table:
+
+```
+php bin/console doctrine:migrations:version YYYYMMDDHHMMSS --add
+```
+
+### Execute SQL query from console
+
+This command allows us to execute query from console:
+
+```
+php bin/console doctrine:query:sql 'SELECT * FROM comment'
+```
+
 ## Create console command
 
 Install bundle:
