@@ -205,3 +205,25 @@ php bin/console debug:twig
 ```php
 php bin/console make:user
 ```
+
+## Create console command
+
+Install bundle:
+
+```
+composer require maker --dev
+```
+
+Create console command, enter name in dialog `article:stats`:
+
+```
+php bin/console make:command
+```
+
+It will create a file `src/Command/ArticleStatsCommand.php`.
+
+We can run our new command:
+
+```
+bin/console article:stats
+```
