@@ -10,3 +10,11 @@ They are dependent from Symfony components.
 ```
 composer require knplabs/knp-paginator-bundle
 ```
+
+## FOSRestBundle
+
+[FOSRestBundle](https://github.com/FriendsOfSymfony/FOSRestBundle) provides various tools to rapidly develop RESTful API's with Symfony:
+
+```
+composer require friendsofsymfony/rest-bundle
+```
