@@ -11,3 +11,11 @@ Also it gives us `asset()` method in templates.
 ```
 composer require asset
 ```
+
+## symfony / serializer
+
+The [serializer](https://github.com/symfony/serializer) component is meant to be used to turn objects into a specific format (XML, JSON, YAML, etc.) and the other way around. This command will install `serializer-pack` - serializer with additional components:
+
+```
+composer require serializer
+```
