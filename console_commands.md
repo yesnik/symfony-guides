@@ -112,14 +112,14 @@ This command will create controller, form, templates for entity.
 
 *Way 1:*
 ```
-php -S 127.0.0.1:8000 -t public
+symfony server:start
 ```
+This command will start [Symfony Local web server](https://symfony.com/doc/current/setup/symfony_server.html)
 
 *Way 2:*
 ```
-./bin/console server:start
+php -S 127.0.0.1:8000 -t public
 ```
-To make this work, don't forget to add: `composer require server`
 
 ### Show available routes
 ```
