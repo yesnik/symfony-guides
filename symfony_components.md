@@ -19,3 +19,11 @@ The [serializer](https://github.com/symfony/serializer) component is meant to be
 ```
 composer require serializer
 ```
+
+## symfony / validator
+
+The [validator](https://github.com/symfony/validator) component provides tools to validate values.
+
+```
+composer require validator
+```
