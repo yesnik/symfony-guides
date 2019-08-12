@@ -19,4 +19,11 @@ composer require knplabs/knp-paginator-bundle
 composer require friendsofsymfony/rest-bundle
 ```
 
+## SensioFrameworkExtraBundle
+
+[SensioFrameworkExtraBundle](https://github.com/sensiolabs/SensioFrameworkExtraBundle) allows to configure controllers with annotations.
+
+```
+composer require annotations
+```
 
