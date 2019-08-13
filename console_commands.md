@@ -112,7 +112,7 @@ This command will create controller, form, templates for entity.
 
 *Way 1:*
 ```
-symfony server:start
+symfony serve
 ```
 This command will start [Symfony Local web server](https://symfony.com/doc/current/setup/symfony_server.html)
 
