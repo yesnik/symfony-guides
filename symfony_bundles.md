@@ -19,6 +19,14 @@ composer require knplabs/knp-paginator-bundle
 composer require friendsofsymfony/rest-bundle
 ```
 
+## FOSUserBundle
+
+[FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle) provides user management for Symfony project. Compatible with Doctrine ORM & ODM, and custom storages.
+
+```
+composer require friendsofsymfony/user-bundle
+```
+
 ## SensioFrameworkExtraBundle
 
 [SensioFrameworkExtraBundle](https://github.com/sensiolabs/SensioFrameworkExtraBundle) allows to configure controllers with annotations.
