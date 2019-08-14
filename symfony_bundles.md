@@ -11,6 +11,15 @@ They are dependent from Symfony components.
 composer require knplabs/knp-paginator-bundle
 ```
 
+## FOSOAuthServerBundle
+
+[FOSOAuthServerBundle](https://github.com/FriendsOfSymfony/FOSOAuthServerBundle) is a server side OAuth2 Bundle for Symfony/
+
+```
+composer require friendsofsymfony/oauth-server-bundle
+```
+
+
 ## FOSRestBundle
 
 [FOSRestBundle](https://github.com/FriendsOfSymfony/FOSRestBundle) provides various tools to rapidly develop RESTful API's with Symfony:
