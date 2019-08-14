@@ -12,6 +12,14 @@ Also it gives us `asset()` method in templates.
 composer require asset
 ```
 
+## symfony / security
+
+The [security](https://github.com/symfony/security) component provides a complete security system for your web application.
+
+```
+composer require security
+```
+
 ## symfony / serializer
 
 The [serializer](https://github.com/symfony/serializer) component is meant to be used to turn objects into a specific format (XML, JSON, YAML, etc.) and the other way around. This command will install `serializer-pack` - serializer with additional components:
