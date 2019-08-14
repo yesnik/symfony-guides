@@ -20,6 +20,14 @@ The [serializer](https://github.com/symfony/serializer) component is meant to be
 composer require serializer
 ```
 
+## symfony / translation
+
+The [translation](https://github.com/symfony/translation) component provides tools to internationalize your application.
+
+```
+composer require symfony/translation
+```
+
 ## symfony / validator
 
 The [validator](https://github.com/symfony/validator) component provides tools to validate values.
