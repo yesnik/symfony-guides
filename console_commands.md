@@ -1,6 +1,6 @@
 # Console commands
 
-You can see available commands:
+Show available commands:
 
 ```
 ./bin/console
