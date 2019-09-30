@@ -1,11 +1,6 @@
 # Debug
 
-Include debug toolbar:
-```
-composer require profiler --dev
-```
-
-Install debug pack for Symfony projects:
+Install *debug pack* for Symfony projects:
 ```
 composer require debug --dev
 ```
