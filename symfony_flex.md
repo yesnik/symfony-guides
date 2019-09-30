@@ -6,7 +6,7 @@ like installing and removing bundles and other Composer dependencies.
 
 ## Symfony Recipes Server
 
-Link: https://symfony.sh/
+Link: https://flex.symfony.com/
 
 This site allows us to run this command:
 
