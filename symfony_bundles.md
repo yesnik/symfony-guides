@@ -11,14 +11,6 @@ They are dependent from Symfony components.
 composer require admin
 ```
 
-## KnpPaginatorBundle
-
-[KnpPaginatorBundle](https://github.com/KnpLabs/KnpPaginatorBundle) is SEO friendly Symfony paginator to sort and paginate:
-
-```
-composer require knplabs/knp-paginator-bundle
-```
-
 ## FOSOAuthServerBundle
 
 [FOSOAuthServerBundle](https://github.com/FriendsOfSymfony/FOSOAuthServerBundle) is a server side OAuth2 Bundle for Symfony/
@@ -26,7 +18,6 @@ composer require knplabs/knp-paginator-bundle
 ```
 composer require friendsofsymfony/oauth-server-bundle
 ```
-
 
 ## FOSRestBundle
 
@@ -42,6 +33,22 @@ composer require friendsofsymfony/rest-bundle
 
 ```
 composer require friendsofsymfony/user-bundle
+```
+
+## KnpPaginatorBundle
+
+[KnpPaginatorBundle](https://github.com/KnpLabs/KnpPaginatorBundle) is SEO friendly Symfony paginator to sort and paginate:
+
+```
+composer require knplabs/knp-paginator-bundle
+```
+
+## MakerBundle
+
+[MakerBundle](https://github.com/symfony/maker-bundle) is the fastest way to generate the most common code you'll need in a Symfony app: commands, controllers, form classes, event subscribers and more.
+
+```
+composer require maker
 ```
 
 ## SecurityBundle
