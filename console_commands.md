@@ -206,6 +206,12 @@ php bin/console debug:twig
 php bin/console make:user
 ```
 
+### Create database
+
+```
+php bin/console doctrine:database:create
+```
+
 ### Generate migration file
 
 **Create migration manually**
