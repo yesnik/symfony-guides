@@ -44,6 +44,14 @@ composer require friendsofsymfony/rest-bundle
 composer require friendsofsymfony/user-bundle
 ```
 
+## SecurityBundle
+
+[SecurityBundle](https://github.com/symfony/security-bundle) integrates the Security component in Symfony applications. All these options are configured under the `security` key in your application configuration:
+
+```
+composer require security
+```
+
 ## SensioFrameworkExtraBundle
 
 [SensioFrameworkExtraBundle](https://github.com/sensiolabs/SensioFrameworkExtraBundle) allows to configure controllers with annotations.
