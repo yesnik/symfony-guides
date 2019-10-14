@@ -46,7 +46,7 @@ composer require friendsofsymfony/user-bundle
 
 ## SecurityBundle
 
-[SecurityBundle](https://github.com/symfony/security-bundle) integrates the Security component in Symfony applications. All these options are configured under the `security` key in your application configuration:
+[SecurityBundle](https://github.com/symfony/security-bundle) integrates the [Security component](https://github.com/symfony/security) in Symfony applications. All these options are configured under the `security` key in your application configuration:
 
 ```
 composer require security
