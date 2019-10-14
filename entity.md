@@ -32,3 +32,14 @@ class Comment
 ```
 
 `UUID` tells Doctrine to use the built-in Universally Unique Identifier generator. This strategy provides full portability.
+
+**Important:** If you use UUID for primary key don't forget to define correct return type for `getId` method from `?int` to `?string`:
+
+```php
+class Comment
+{
+    public function getId(): ?string
+    {
+        return $this->id;
+    }
+```
