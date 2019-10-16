@@ -206,6 +206,8 @@ php bin/console debug:twig
 php bin/console make:user
 ```
 
+Depending on your answers, the command will create a `User` class/entity and update your `security.yaml` file to configure a secure password encoder (if needed) and a user provider. 
+
 ### Create database
 
 ```
