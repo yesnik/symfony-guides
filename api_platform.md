@@ -8,6 +8,11 @@ composer require api
 
 Visit: http://127.0.0.1:8000/api
 
+**Available formats**
+
+- http://127.0.0.1:8000/api/cheese_listings.json
+- http://127.0.0.1:8000/api/cheese_listings.jsonld
+
 ## Generate Entity
 
 ```bash
