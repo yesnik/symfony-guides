@@ -7,3 +7,35 @@ composer require api
 ```
 
 Visit: http://127.0.0.1:8000/api
+
+## Generate Entity
+
+```bash
+php bin/console make:entity
+```
+
+Answer `yes` to this question: *Mark this class as an API Platform resource (expose a CRUD API for it) (yes/no)*
+
+This command will generate `/src/Entity/CheeseListing.php`.
+Annotation `@ApiResource()` tells API Platform that you want to expose this class as an API:
+
+```php
+namespace App\Entity;
+
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ApiResource()
+ * @ORM\Entity(repositoryClass="App\Repository\CheeseListingRepository")
+ */
+class CheeseListing
+{
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+}
+```
