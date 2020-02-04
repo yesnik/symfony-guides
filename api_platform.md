@@ -68,3 +68,22 @@ class CheeseListing
 {
     // ...
 ```
+
+### Customize operation's URL
+
+Each operation generates a route, and API Platform gives you full control over how that route looks.
+
+```php
+/**
+ * @ApiResource(
+ *     collectionOperations={"get", "post"},
+ *     itemOperations={
+ *          "get"={"path"="/i_love_cheeses/{id}"},
+ *          "put"
+ *     },
+ *     shortName="cheeses"
+ * )
+ */
+class CheeseListing { // ... }
+```
+This will change GET route to `/api/i_love_cheeses/{id}`.
