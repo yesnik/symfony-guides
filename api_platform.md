@@ -16,6 +16,7 @@ composer require api
 - Entity in JSON format: http://127.0.0.1:8000/api/products.json
 - Entity in JSON-LD format http://127.0.0.1:8000/api/products.jsonld
 
+OpenAPI and JSON-LD documents do the same thing: they describe our API in a machine-readable format.
 
 ## Generate Entity
 
