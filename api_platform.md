@@ -8,10 +8,11 @@ composer require api
 
 Visit: http://127.0.0.1:8000/api
 
-**Available formats**
+**Available URLs**
 
-- http://127.0.0.1:8000/api/cheese_listings.json
-- http://127.0.0.1:8000/api/cheese_listings.jsonld
+- JSON format: http://127.0.0.1:8000/api/products.json
+- JSON-LD format http://127.0.0.1:8000/api/products.jsonld
+- OpenAPI specification: http://127.0.0.1:8000/api/docs.json
 
 ## Generate Entity
 
