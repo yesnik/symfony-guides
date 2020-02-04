@@ -11,8 +11,8 @@ composer require api
 **Available URLs**
 
 - Web interface: http://127.0.0.1:8000/api
-- OpenAPI specification in JSON: http://127.0.0.1:8000/api/docs.json
-- OpenAPI specification in JSON-LD: http://127.0.0.1:8000/api/docs.jsonld
+- OpenAPI specification: http://127.0.0.1:8000/api/docs.json
+- JSON-LD specification with Hydra: http://127.0.0.1:8000/api/docs.jsonld
 - Entity in JSON format: http://127.0.0.1:8000/api/products.json
 - Entity in JSON-LD format http://127.0.0.1:8000/api/products.jsonld
 
