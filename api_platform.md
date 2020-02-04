@@ -8,13 +8,14 @@ Install Symfony [api pack](https://github.com/api-platform/api-pack) for API Pla
 composer require api
 ```
 
-Visit: http://127.0.0.1:8000/api
-
 **Available URLs**
 
-- JSON format: http://127.0.0.1:8000/api/products.json
-- JSON-LD format http://127.0.0.1:8000/api/products.jsonld
-- OpenAPI specification: http://127.0.0.1:8000/api/docs.json
+- Web interface: http://127.0.0.1:8000/api
+- OpenAPI specification in JSON: http://127.0.0.1:8000/api/docs.json
+- OpenAPI specification in JSON-LD: http://127.0.0.1:8000/api/docs.jsonld
+- Entity in JSON format: http://127.0.0.1:8000/api/products.json
+- Entity in JSON-LD format http://127.0.0.1:8000/api/products.jsonld
+
 
 ## Generate Entity
 
