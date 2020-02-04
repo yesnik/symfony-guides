@@ -1,4 +1,6 @@
-# Api
+# API Platform
+
+[API Platform's](https://api-platform.com/) philosophy: create resources, tweak configuration, let API Platform expose those resources as an API. Additionally it creates an OpenAPI specification (visit `/api/docs.json`).
 
 Install Symfony [api pack](https://github.com/api-platform/api-pack) for API Platform:
 
