@@ -49,3 +49,22 @@ class CheeseListing
     private $id;
 }
 ```
+
+## Operations
+
+API Platform supports 2 types of operations: collection operations, item operations.
+
+Edit `/src/Entity/CheeseListing.php`:
+
+```php
+/**
+ * @ApiResource(
+ *     collectionOperations={"get", "post"},
+ *     itemOperations={"get", "put", "delete"}
+ * )
+ * @ORM\Entity(repositoryClass="App\Repository\CheeseListingRepository")
+ */
+class CheeseListing
+{
+    // ...
+```
