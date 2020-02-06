@@ -207,3 +207,20 @@ Request:
 ```bash
 curl "http://127.0.0.1:8000/api/cheeses?title=Hello" -H "accept: application/ld+json"
 ```
+
+### RangeFilter
+
+```php
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\RangeFilter;
+
+/**
+ * @ApiFilter(RangeFilter::class, properties={"price"})
+ */
+class CheeseListing {}
+```
+
+Request:
+
+```bash
+curl -X GET "http://127.0.0.1:8000/api/cheeses?price[gt]=1000" -H "accept: application/ld+json"
+```
