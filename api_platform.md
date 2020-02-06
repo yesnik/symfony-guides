@@ -149,3 +149,25 @@ class CheeseListing
         return Carbon::instance($this->getCreatedAt())->diffForHumans();
     }
 ```
+
+### Change name of property
+
+In write operations `textDescription` will be named `description`, thanks to annotation `@SerializedName`.
+
+```php
+use Symfony\Component\Serializer\Annotation\SerializedName;
+
+class CheeseListing
+{
+    /**
+     * The description of the cheese as raw text.
+     *
+     * @SerializedName("description")
+     * @Groups("cheese_listing:write")
+     */
+    public function setTextDescription(string $description): self
+    {
+        $this->description = nl2br($description);
+        return $this;
+    }
+```
