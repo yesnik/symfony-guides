@@ -87,3 +87,42 @@ Each operation generates a route, and API Platform gives you full control over h
 class CheeseListing { // ... }
 ```
 This will change GET route to `/api/i_love_cheeses/{id}`.
+
+### Adding groups to fields
+
+Use annotations to edit groups:
+
+- `normalizationContext` - for read
+- `denormalizationContext` - for write
+
+```php
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+/**
+ * @ApiResource(
+ *     collectionOperations={"get", "post"},
+ *     itemOperations={
+ *          "get"={},
+ *          "put"
+ *     },
+ *     shortName="cheeses",
+ *     normalizationContext={"groups"={"cheese_listing:read"}, "swagger_definition_name"="Read"},
+ *     denormalizationContext={"groups"={"cheese_listing:write"}, "swagger_definition_name"="Write"}
+ * )
+ * @ORM\Entity(repositoryClass="App\Repository\CheeseListingRepository")
+ */
+class CheeseListing
+{
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups({"cheese_listing:read", "cheese_listing:write"})
+     */
+    private $title;
+
+    /**
+     * @ORM\Column(type="text")
+     * @Groups({"cheese_listing:read"})
+     */
+    private $description;
+```
