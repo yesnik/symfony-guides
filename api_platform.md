@@ -224,3 +224,11 @@ Request:
 ```bash
 curl -X GET "http://127.0.0.1:8000/api/cheeses?price[gt]=1000" -H "accept: application/ld+json"
 ```
+
+### PropertyFilter
+
+```php
+use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
+```
+
+Choose the exact properties you want with `?properties[]=title&properties[]=shortDescription`
