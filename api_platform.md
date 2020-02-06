@@ -171,3 +171,39 @@ class CheeseListing
         return $this;
     }
 ```
+
+## Filters
+
+### BooleanFilter
+
+```php
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
+
+/**
+ * @ApiFilter(BooleanFilter::class, properties={"isPublished"})
+ */
+class CheeseListing {}
+```
+
+Request:
+
+```bash
+curl "http://127.0.0.1:8000/api/cheeses?isPublished=false" -H "accept: application/ld+json"
+```
+
+### SearchFilter
+
+```php
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+
+/**
+ * @ApiFilter(SearchFilter::class, properties={"title": "partial"})
+ */
+class CheeseListing {}
+```
+
+Request:
+
+```bash
+curl "http://127.0.0.1:8000/api/cheeses?title=Hello" -H "accept: application/ld+json"
+```
