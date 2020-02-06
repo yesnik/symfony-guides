@@ -95,6 +95,8 @@ Use annotations to edit groups:
 - `normalizationContext` - for read
 - `denormalizationContext` - for write
 
+These groups helps us to expose to our API only the fields that we want.
+
 ```php
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
