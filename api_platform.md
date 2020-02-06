@@ -125,4 +125,25 @@ class CheeseListing
      * @Groups({"cheese_listing:read"})
      */
     private $description;
+    
+    /**
+     * The description of the cheese as raw text.
+     *
+     * @Groups("cheese_listing:write")
+     */
+    public function setTextDescription(string $description): self
+    {
+        $this->description = nl2br($description);
+        return $this;
+    }
+    
+    /**
+     * How long ago in text that this cheese listing was added.
+     *
+     * @Groups("cheese_listing:read")
+     */
+    public function getCreatedAtAgo(): string
+    {
+        return Carbon::instance($this->getCreatedAt())->diffForHumans();
+    }
 ```
