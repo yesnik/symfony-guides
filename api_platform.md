@@ -150,6 +150,19 @@ class CheeseListing
     }
 ```
 
+### Change items per page
+
+```php
+/**
+ * @ApiResource(
+ *     attributes={
+ *         "pagination_items_per_page"=10
+ *     }
+ * )
+ */
+class CheeseListing {}
+```
+
 ### Change name of property
 
 In write operations `textDescription` will be named `description`, thanks to annotation `@SerializedName`.
