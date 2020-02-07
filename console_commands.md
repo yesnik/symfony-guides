@@ -162,10 +162,11 @@ If you also want to see private services:
 ./bin/console config:dump knp_markdown
 ```
 
-### Show current config for service
+### Show current config for service/bundle
 
 ```
 ./bin/console debug:config framework
+./bin/console debug:config api_platform
 ```
 
 ### Clear app's cache
