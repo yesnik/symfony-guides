@@ -100,7 +100,7 @@ class CheeseListing { // ... }
 ```
 This will change GET route to `/api/i_love_cheeses/{id}`.
 
-### Adding groups to fields
+## Groups
 
 Use annotations to edit groups:
 
@@ -115,11 +115,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ApiResource(
- *     collectionOperations={"get", "post"},
- *     itemOperations={
- *          "get"={},
- *          "put"
- *     },
  *     shortName="cheeses",
  *     normalizationContext={"groups"={"cheese_listing:read"}, "swagger_definition_name"="Read"},
  *     denormalizationContext={"groups"={"cheese_listing:write"}, "swagger_definition_name"="Write"}
