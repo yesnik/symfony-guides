@@ -217,7 +217,7 @@ Depending on your answers, the command will create a `User` class/entity and upd
 
 ### Create database
 
-```
+```bash
 php bin/console doctrine:database:create
 ```
 
@@ -227,35 +227,35 @@ php bin/console doctrine:database:create
 
 This command analyzes Entity's changes and creates the new migration file.
 
-```
-bin/console make:migration
+```bash
+php bin/console make:migration
 ```
 
-This command will create file `src/Migrations/Version20181008115412.php`.
+This command will create file `src/Migrations/Version20200210070413.php`.
 
 **Generate migration based on schema changes**
 
-```
+```bash
 php bin/console doctrine:migrations:diff
 ```
 
 ### Apply migration
 
-```
-bin/console doctrine:migrations:migrate
+```bash
+php bin/console doctrine:migrations:migrate
 ```
 
 ### Show status of migrations
 
-```
-bin/console doctrine:migrations:status
+```bash
+php bin/console doctrine:migrations:status
 ```
 
 ### Skip migration
 
 You can skip single migrations by explicitly adding them to the `migration_versions` table:
 
-```
+```bash
 php bin/console doctrine:migrations:version YYYYMMDDHHMMSS --add
 ```
 
@@ -263,7 +263,7 @@ php bin/console doctrine:migrations:version YYYYMMDDHHMMSS --add
 
 This command allows us to execute query from console:
 
-```
+```bash
 php bin/console doctrine:query:sql 'SELECT * FROM comment'
 ```
 
