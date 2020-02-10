@@ -101,6 +101,12 @@ File of template `templates/partners/index.html.twig`:
 {% endblock %}
 ```
 
+### Create Entity, add column, add field
+
+```bash
+php bin/console make:entity
+```
+
 ### Create CRUD for entity
 
 ```
