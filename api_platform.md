@@ -289,3 +289,31 @@ api_platform:
 ```
 
 Copy these lines to `config/packages/api_platform.yaml`.
+
+## Validation
+
+Validation in API Platform works exactly like validation in every Symfony app.
+ 
+Edit file:
+ 
+```php
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\CheeseListingRepository")
+ */
+class CheeseListing
+{
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *     min=2,
+     *     max=50,
+     *     maxMessage="Describe your cheese in 50 chars or less"
+     * )
+     */
+    private $title;
+    
+ ```
+ 
