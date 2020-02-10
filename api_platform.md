@@ -245,3 +245,18 @@ use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
 ```
 
 Choose the exact properties you want with `?properties[]=title&properties[]=shortDescription`
+
+## Formats
+
+### Define formats for entity
+
+```php
+/**
+ * @ApiResource(
+ *     attributes={
+ *         "formats"={"jsonld", "json", "html", "jsonhal", "csv"={"text/csv"}}
+ *     }
+ * )
+ */
+class CheeseListing {}
+```
