@@ -129,6 +129,22 @@ User has many articles. At `Article` we have `author` field.
 private $articles;
 ```
 
+### UniqueEntity constraint
+
+If you want to validate that the value of an entity property is unique among all entities of the same type (e.g. the registration email of all users) use the `UniqueEntity` constraint.
+
+```php
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+/**
+ * @UniqueEntity(fields={"username"})
+ * @UniqueEntity(fields={"email"})
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ */
+class User implements UserInterface { }
+```
+
 ### Create entity (Entity create) / Add column / Add field
 
 ```
