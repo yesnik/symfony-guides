@@ -221,6 +221,12 @@ Depending on your answers, the command will create a `User` class/entity and upd
 php bin/console doctrine:database:create
 ```
 
+### Drop database
+
+```bash
+php bin/console doctrine:schema:drop --force
+```
+
 ### Generate migration file
 
 **Create migration manually**
