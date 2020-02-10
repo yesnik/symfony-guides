@@ -324,3 +324,36 @@ class CheeseListing
     
  ```
  
+ ## Relations
+ 
+ Suppose that CheeseListing belongs to User:
+ 
+ ```php
+ /**
+ * @ApiResource(
+ *     normalizationContext={"groups"={"cheese_listing:read"}, "swagger_definition_name"="Read"},
+ *     denormalizationContext={"groups"={"cheese_listing:write"}, "swagger_definition_name"="Write"},
+ * )
+ * @ORM\Entity(repositoryClass="App\Repository\CheeseListingRepository")
+ */
+class CheeseListing {
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="cheeseListings")
+     * @ORM\JoinColumn(nullable=false)
+     * @Groups({"cheese_listing:read", "cheese_listing:write"})
+     */
+    private $owner;
+    
+ ```
+ 
+ In POST request we need to provide `IRI` value for `owner` field:
+ 
+```json
+{
+  "title": "Cheese",
+  "price": 150,
+  "owner": "/api/users/1",
+  "description": "Nice cheese"
+}
+```
+ 
