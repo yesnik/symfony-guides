@@ -50,6 +50,18 @@ class CheeseListing
 }
 ```
 
+### Generate User
+
+```bash
+php bin/console make:user
+```
+
+This command will create:
+
+- src/Entity/User.php
+- src/Repository/UserRepository.php
+
+
 ## Operations
 
 API Platform supports 2 types of operations: collection operations, item operations.
