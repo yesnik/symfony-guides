@@ -260,3 +260,32 @@ Choose the exact properties you want with `?properties[]=title&properties[]=shor
  */
 class CheeseListing {}
 ```
+
+### Define formats globally
+
+Display available config options for API Platform:
+
+```bash
+php bin/console debug:config api_platform
+```
+
+Look at the `formats` section in the output:
+
+```yaml
+api_platform:
+    formats:
+        jsonld:
+            mime_types:
+                - application/ld+json
+        json:
+            mime_types:
+                - application/json
+        html:
+            mime_types:
+                - text/html
+        jsonhal:
+            mime_types:
+                - application/hal+json
+```
+
+Copy these lines to `config/packages/api_platform.yaml`.
