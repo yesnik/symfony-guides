@@ -356,4 +356,41 @@ class CheeseListing {
   "description": "Nice cheese"
 }
 ```
- 
+
+### Embed relation data in response
+
+Add `"cheese_listing:read"` group to `User` entity:
+
+```php
+class User implements UserInterface
+{
+    /**
+     * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups({"user:read", "user:write", "cheese_listing:read"})
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     * @Groups({"user:read", "user:write", "cheese_listing:read"})
+     */
+    private $username;
+```
+
+The serializer knows to serialize all fields in the `cheese_listing:read` group. 
+It first looks at `CheeseListing` and finds `title`, `description` and `owner`. Then it keeps going and, inside of `User`, finds that group on `email` and `username`.
+
+Result:
+
+```json
+{
+  "title": "Cheese",
+  "description": "Nice cheese 1",
+  "price": 201,
+  "owner": {
+    "email": "kenny@mail.ru",
+    "username": "kenny"
+  }
+}
+```
+
