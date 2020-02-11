@@ -540,3 +540,19 @@ class CheeseListing
     }
 ```
 
+Also we can get this error: *A new entity was found through the relationship 'App\\Entity\\User#cheeseListings' that was not configured to cascade persist operations for entity: App\\Entity\\CheeseListing@000*.
+
+This error tells us that API Platform is creating a new `CheeseListing` and it is setting it onto the `cheeseListings` property of the new `User`. But nothing ever calls `$entityManager->persist()` on that new `CheeseListing`, which is why Doctrine isn't sure what to do when trying to save the `User`.
+
+To fix this error add `cascade={"persist"}`:
+
+```php
+class User implements UserInterface
+{
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CheeseListing", mappedBy="owner", orphanRemoval=false, cascade={"persist"})
+     * @Groups({"user:read", "user:write"})
+     */
+    private $cheeseListings;
+```
+
