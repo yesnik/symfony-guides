@@ -197,6 +197,7 @@ class CheeseListing
 ### BooleanFilter
 
 ```php
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 
 /**
