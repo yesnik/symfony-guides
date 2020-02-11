@@ -394,3 +394,5 @@ Result:
 }
 ```
 
+If you get back an object, it will have `@id`, `@type` and other data properties. If you get back a string, you know it's an IRI that you can use to go get the real data.
+
