@@ -396,3 +396,46 @@ Result:
 
 If you get back an object, it will have `@id`, `@type` and other data properties. If you get back a string, you know it's an IRI that you can use to go get the real data.
 
+### Embed relation's data only for GET
+
+Use a specific naming convention for this *operation-specific group*:
+
+```
+[entity name] : [item | collection] : [get | post | put | delete ]
+```
+
+Add group `cheese_listing:item:get` to `normalization_context` param:
+
+```php
+/**
+ * @ApiResource(
+ *     itemOperations={
+ *          "get"={
+ *              "normalization_context"={
+ *                  "groups"={
+ *                      "cheese_listing:read",
+ *                      "cheese_listing:item:get"
+ *                  }
+ *              },
+ *          },
+ *          "put"
+ *     },
+ * )
+ * @ORM\Entity(repositoryClass="App\Repository\CheeseListingRepository")
+ */
+class CheeseListing {}
+```
+
+Add this group to related entity:
+
+```php
+class User implements UserInterface
+{
+    /**
+     * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups({
+     *     "user:read", "user:write", "cheese_listing:item:get"
+     * })
+     */
+    private $email;
+```
