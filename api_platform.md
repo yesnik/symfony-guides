@@ -496,3 +496,47 @@ This will allow us to make request `POST /api/users`:
   ]
 }
 ```
+
+### Created main and related entity
+
+Sometimes we can get an error: *Nested documents for attribute "cheeseListings" are not allowed. Use IRIs instead*.
+It means that we need to add group `user:write` to CheeseListing's attributes:
+
+```php
+class CheeseListing
+{
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups({
+     *     "cheese_listing:read", 
+     *     "cheese_listing:write", 
+     *     "user:read",
+     *     "user:write"
+     * })
+     */
+    private $title;
+
+    /**
+     * The price of this delicious cheese in cents.
+     *
+     * @ORM\Column(type="integer")
+     * @Groups({
+     *     "cheese_listing:read", 
+     *     "cheese_listing:write", 
+     *     "user:read",
+     *     "user:write"
+     * })
+     */
+    private $price;
+
+    /**
+     * @SerializedName("description")
+     * @Groups({"cheese_listing:write", "user:write"})
+     */
+    public function setTextDescription(string $description): self
+    {
+        $this->description = nl2br($description);
+        return $this;
+    }
+```
+
