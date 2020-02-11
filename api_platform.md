@@ -454,3 +454,19 @@ If we want to update related entity we need to provide `@id`:
 ```
 
 Otherwise we'll get an error: *A new entity was found through the relationship 'App\\Entity\\CheeseListing#owner' that was not configured to cascade persist operations for entity: App\\Entity\\User@0000...*
+
+### Validate related entity
+
+But when we're doing embedded object updates, we do want validation to continue down into this object. To force that, above the `owner` property, add `@Assert\Valid()`.
+
+```php
+class CheeseListing
+{
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="cheeseListings")
+     * @Assert\Valid()
+     */
+    private $owner;
+
+```
+
