@@ -467,7 +467,20 @@ class CheeseListing
      * @Assert\Valid()
      */
     private $owner;
+```
 
+When the validator processes the `User` object, it doesn't automatically cascade down into the `cheeseListings` array and also validate those objects. We can force that by adding `@Assert\Valid()`:
+
+```php
+class User implements UserInterface
+{
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CheeseListing", mappedBy="owner", 
+     *                orphanRemoval=false, cascade={"persist"})
+     * @Groups({"user:read", "user:write"})
+     * @Assert\Valid()
+     */
+    private $cheeseListings;
 ```
 
 ### Create User and assign it to existing entity
