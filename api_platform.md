@@ -259,7 +259,10 @@ use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
 class User implements UserInterface {}
 ```
 
-Choose the exact properties you want with `?properties[]=title&properties[]=shortDescription`
+Choose the exact properties you want with `?properties[]=title&properties[]=shortDescription`.
+
+Also it's possible to select attributes of related entity: 
+`/api/users/2.jsonld?properties[]=email&properties[cheeseListings][]=title&properties[cheeseListings][]=price`
 
 ## Formats
 
