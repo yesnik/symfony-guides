@@ -470,3 +470,29 @@ class CheeseListing
 
 ```
 
+### Create User and assign it to existing entity
+
+Add group `user:write` to `$cheeseListings` property.
+
+```php
+class User implements UserInterface
+{
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CheeseListing", mappedBy="owner", orphanRemoval=false)
+     * @Groups({"user:read", "user:write"})
+     */
+    private $cheeseListings;
+```
+
+This will allow us to make request `POST /api/users`:
+
+```json
+{
+  "email": "lora@mail.ru",
+  "password": "123",
+  "username": "lora",
+  "cheeseListings": [
+    "/api/cheeses/1"
+  ]
+}
+```
