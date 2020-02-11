@@ -249,6 +249,13 @@ curl -X GET "http://127.0.0.1:8000/api/cheeses?price[gt]=1000" -H "accept: appli
 
 ```php
 use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
+
+/**
+ * @ApiResource()
+ * @ApiFilter(PropertyFilter::class)
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ */
+class User implements UserInterface {}
 ```
 
 Choose the exact properties you want with `?properties[]=title&properties[]=shortDescription`
