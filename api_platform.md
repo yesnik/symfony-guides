@@ -439,3 +439,18 @@ class User implements UserInterface
      */
     private $email;
 ```
+
+### Update related entity
+
+If we want to update related entity we need to provide `@id`:
+
+```json
+{
+  "owner": {
+    "@id": "/api/users/2",
+    "username": "Leo"
+  }
+}
+```
+
+Otherwise we'll get an error: *A new entity was found through the relationship 'App\\Entity\\CheeseListing#owner' that was not configured to cascade persist operations for entity: App\\Entity\\User@0000...*
