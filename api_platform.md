@@ -597,3 +597,21 @@ class User implements UserInterface
     private $cheeseListings;
 ```
 
+### Subresources
+
+If you want to make the link `/api/users/4/cheese_listings` work use `@ApiSubresource()`:
+
+```php
+use ApiPlatform\Core\Annotation\ApiSubresource;
+
+class User implements UserInterface
+{
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CheeseListing", mappedBy="owner", orphanRemoval=true, cascade={"persist"})
+     * @Groups({"user:read", "user:write"})
+     * @Assert\Valid()
+     * @ApiSubresource()
+     */
+    private $cheeseListings;
+```
+
