@@ -163,16 +163,16 @@ If you also want to see private services:
 
 ### Dump default config of the bundle
 
-```
-./bin/console config:dump TwigBundle
-./bin/console config:dump knp_markdown
+```bash
+php bin/console config:dump TwigBundle
+php bin/console config:dump knp_markdown
 ```
 
-### Show current config for service/bundle
+Another way:
 
 ```
-./bin/console debug:config framework
-./bin/console debug:config api_platform
+php bin/console debug:config framework
+php bin/console debug:config api_platform
 ```
 
 ### Clear app's cache
