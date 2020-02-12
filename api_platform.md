@@ -222,12 +222,29 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  */
 class CheeseListing {}
 ```
-
 Request:
 
 ```bash
 curl "http://127.0.0.1:8000/api/cheeses?title=Hello" -H "accept: application/ld+json"
 ```
+
+**Use conditions on relation**
+
+```php
+/**
+ * @ApiFilter(SearchFilter::class, properties={
+ *     "title": "partial",
+ *     "description": "partial",
+ *     "owner": "exact",
+ *     "owner.username": "partial"
+ * })
+ */
+class CheeseListing {}
+```
+Requests:
+
+- http://127.0.0.1:8000/api/cheeses.json?owner.username=sara
+- http://127.0.0.1:8000/api/cheeses.json?owner[]=%2Fapi%2Fusers%2F4 (param `owner` accepts IRI value: `/api/users/4`)
 
 ### RangeFilter
 
