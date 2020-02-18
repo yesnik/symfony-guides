@@ -11,12 +11,29 @@ yarn install
 
 ### Config
 
-Everything in Encore is configured via a `webpack.config.js` file at the root of your project. 
+Everything in Encore is configured with the file `webpack.config.js`:
+
+```js
+var Encore = require('@symfony/webpack-encore');
+
+Encore
+    // directory where compiled assets will be stored
+    .setOutputPath('public/build/')
+    // public path used by the web server to access the output path
+    .setPublicPath('/build')
+
+    .addEntry('app', './assets/js/app.js')
+    
+    // enables Sass/SCSS support
+    .enableSassLoader()
+```
+
+They key part is `addEntry()`: this tells Encore to load the `assets/js/app.js` file and follow all of the `require()` statements. It will then package everything together and - thanks to the first `app` argument - output final `app.js` and `app.css` files into the `public/build` directory.
 
 With Encore, think of your `assets/js/app.js` file like a standalone JavaScript application: it will require all of the dependencies it needs (e.g. jQuery or React), including any CSS:
 
 ```
-require('../css/app.css');
+import '../css/app.scss';
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 // const $ = require('jquery');
