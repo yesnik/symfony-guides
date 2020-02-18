@@ -163,6 +163,19 @@ To add a Banner when you are Impersonating, edit `templates/base.html.twig`:
 {% endif %}
 ```
 
+### Auth in javascript
+
+If you're consuming your API from JavaScript, you have 2 basic options for authentication:
+
+1. You can use `HttpOnly` cookies, which is how sessions work.
+2. You can return *access token* on login and store it in JavaScript. 
+
+Storing access tokens in JavaScript is a dangerous practice because it can be stolen 
+if some bad JavaScript somehow runs on your page. 
+If the access token have a short lifetime, that helps... but then they're less useful, 
+because your user will need to constantly log in.
+
+
 ## Login / logout routes
 
 Login, logout routes for cookie-based authentication.
