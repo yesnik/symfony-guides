@@ -165,6 +165,8 @@ To add a Banner when you are Impersonating, edit `templates/base.html.twig`:
 
 ## Login / logout routes
 
+Login, logout routes for cookie-based authentication.
+
 File `config/packages/security.yaml`:
 
 ```php
