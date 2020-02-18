@@ -178,6 +178,28 @@ because your user will need to constantly log in.
 That's why we recommend to use `HttpOnly` cookie-based authentication (like a session) for JavaScript frontend. 
 It can also be used in other situations, like for authenticating a mobile app.
 
+**Avoiding CSRF Attacks**
+
+*CSRF token* - an extra field that must be sent on form submit that proves that the request originated from the real site - not from somewhere else. Symfony's form component adds `CSRF` tokens automatically.
+
+But using CSRF tokens in an API is annoying: you need to manage CSRF tokens and send that field manually from your JavaScript on every request. If you're using cookie-based authentication and need to 100% prevent a CSRF attack for an endpoint, this is the time-tested way to do that.
+
+**SameSite Cookies**
+
+There is a new way to prevent CSRF attacks - a solution that is implemented inside browsers themselves. It's called a "SameSite" cookie.
+
+The basic reason that CSRF attacks are possible is that when a user submits the form that lives on the "bad" site, any cookies that our domain set are sent with that request to our app... even though the request isn't "originating" from our domain. For most cookies that... should probably not happen. Instead, we should be able to say:
+
+*Hey browsers! See this session cookie that my Symfony app is setting? I want you to only send that back to my app if the request originates from my domain.*
+
+Symfony uses `SameSite` attribute already. File `config/packages/framework.yaml`:
+
+```yaml
+framework:
+    session:
+        cookie_samesite: lax
+```
+
 ## Login / logout routes
 
 Login, logout routes for cookie-based authentication.
