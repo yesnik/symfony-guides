@@ -1,6 +1,6 @@
 # Authorization
 
-### Create authenticator
+## Create authenticator
 
 ```
 php bin/console make:auth
@@ -29,7 +29,7 @@ This class basically has a method for each step of the authentication process. S
 
 If we return `false` from `supports()`, nothing else happens. Symfony doesn't call any other methods on our authenticator, and the request continues on like normal to our controller, like nothing happened. It's not an authentication failure - it's just that nothing happens at all.
 
-### Authorization
+## Authorization
 
 *Authorization* is all about deciding whether or not a user should have access to something. 
 This is where, for example, you can require a user to log in before they see some page - or restrict some sections to admin users only.
@@ -161,4 +161,60 @@ To add a Banner when you are Impersonating, edit `templates/base.html.twig`:
         <a href="{{ path('app_homepage', {'_switch_user': '_exit'}) }}">Exit Impersonation</a>
     </div>
 {% endif %}
+```
+
+## Login / logout routes
+
+File `config/packages/security.yaml`:
+
+```php
+security:
+    firewalls:
+        main:
+            json_login:
+                # Name of a route to login
+                check_path: app_login
+                username_path: email
+                password_path: password
+            logout:
+                # Name of a route to log out
+                path: app_logout
+```
+
+File `src/Controller/SecurityController.php`:
+
+```php
+namespace App\Controller;
+
+use ApiPlatform\Core\Api\IriConverterInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response;
+
+class SecurityController extends AbstractController
+{
+    /**
+     * @Route("/login", name="app_login", methods={"POST"})
+     */
+    public function login(IriConverterInterface $iriConverter)
+    {
+        if (!$this->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->json([
+                'error' => 'Invalid login request: check that the Content-Type header is "application/json".'
+            ], 400);
+        }
+
+        return new Response(null, 204, [
+            'Location' => $iriConverter->getIriFromItem($this->getUser())
+        ]);
+    }
+
+    /**
+     * @Route("/logout", name="app_logout")
+     */
+    public function logout()
+    {
+        throw new \Exception('should not be reached');
+    }
+}
 ```
