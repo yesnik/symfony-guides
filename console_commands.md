@@ -160,19 +160,18 @@ If you also want to see private services:
 
 - `kernel.debug` - it's `true` most of the time, but is `false` in the prod environment.
 
-
-### Dump default config of the bundle
-
-```bash
-php bin/console config:dump TwigBundle
-php bin/console config:dump knp_markdown
-```
-
-Another way:
+### Show current config for the bundle
 
 ```
 php bin/console debug:config framework
 php bin/console debug:config api_platform
+```
+
+### Dump available config options for the bundle
+
+```bash
+php bin/console config:dump-reference security
+php bin/console config:dump knp_markdown
 ```
 
 ### Clear app's cache
