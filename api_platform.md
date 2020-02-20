@@ -615,3 +615,23 @@ class User implements UserInterface
     private $cheeseListings;
 ```
 
+## Authorization
+
+### Protect operation
+
+Edit `src/Entity/CheeseListing.php`:
+
+```php
+/**
+ * @ApiResource(
+ *     collectionOperations={
+ *          "get",
+ *          "post"={"security"="is_granted('ROLE_USER')"}
+ *     },
+ *     ...
+ * )
+ */
+class CheeseListing { }
+```
+
+If you're not logged in then you can't make POST request to create `CheeseListing`.
