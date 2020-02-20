@@ -176,7 +176,9 @@ If the access token have a short lifetime, that helps... but then they're less u
 because your user will need to constantly log in.
 
 That's why we recommend to use `HttpOnly` cookie-based authentication (like a session) for JavaScript frontend. 
-It can also be used in other situations, like for authenticating a mobile app.
+It can also be used in other situations, like for authenticating a mobile app. 
+
+But if you use `HttpOnly` cookies, then you need to worry about CSRF protection... unless you use SameSite cookies... which protects *almost every* browser... or you could use CSRF tokens to be safest... but it complicates your app.
 
 **Avoiding CSRF Attacks**
 
