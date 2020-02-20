@@ -1,4 +1,4 @@
-# Authorization
+# Authentication & Authorization
 
 ## Create authenticator
 
@@ -33,6 +33,8 @@ If we return `false` from `supports()`, nothing else happens. Symfony doesn't ca
 
 *Authorization* is all about deciding whether or not a user should have access to something. 
 This is where, for example, you can require a user to log in before they see some page - or restrict some sections to admin users only.
+
+Authorization is all about denying access to read or perform different operations... and this is enforced in a way that's independent of how you log in.
 
 There are 2 main ways to handle authorization:
 
@@ -163,7 +165,7 @@ To add a Banner when you are Impersonating, edit `templates/base.html.twig`:
 {% endif %}
 ```
 
-### Auth in javascript
+### Authentication in javascript
 
 If you're consuming your API from JavaScript, you have 2 basic options for authentication:
 
