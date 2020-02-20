@@ -59,6 +59,9 @@ Access controls work like routes: Symfony checks them one-by-one from top to bot
 And as soon as it finds one access control that matches the URL, it uses that and stops. 
 So maximum of one access control is used on each page load.
 
+`access_control` is great for some situations, but most of the time you'll need *more flexibility*. 
+In a traditional Symfony app, we add security to controllers. But in API Platform we don't have any controllers! Ok, so instead of thinking about protecting each controller, we'll think about protecting *each API operation*. Maybe we want this collection GET operation to be accessible anonymously but we want to require a user to be authenticated in order to POST and create a new CheeseListing.
+
 **2. Use IsGranted annotation**
 
 Edit `/src/Controller/CommentAdminController.php`:
