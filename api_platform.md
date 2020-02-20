@@ -628,6 +628,10 @@ Edit `src/Entity/CheeseListing.php`:
  *          "get",
  *          "post"={"security"="is_granted('ROLE_USER')"}
  *     },
+ *     itemOperations={
+ *          "put"={"access_control"="is_granted('ROLE_USER')"},
+ *          "delete"={"access_control"="is_granted('ROLE_ADMIN')"}
+ *     },
  *     ...
  * )
  */
