@@ -43,6 +43,8 @@ There are 2 main ways to handle authorization:
 
 **1. access_control in security.yaml**
 
+When a user logs in - no matter how they authenticate or where your user data is stored - your login mechanism assigns that user a *set of roles*. In our app, those roles are stored in the database and we'll eventually let admin users modify them via our API. The simplest way to prevent access to an endpoint is by making sure *the user has some role*. 
+
 Edit `config/packages/security.yaml`:
 
 ```yaml
