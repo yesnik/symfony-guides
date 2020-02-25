@@ -49,3 +49,9 @@ php bin/phpunit
 ```bash
 php bin/console doctrine:database:create --env=test
 ```
+
+**Create database schema**
+
+```bash
+php bin/console doctrine:schema:create --env=test
+```
