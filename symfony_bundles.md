@@ -3,6 +3,14 @@
 [Bundle](https://symfony.com/doc/current/bundles.html) is a collection of code and other files written for use in a Symfony application. 
 They are dependent from Symfony components.
 
+## AliceBundle
+
+[AliceBundle](https://github.com/hautelook/AliceBundle) is a Symfony bundle to manage fixtures with Alice and Faker.
+
+```
+composer require --dev hautelook/alice-bundle
+```
+
 ## EasyAdminBundle
 
 [EasyAdminBundle](https://github.com/EasyCorp/EasyAdminBundle) is new and simple admin generator for Symfony apps.
