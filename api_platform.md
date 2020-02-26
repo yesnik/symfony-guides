@@ -690,3 +690,7 @@ class CheeseListingResourceTest extends ApiTestCase
 ```
 
 To clear DB we use here [AliceBundle](https://github.com/hautelook/AliceBundle).
+
+Always start with `self::createClient()`. It creates a `$client` object that will help us make requests into our API. 
+Also it *boots Symfony's container*, which is what gives us access to the entity manager and all other services. 
+
