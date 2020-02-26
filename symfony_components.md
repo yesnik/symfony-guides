@@ -12,6 +12,14 @@ Also it gives us `asset()` method in templates.
 composer require asset
 ```
 
+## symfony / http-client
+
+The [HttpClient](https://github.com/symfony/http-client) component provides powerful methods to fetch HTTP resources synchronously or asynchronously.
+
+```bash
+composer require symfony/http-client
+```
+
 ## symfony / security
 
 The [security](https://github.com/symfony/security) component provides a complete security system for your web application.
