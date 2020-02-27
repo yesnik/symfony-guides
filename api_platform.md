@@ -629,7 +629,10 @@ Edit `src/Entity/CheeseListing.php`:
  *          "post"={"security"="is_granted('ROLE_USER')"}
  *     },
  *     itemOperations={
- *          "put"={"access_control"="is_granted('ROLE_USER')"},
+ *          "put"={
+ *              "security"="is_granted('ROLE_USER') and object.getOwner() == user",
+ *              "security_message"="Only the creator can edit a cheese listing"
+ *          },
  *          "delete"={"access_control"="is_granted('ROLE_ADMIN')"}
  *     },
  *     ...
