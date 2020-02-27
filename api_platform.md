@@ -643,6 +643,12 @@ class CheeseListing { }
 
 If you're not logged in then you can't make POST request to create `CheeseListing`.
 
+When a request comes in, API Platform goes through three steps in a specific order:
+
+1. It deserializes the JSON and updates the CheeseListing object
+2. It applies `security` param 
+3. It executes validation rules.
+
 ## Testing API
 
 ### Api test example
