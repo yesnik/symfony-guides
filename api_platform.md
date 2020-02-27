@@ -617,6 +617,12 @@ class User implements UserInterface
 
 ## Authorization
 
+When a request comes in, API Platform goes through three steps in a specific order:
+
+1. It deserializes the JSON and updates the CheeseListing object
+2. It applies `security` param 
+3. It executes validation rules.
+
 ### Protect operation
 
 Edit `src/Entity/CheeseListing.php`:
@@ -643,11 +649,30 @@ class CheeseListing { }
 
 If you're not logged in then you can't make POST request to create `CheeseListing`.
 
-When a request comes in, API Platform goes through three steps in a specific order:
+Edit `src/Entity/User.php`:
 
-1. It deserializes the JSON and updates the CheeseListing object
-2. It applies `security` param 
-3. It executes validation rules.
+```php
+/**
+ * @ApiResource(
+ *     collectionOperations={
+ *          "get"={"access_control"="is_granted('ROLE_USER')"},
+ *          "post"
+ *     },
+ *     itemOperations={
+ *          "get"={"access_control"="is_granted('ROLE_USER')"},
+ *          "put"={"access_control"="is_granted('ROLE_USER') and object == user"},
+ *          "delete"={"access_control"="is_granted('ROLE_ADMIN')"}
+ *     },
+ *     normalizationContext={"groups"={"user:read"}},
+ *     denormalizationContext={"groups"={"user:write"}},
+ * )
+ * @UniqueEntity(fields={"username"})
+ * @UniqueEntity(fields={"email"})
+ * @ApiFilter(PropertyFilter::class)
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ */
+class User implements UserInterface {}
+```
 
 ## Testing API
 
