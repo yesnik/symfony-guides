@@ -266,3 +266,23 @@ class SecurityController extends AbstractController
     }
 }
 ```
+
+## Voters
+
+### Create voter
+
+```bash
+php bin/console make:voter
+```
+This command will create a file `src/Security/Voter/CheeseListingVoter.php`.
+
+### How voters work
+
+Whenever you call `is_granted()`, Symfony loops through all of the "voters" in the system and asks each one: *Current user has EDIT access to this `Post` object?*
+
+Symfony has 2 core voters: 
+
+1. The first knows how to decide access when you call `is_granted()` and pass it `ROLE_` something, like `ROLE_USER` or `ROLE_ADMIN`. It determines that by looking at the roles on the authenticated user. 
+2. The second voter knows how to decide access if you call `is_granted()` and pass it one of the `IS_AUTHENTICATED_` strings: `IS_AUTHENTICATED_FULLY`, `IS_AUTHENTICATED_REMEMBERED` or `IS_AUTHENTICATED_ANONYMOUSLY`.
+
+Now that we've created a class and made it extend Symfony's Voter base class, our app has a third voter. This means that, whenever someone calls `is_granted()`, Symfony will call the `supports()` method and pass it the `$attribute` - that's the string `EDIT`, or `ROLE_USER` - and the `$subject`, which will be the `CheeseListing` object in our case.
