@@ -286,3 +286,48 @@ Symfony has 2 core voters:
 2. The second voter knows how to decide access if you call `is_granted()` and pass it one of the `IS_AUTHENTICATED_` strings: `IS_AUTHENTICATED_FULLY`, `IS_AUTHENTICATED_REMEMBERED` or `IS_AUTHENTICATED_ANONYMOUSLY`.
 
 Now that we've created a class and made it extend Symfony's Voter base class, our app has a third voter. This means that, whenever someone calls `is_granted()`, Symfony will call the `supports()` method and pass it the `$attribute` - that's the string `EDIT`, or `ROLE_USER` - and the `$subject`, which will be the `CheeseListing` object in our case.
+
+Our job here is to answer the question: do we know how to decide access for this `$attribute` and `$subject` combination? Or should another voter handle this?
+
+We're going to design our voter to decide access if the `$attribute` is `EDIT` and if `$subject` is an `instanceof CheeseListing`.
+
+```php
+// src/Security/Voter/CheeseListingVoter.php
+
+namespace App\Security\Voter;
+
+use App\Entity\CheeseListing;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+use Symfony\Component\Security\Core\User\UserInterface;
+
+class CheeseListingVoter extends Voter
+{
+    protected function supports($attribute, $subject)
+    {
+        // replace with your own logic
+        // https://symfony.com/doc/current/security/voters.html
+        return in_array($attribute, ['EDIT'])
+            && $subject instanceof CheeseListing;
+    }
+
+    protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
+    {
+        $user = $token->getUser();
+        // if the user is anonymous, do not grant access
+        if (!$user instanceof UserInterface) {
+            return false;
+        }
+        /** @var CheeseListing $subject */
+        // ... (check conditions and return true to grant permission) ...
+        switch ($attribute) {
+            case 'EDIT':
+                if ($subject->getOwner() === $user) {
+                    return true;
+                }
+                return false;
+        }
+        throw new \Exception(sprintf('Unhandled attribute "%s"', $attribute));
+    }
+}
+```
