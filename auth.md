@@ -291,6 +291,10 @@ Our job here is to answer the question: do we know how to decide access for this
 
 We're going to design our voter to decide access if the `$attribute` is `EDIT` and if `$subject` is an `instanceof CheeseListing`.
 
+If anything else is passed (e.g. `ROLE_ADMIN`) `supports()` will return `false` and Symfony will know to ask a different voter.
+
+But if we return `true` from `supports()`, Symfony will call `voteOnAttribute()` and pass us the same `$attribute` string - `EDIT` - the same `$subject` - `CheeseListing` object - and a `$token`, which contains the authenticated `User` object. Our job in this method is clear: return `true` if the user should have access or `false` if they should not.
+
 ```php
 // src/Security/Voter/CheeseListingVoter.php
 
