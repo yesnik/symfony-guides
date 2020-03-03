@@ -269,6 +269,9 @@ class SecurityController extends AbstractController
 
 ## Voters
 
+If you're just checking for a role, no problem: use `is_granted('ROLE_ADMIN')`. 
+But if your logic gets any more complex, use a voter.
+
 ### Create voter
 
 ```bash
