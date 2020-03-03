@@ -307,9 +307,17 @@ use App\Entity\CheeseListing;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Security;
 
 class CheeseListingVoter extends Voter
 {
+    private $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+    
     protected function supports($attribute, $subject)
     {
         // replace with your own logic
@@ -330,6 +338,10 @@ class CheeseListingVoter extends Voter
         switch ($attribute) {
             case 'EDIT':
                 if ($subject->getOwner() === $user) {
+                    return true;
+                }
+                
+                if ($this->security->isGranted('ROLE_ADMIN')) {
                     return true;
                 }
                 return false;
