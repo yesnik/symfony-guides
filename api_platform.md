@@ -352,6 +352,32 @@ class CheeseListing
     
  ```
  
+If we don't define `groups` param on a constraint, the validator puts this constraint into `Default` group. 
+By default the validator executes constraints in this `Default` group.
+
+Suppose that we don't want it to include `@Assert\NotBlank` validator into `PUT` operation. But we want it in the `POST` operation. It's possible to specify *validation groups* for each method in operaion:
+
+```php
+/**
+ * @ApiResource(
+ *     collectionOperations={
+ *          "post"={
+ *              "security"="is_granted('IS_AUTHENTICATED_ANONYMOUSLY')",
+ *              "validation_groups"={"Default", "create"}
+ *          },
+ *     },
+ * )
+ */
+class User implements UserInterface {
+    /**
+     * @Groups("user:write")
+     * @Assert\NotBlank(groups={"create"})
+     * @SerializedName("password")
+     */
+    private $plainPassword;
+    
+```
+ 
  ## Relations
  
  Suppose that CheeseListing belongs to User:
