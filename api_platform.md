@@ -643,6 +643,25 @@ class User implements UserInterface
     private $cheeseListings;
 ```
 
+## Normalizer
+
+Create normalizer:
+
+```bash
+php bin/console make:serializer:normalizer
+```
+
+This command will create file `src/Serializer/Normalizer/UserNormalizer.php`.
+
+When an object is being transformed into JSON (or another format), it goes through these steps: 
+
+1. *Normalizer* transforms the object into an array. 
+2. *Encoder* transforms that array into JSON (or another format).
+
+The serializer has many normalizers. When it needs to normalize something, it loops over all the normalizers, calls `supportsNormalization()` and passes us the data that it needs to normalize. 
+If we return `true` from `supportsNormalization()`, the serializer will call `normalize()` method. 
+
+
 ## Authorization
 
 When a request comes in, API Platform goes through three steps in a specific order:
