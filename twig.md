@@ -1,27 +1,42 @@
 # Twig
 
-### Install twig
+Installation:
 
 ```bash
 composer req twig
 ```
 
-### Install twig extensions
+## About twig
 
-Twig extensions [documentation](http://twig-extensions.readthedocs.io/en/latest/).
+### Simple example
 
+Controller file `src/Controller/QuestionController.php`:
+
+```php
+namespace App\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
+
+class QuestionController extends AbstractController
+{
+    /**
+     * @Route("/questions/{slug}")
+     * @return Response
+     */
+    public function show($slug)
+    {
+        return $this->render('question/show.html.twig', [
+            'question' => 'Question: ' . $slug,
+        ]);
+    }
+}
 ```
-composer require twig/extensions
-```
+Template file `templates/question/show.html.twig`:
 
-### Create twig extension
-
+```twig
+<h1>{{ question }}</h1>
 ```
-bin/console make:twig-extension
-```
-
-This command will create `src/Twig/AppExtension.php`.
-After this we can use created filters in our twig templates.
 
 ### Create url for route in twig
 
@@ -38,6 +53,26 @@ File: `templates/companies/index.html.twig`:
     Edit
 </a>
 ```
+
+
+## Twig extensions
+
+### Install
+
+Twig extensions [documentation](http://twig-extensions.readthedocs.io/en/latest/).
+
+```bash
+composer require twig/extensions
+```
+
+### Create twig extension
+
+```
+bin/console make:twig-extension
+```
+
+This command will create `src/Twig/AppExtension.php`.
+After this we can use created filters in our twig templates.
 
 ### Show twig functions, filters, globals
 
