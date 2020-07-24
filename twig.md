@@ -1,5 +1,11 @@
 # Twig
 
+### Install twig
+
+```bash
+composer req twig
+```
+
 ### Install twig extensions
 
 Twig extensions [documentation](http://twig-extensions.readthedocs.io/en/latest/).
