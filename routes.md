@@ -35,6 +35,8 @@ article_toggle_heart:
 
 ## Define routes via annotations
 
+### Example 1
+
 File `src/Controller/SecurityController.php`:
 
 ```php
@@ -58,3 +60,26 @@ class SecurityController extends AbstractController
 ```
 
 This code creates `/login` route that accepts only POST requests.
+
+### Example 2
+
+File: `src/Controller/QuestionController.php`
+
+```php
+namespace App\Controller;
+
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+class QuestionController
+{
+    /**
+     * @Route("/questions/{slug}")
+     * @return Response
+     */
+    public function show($slug)
+    {
+        return new Response('Show: ' . $slug);
+    }
+}
+```
