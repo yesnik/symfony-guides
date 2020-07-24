@@ -117,13 +117,14 @@ This command will create controller, form, templates for entity.
 ### Start development server
 
 *Way 1:*
-```
+```bash
 symfony serve
+symfony local:server:start
 ```
 This command will start [Symfony Local web server](https://symfony.com/doc/current/setup/symfony_server.html)
 
 *Way 2:*
-```
+```bash
 php -S 127.0.0.1:8000 -t public
 ```
 
