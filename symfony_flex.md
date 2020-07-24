@@ -20,3 +20,7 @@ It keeps track of which recipes have been installed.
 Whenever you install a package, Flex will execute the recipe for that package, if there is one. 
 Recipes can add configuration files, create directories, or even modify files like `.gitignore` 
 or `config/bundles.php` so that the library instantly works without any extra setup.
+
+## Where do these Flex recipes live?
+
+Visit https://flex.symfony.com/ and try to find "mailer". You'll see `symfony/mailer` package. Click "Recipie" link, that will lead you to GitHub: https://github.com/symfony/recipes/tree/master/symfony/mailer
