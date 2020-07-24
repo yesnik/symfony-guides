@@ -27,3 +27,11 @@ Visit https://flex.symfony.com/ and try to find "mailer". You'll see `symfony/ma
 Click "Recipie" link, that will lead you to GitHub: https://github.com/symfony/recipes/tree/master/symfony/mailer
 
 Unofficial packages host their recipies at https://github.com/symfony/recipes-contrib
+
+## Console commands
+
+Show installed recipes in project:
+
+```bash
+composer recipes
+```
