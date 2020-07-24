@@ -1,12 +1,8 @@
 # Twig
 
-Installation:
-
 ```bash
 composer req twig
 ```
-
-## About twig
 
 ### Simple example
 
@@ -53,7 +49,6 @@ File: `templates/companies/index.html.twig`:
     Edit
 </a>
 ```
-
 
 ## Twig extensions
 
