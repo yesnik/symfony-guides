@@ -4,6 +4,8 @@
 composer req twig
 ```
 
+Available tags, filters see in the documentation: https://twig.symfony.com/
+
 ### Simple example
 
 Controller file `src/Controller/QuestionController.php`:
