@@ -30,8 +30,11 @@ Unofficial packages host their recipies at https://github.com/symfony/recipes-co
 
 ## Console commands
 
-Show installed recipes in project:
-
+- Show installed recipes in project:
 ```bash
 composer recipes
+```
+- Show details about recipe:
+```bash
+composer recipes symfony/routing
 ```
