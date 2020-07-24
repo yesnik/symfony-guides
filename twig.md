@@ -26,6 +26,7 @@ class QuestionController extends AbstractController
     {
         return $this->render('question/show.html.twig', [
             'question' => 'Question: ' . $slug,
+            'answers' => ['One', 'Two'],
         ]);
     }
 }
@@ -33,7 +34,19 @@ class QuestionController extends AbstractController
 Template file `templates/question/show.html.twig`:
 
 ```twig
+{% extends 'base.html.twig' %}
+
+{% block body %}
 <h1>{{ question }}</h1>
+
+<h2>Answers ({{ answers|length }})</h2>
+
+<ul>
+    {% for answer in answers %}
+        <li>{{ answer }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
 ```
 
 ### Create url for route in twig
