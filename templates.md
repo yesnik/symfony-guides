@@ -5,6 +5,11 @@
 ```html
 <a href="{{ path('index') }}">Home</a>
 ```
+Run command to see available routes:
+
+```bash
+php bin/console debug:router
+```
 
 ### Generate link to assets
 
