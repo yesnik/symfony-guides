@@ -1,13 +1,8 @@
 # Debug
 
-Install *debug pack* for Symfony projects:
+Install [profiler pack](https://github.com/symfony/profiler-pack) for Symfony projects:
 ```
-composer require debug --dev
-```
-
-If you want to unpack libs from pack:
-```
-composer unpack debug
+composer require profiler --dev
 ```
 
 Shortcut for `dump($x);die` in view or controller:
