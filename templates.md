@@ -11,6 +11,7 @@
 ```html
 <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 ```
+Later it will help you easily to place your assets to CDN: https://s2.somecdn.com/css/styles.css 
 
 ### Add script in template
 
