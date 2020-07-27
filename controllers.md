@@ -1,4 +1,3 @@
-
 ## Controllers
 
 ### Create controller
@@ -99,15 +98,13 @@ This command will show a full list of all of the type-hints that you can use to 
 Notice that most of them say that they are an alias to something.
 Whenever you install a new package, you'll get more and more services in this list.
 
-### Return JSON in action
+### Return JSON
 
-To return JSON in action we can use:
-
-```
+```php
 $this->json(['amount' => 100]);
 ```
 
-### Redirect in controller
+### Redirect
 
 ```php
 class SecurityController extends AbstractController
