@@ -21,6 +21,14 @@ Install [debug pack](https://github.com/symfony/debug-pack) that has Monolog:
 composer require debug
 ```
 
+### Unpack a pack
+
+```bash
+composer unpack symfony/debug-pack
+```
+
+This command will extract packages from the pack.
+
 ### Logs
 
 Log files can be found at `var/log/dev.log`
