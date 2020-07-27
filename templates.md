@@ -2,6 +2,8 @@
 
 ### Generate link to action
 
+**Without params**
+
 ```html
 <a href="{{ path('homepage') }}">Home</a>
 ```
@@ -23,6 +25,12 @@ Run the command to see available routes:
 
 ```bash
 php bin/console debug:router
+```
+
+**With params**
+
+```html
+<a href="{{ path('post_show', { slug: 'php-book' }) }}">A PHP Book</a>
 ```
 
 ### Generate link to assets
