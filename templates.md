@@ -3,9 +3,23 @@
 ### Generate link to action
 
 ```html
-<a href="{{ path('index') }}">Home</a>
+<a href="{{ path('homepage') }}">Home</a>
 ```
-Run command to see available routes:
+In controller we can difine name for the route via annotation:
+
+```php
+class PostController extends AbstractController
+{
+    /**
+     * @Route("/", name="homepage")
+     */
+    public function homepage()
+    {
+        // ..
+    }
+```
+
+Run the command to see available routes:
 
 ```bash
 php bin/console debug:router
