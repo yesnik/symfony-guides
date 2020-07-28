@@ -90,8 +90,12 @@ public function index(RequestStack $requestStack)
 
 **Show list of type-hints** / **Find service**
 
-```
-./bin/console debug:autowiring
+```bash
+# All services
+php bin/console debug:autowiring
+
+# Services that matches "log"
+php bin/console debug:autowiring log
 ```
 
 This command will show a full list of all of the type-hints that you can use to get a service. 
