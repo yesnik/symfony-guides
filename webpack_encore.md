@@ -47,8 +47,8 @@ Encore's job (via Webpack) is simple: to read and follow all of the require stat
 
 Compile assets during development:
 
-```
-yarn encore dev --watch
+```bash
+yarn watch
 ```
 
 ### Include assets in template
