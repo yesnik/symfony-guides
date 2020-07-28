@@ -74,3 +74,11 @@ Edit base template `templates/base.html.twig`:
         <script src="/build/app.js"></script> -->
 {% endblock %}
 ```
+
+### Import bootstrap styles
+
+Edit `/assets/css/app.css`:
+
+```css
+@import "~bootstrap";
+```
