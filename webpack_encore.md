@@ -1,5 +1,7 @@
 # Webpack Encore
 
+Encore's job (via Webpack) is simple: to read and follow all of the require statements and create one final `app.js` (and `app.css`) that contains everything for our app.
+
 ### Installation 
 
 Install [Encore](https://symfony.com/doc/current/frontend/encore/installation.html) in Symfony app:
@@ -14,6 +16,9 @@ yarn install
 ```bash
 # Add jquery package
 yarn add jquery --dev
+
+# Compile assets during development
+yarn watch
 ```
 
 ### Config
@@ -46,16 +51,6 @@ import '../css/app.scss';
 // const $ = require('jquery');
 
 console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
-```
-
-### Compile assets
-
-Encore's job (via Webpack) is simple: to read and follow all of the require statements and create one final `app.js` (and `app.css`) that contains everything your app needs.
-
-Compile assets during development:
-
-```bash
-yarn watch
 ```
 
 ### Include assets in template
