@@ -104,6 +104,17 @@ Whenever you install a new package, you'll get more and more services in this li
 $this->json(['amount' => 100]);
 ```
 
+### Allow only POST
+
+```php
+class PostController extends AbstractController
+{
+    /**
+     * @Route("/posts/{id}/vote/{direction}", methods={"POST"})
+     */
+    public function commentVote($id, $direction) {}
+```
+
 ### Redirect
 
 ```php
