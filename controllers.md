@@ -112,7 +112,7 @@ class PostController extends AbstractController
     /**
      * @Route("/posts/{id}/vote/{direction}", methods={"POST"})
      */
-    public function commentVote($id, $direction) {}
+    public function vote($id, $direction) {}
 ```
 
 ### Redirect
