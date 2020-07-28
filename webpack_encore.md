@@ -9,6 +9,13 @@ composer require encore
 yarn install
 ```
 
+### Console commands
+
+```bash
+# Add jquery package
+yarn add jquery --dev
+```
+
 ### Config
 
 Everything in Encore is configured with the file `webpack.config.js`:
