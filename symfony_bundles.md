@@ -43,6 +43,10 @@ composer require friendsofsymfony/rest-bundle
 composer require friendsofsymfony/user-bundle
 ```
 
+## KnpMarkdownBundle
+
+[KnpMarkdownBundle](https://github.com/KnpLabs/KnpMarkdownBundle) provides markdown conversion for a Symfony project.
+
 ## KnpPaginatorBundle
 
 [KnpPaginatorBundle](https://github.com/KnpLabs/KnpPaginatorBundle) is SEO friendly Symfony paginator to sort and paginate:
