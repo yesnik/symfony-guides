@@ -49,6 +49,7 @@ Every service is stored inside another object called the *container*.
 And each service has an internal name, just like routes.
 
 And what exactly puts these services into the container? The answer: *bundles* - Symfony's plugin system.
+Look at the file `config/bundles.php`. Each bundle gives a service to our app.
 
 **What can we autowire in controller**
 
