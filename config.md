@@ -24,7 +24,7 @@ knp_markdown:
     service: markdown.parser.light
 ```
 
-**Important:** We may need to reset cache to apply changes in settings: `php bin/console cache:clear`
+**Important:** We may need to clear cache to apply changes in settings: `php bin/console cache:clear`
 
 ## Services config
 
