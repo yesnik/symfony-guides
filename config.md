@@ -16,6 +16,16 @@ Also we can use alias:
 php bin/console config:dump-reference knp_markdown
 ```
 
+Copy this bundle's config to file `config/packages/knp_makrdown.yaml`:
+
+```yaml
+knp_markdown:
+  parser:
+    service: markdown.parser.light
+```
+
+**Important:** We may need to reset cache to apply changes in settings: `php bin/console cache:clear`
+
 ## Services config
 
 When Symfony loads, it needs to figure out all of the services that should be in the container. 
