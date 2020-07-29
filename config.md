@@ -1,5 +1,23 @@
 # Config
 
+## Bundle config
+
+Each file in `config/packages/` configures a some bundle. Any configuration under `knp_markdown` is passed to the `KnpMarkdownBundle`. Any config under `framework` configures `FrameworkBundle`, which is Symfony's one, "core" bundle.
+
+### Show default bundle config
+
+```
+php bin/console config:dump-reference KnpMarkdownBundle
+```
+
+Also we can use alias:
+
+```
+php bin/console config:dump-reference knp_markdown
+```
+
+## Services config
+
 When Symfony loads, it needs to figure out all of the services that should be in the container. 
 
 Look at `config/services.yaml`:
@@ -169,20 +187,4 @@ We can open a file, and then decode its JSON:
  
 ```
 app.secrets: '%env(json:file:SECRETS_FILE)%'
-```
-
-## Bundle config
-
-Each file in `config/packages/` configures a some bundle. Any configuration under `knp_markdown` is passed to the `KnpMarkdownBundle`. Any config under `framework` configures `FrameworkBundle`, which is Symfony's one, "core" bundle.
-
-### Show default bundle config
-
-```
-./bin/console config:dump TwigBundle
-```
-
-Also we can use alias:
-
-```
-./bin/console config:dump knp_markdown
 ```
