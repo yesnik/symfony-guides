@@ -2,22 +2,37 @@
 
 In Symfony Profiler there are a number of things called *pools* - different cache systems (most are used internally by Symfony). The one we're using is called `cache.app`. 
 
-In `src/Controller/ArticleController.php`:
+In `src/Controller/QuestionController.php`:
 
 ```php
-use Symfony\Component\Cache\Adapter\AdapterInterface;
-
 // ...
-public function show(AdapterInterface $cache) {
-    $articleContent = 'Some content';
+use Symfony\Contracts\Cache\CacheInterface;
 
-    $item = $cache->getItem('markdown_'.md5($articleContent));
+class QuestionController extends AbstractController
+{
+    /**
+     * @Route("/questions/{slug}", name="app_question_show")
+     * @return Response
+     */
+    public function show(
+        $slug,
+        MarkdownParserInterface $markdownParser,
+        CacheInterface $cache
+    )
+    {
+        $questionText = 'How are you *World*?';
 
-    if (!$item->isHit()) {
-        $item->set($markdown->transform($articleContent));
-        $cache->save($item);
+        $questionTextParsed = $cache->get(
+            'markdown_'. md5($questionText),
+            function () use ($markdownParser, $questionText) {
+                return $markdownParser->transformMarkdown($questionText);
+            }
+        );
+
+        return $this->render('question/show.html.twig', [
+            'question' => 'Question: ' . $slug,
+            'questionText' => $questionTextParsed,
+        ]);
     }
-
-    $articleContent = $item->get();
 }
 ```
