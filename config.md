@@ -4,10 +4,14 @@
 
 Each file in `config/packages/` configures a some bundle. Any configuration under `knp_markdown` is passed to the `KnpMarkdownBundle`. Any config under `framework` configures `FrameworkBundle`, which is Symfony's one, "core" bundle.
 
-### Show default bundle config
+### Show bundle config options
 
 ```
+# Show config options for Markdown bundle
 php bin/console config:dump-reference KnpMarkdownBundle
+
+# Show config options for Main bundle of Symfony (includes cache, etc.)
+php bin/console config:dump-reference FrameworkBundle
 ```
 
 Also we can use alias:
