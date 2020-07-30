@@ -6,12 +6,12 @@ Each file in `config/packages/` configures a some bundle. Any configuration unde
 
 ### Show bundle config options
 
-```
-# Show current config values for Markdown bundle
-php bin/console config:dump-reference KnpMarkdownBundle
-
-# Show current config values for Main bundle of Symfony (includes cache, etc.)
+```bash
+# Show config example for Main bundle of Symfony (includes cache, etc.)
 php bin/console config:dump-reference FrameworkBundle
+
+# Show current config values
+php bin/console debug:config FrameworkBundle
 ```
 
 Also we can use alias:
