@@ -115,7 +115,7 @@ class SlackClient
 
 **Note:** PHPDoc `@required` above `setLogger` function makes Symfony to call it after instantiating of `SlackClient`. 
 
-## Service container
+## How Autowiring Works
 
 Symfony puts all of services inside *service container* - an array of services, where each object has unique id.
 
@@ -123,12 +123,13 @@ Symfony puts all of services inside *service container* - an array of services, 
 # Show all services in the container
 php bin/console debug:container
 
-# Show info about markdown service
-php bin/console debug:container markdown
-
 # Show services that can be accessed via autowiring
 php bin/console debug:autowiring
 ```
+
+When Symfony sees an argument type-hinted with `Symfony\Component\Cache\Adapter\AdapterInterface`, it looks for a service in the container with this exact id.
+Some services are just *aliases* to another service. 
+If you ask for the `AdapterInterface` service, Symfony will give you the `cache.app` service.
 
 ## Private vs Public Service
 
