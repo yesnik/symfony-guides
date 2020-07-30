@@ -2,6 +2,8 @@
 
 In Symfony Profiler there are a number of things called *pools* - different cache systems (most are used internally by Symfony). The one we're using is called `cache.app`. 
 
+Cache has it's own config file: `config/packages/cache.yaml`.
+
 In `src/Controller/QuestionController.php`:
 
 ```php
