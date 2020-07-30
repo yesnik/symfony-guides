@@ -38,3 +38,12 @@ class QuestionController extends AbstractController
     }
 }
 ```
+
+## Clear cache
+
+```bash
+php bin/console cache:clear
+```
+
+On next request new cache will be built. 
+The cache is stored in a `var/cache/prod` directory.
