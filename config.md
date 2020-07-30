@@ -1,5 +1,10 @@
 # Config
 
+## Config files
+
+Symfony loads everything from `config/packages` and then loads the files in the environment subdirectory. 
+It allows us to override the original values.
+
 ## Bundle config
 
 Each file in `config/packages/` configures a some bundle. Any configuration under `knp_markdown` is passed to the `KnpMarkdownBundle`. Any config under `framework` configures `FrameworkBundle`, which is Symfony's one, "core" bundle.
