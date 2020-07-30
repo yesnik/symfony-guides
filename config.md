@@ -7,10 +7,10 @@ Each file in `config/packages/` configures a some bundle. Any configuration unde
 ### Show bundle config options
 
 ```
-# Show config options for Markdown bundle
+# Show current config values for Markdown bundle
 php bin/console config:dump-reference KnpMarkdownBundle
 
-# Show config options for Main bundle of Symfony (includes cache, etc.)
+# Show current config values for Main bundle of Symfony (includes cache, etc.)
 php bin/console config:dump-reference FrameworkBundle
 ```
 
