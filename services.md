@@ -115,6 +115,21 @@ class SlackClient
 
 **Note:** PHPDoc `@required` above `setLogger` function makes Symfony to call it after instantiating of `SlackClient`. 
 
+## Service container
+
+Symfony puts all of services inside *service container* - an array of services, where each object has unique id.
+
+```bash
+# Show all services in the container
+php bin/console debug:container
+
+# Show info about markdown service
+php bin/console debug:container markdown
+
+# Show services that can be accessed via autowiring
+php bin/console debug:autowiring
+```
+
 ## Private vs Public Service
 
 In Symfony 3, services were defined as *public*. 
