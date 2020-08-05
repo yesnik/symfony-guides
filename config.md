@@ -88,9 +88,13 @@ No: this line simply tells the container to *be aware* of these classes.
 But services are never instantiated until - and unless - *someone asks for them*. 
 So, if we didn't ask for our `MarkdownHelper`, it would never be instantiated on that request.
 
-**Important:** each service in the container is instantiated a maximum of once per request. 
+**Important:** 
+
+- each service in the container is instantiated a maximum of once per request. 
 If multiple parts of our code ask for the `MarkdownHelper`, 
 it will be created just once, and the same instance will be passed each time. 
+- every service in the container needs to have a *unique id*. 
+When we auto-register services in `src` directory, the `id` matches the class name. 
 
 ### Bind service to variable name
 
