@@ -1,5 +1,11 @@
 # Config
 
+To create a container Symfony needs to get all services that should be in the container - service's id, class name and the arguments. 
+Symfony gets this info from 2 places:
+
+1. From bundles. Each bundle has a list of its services.
+2. From `src/` directory. To learn about our services Symfony reads `services.yaml`.
+
 ## Config files
 
 Symfony loads everything from `config/packages` and then loads the files in the environment subdirectory. 
