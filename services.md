@@ -148,9 +148,9 @@ php bin/console debug:container --parameters
 
 Add option `--env=prod` to see values for Production.
 
-### Add param to container
+### Add param to a container
 
-Edit `config/packages/cache.yaml`
+Edit `config/services.yaml`:
 
 ```yaml
 parameters:
