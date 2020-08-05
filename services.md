@@ -138,6 +138,14 @@ When Symfony sees an argument type-hinted with `Symfony\Component\Cache\Adapter\
 Some services are just *aliases* to another service. 
 If you ask for the `AdapterInterface` service, Symfony will give you the `cache.app` service.
 
+## Config parameters
+
+Show a list of the *parameters* in the container:
+
+```bash
+php bin/console debug:container --parameters
+```
+
 ## Private vs Public Service
 
 In Symfony 3, services were defined as *public*. 
