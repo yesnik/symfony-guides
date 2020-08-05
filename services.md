@@ -68,6 +68,15 @@ class ArticleController extends AbstractController
 }
 ```
 
+Edit `config/services.yaml`:
+
+```yaml
+services:
+    App\Service\MarkdownHelper:
+        bind:
+            $isDebug: '%kernel.debug%'
+```
+
 ### Setter Injection
 
 In `SlackClient`, we want to log a message. We already know how to do this: 
