@@ -73,24 +73,24 @@ services:
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:
-        resource: '../src/*'
-        exclude: '../src/{Entity,Migrations,Tests}'
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            - '../src/Tests/'
 ```
 
 This makes all classes inside `src/` available as services in the container.
 
-**Remember**: each class in the src/ directory is automatically registered as a service
-
-But wait! Does that mean that all of our classes are instantiated on every single request? 
+Does that mean that all of our classes are instantiated on every single request? 
 No: this line simply tells the container to *be aware* of these classes. 
 But services are never instantiated until - and unless - *someone asks for them*. 
-So, if we didn't ask for our `MarkdownService`, it would never be instantiated on that request.
+So, if we didn't ask for our `MarkdownHelper`, it would never be instantiated on that request.
 
 **Important:** each service in the container is instantiated a maximum of once per request. 
-If multiple parts of our code ask for the MarkdownHelper, 
+If multiple parts of our code ask for the `MarkdownHelper`, 
 it will be created just once, and the same instance will be passed each time. 
-That's awesome for performance: we don't need multiple markdown helpers... 
-even if we need to call parse() multiple times.
 
 ### Bind service to variable name
 
