@@ -146,6 +146,29 @@ Show a list of the *parameters* in the container:
 php bin/console debug:container --parameters
 ```
 
+### Add param to container
+
+Edit `config/packages/cache.yaml`
+
+```yaml
+parameters:
+    cache_adapter: cache.adapter.apcu
+```
+
+### Use param in a config
+
+```yaml
+framework:
+    cache:
+        app: '%cache_adapter%'
+```
+
+### Read param in a Controller
+
+```php
+$this->getParameter('cache_adapter');
+```
+
 ## Private vs Public Service
 
 In Symfony 3, services were defined as *public*. 
