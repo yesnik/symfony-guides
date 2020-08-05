@@ -95,6 +95,8 @@ If multiple parts of our code ask for the `MarkdownHelper`,
 it will be created just once, and the same instance will be passed each time. 
 - every service in the container needs to have a *unique id*. 
 When we auto-register services in `src` directory, the `id` matches the class name. 
+- If we try to autowire `App\Service\MarkdownHelper` into our controller or another service, 
+autowiring looks in the container for a service whose `id` exactly matches the type-hint: `App\Service\MarkdownHelper`.
 
 ### Bind service to variable name
 
