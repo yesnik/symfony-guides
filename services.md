@@ -157,6 +157,13 @@ parameters:
     cache_adapter: cache.adapter.apcu
 ```
 
+Edit `config/services_dev.yaml` to define param value for *dev* environment:
+
+```yaml
+parameters:
+    cache_adapter: cache.adapter.filesystem`
+```
+
 ### Use param in a config
 
 ```yaml
