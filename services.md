@@ -1,6 +1,6 @@
 ## Services
 
-When you create a service class, the arguments to its constructor are **autowired**. 
+A service is just a class that does work. When you create a service class, the arguments to its constructor are **autowired**. 
 That means that we can use any of the classes or interfaces from `debug:autowiring` as type-hints. 
 When Symfony creates our `MarkdownService` it knows what to do:
 
