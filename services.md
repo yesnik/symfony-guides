@@ -137,6 +137,7 @@ php bin/console debug:autowiring
 When Symfony sees an argument type-hinted with `Symfony\Component\Cache\Adapter\AdapterInterface`, it looks for a service in the container with this exact id.
 Some services are just *aliases* to another service. 
 If you ask for the `AdapterInterface` service, Symfony will give you the `cache.app` service.
+Autowiring only works with class or interface type-hints.
 
 ## Config parameters
 
