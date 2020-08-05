@@ -9,55 +9,60 @@ php bin/console debug:autowiring Markdown --all
 
 Option `--all` shows your custom services in the Symfony container.
 
-When Symfony creates our `MarkdownService` it knows what to do:
+### Example: MarkdownHelper
 
-File of service: `src/Service/MarkdownService.php`:
+Edit: `src/Service/MarkdownHelper.php`:
 
 ```php
 namespace App\Service;
 
-use Michelf\MarkdownInterface;
-use Symfony\Component\Cache\Adapter\AdapterInterface;
+use Knp\Bundle\MarkdownBundle\MarkdownParserInterface;
+use Symfony\Contracts\Cache\CacheInterface;
 
-class MarkdownService
+class MarkdownHelper
 {
-    protected $cache;
-    protected $markdown;
+    private $markdownParser;
+    private $cache;
+    private $isDebug;
 
-    public function __construct(AdapterInterface $cache, MarkdownInterface $markdown)
+    public function __construct(
+        MarkdownParserInterface $markdownParser,
+        CacheInterface $cache,
+        bool $isDebug
+    )
     {
+        $this->markdownParser = $markdownParser;
         $this->cache = $cache;
-        $this->markdown = $markdown;
+        $this->isDebug = $isDebug;
     }
 
     public function parse(string $source): string
     {
-        $item = $this->cache->getItem('markdown_'.md5($source));
-
-        if (!$item->isHit()) {
-            $item->set($this->markdown->transform($source));
-            $this->cache->save($item);
+        if ($this->isDebug) {
+            return $this->markdownParser->transformMarkdown($source);
         }
 
-        return $item->get();
+        return $this->cache->get('markdown_'.md5($source), function() use ($source) {
+            return $this->markdownParser->transformMarkdown($source);
+        });
     }
 }
 ```
 
-In controller:
+Edit `src/Controller/ArticleController.php`:
 
 ```php
 namespace App\Controller;
 
-use App\Service\MarkdownService;
+use App\Service\MarkdownHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ArticleController extends AbstractController
 {
-    public function show($slug, MarkdownService $markdownService)
+    public function show($slug, MarkdownHelper $markdownHelper)
     {
         // ...
-        $articleContent = $markdownService->parse($articleContent);
+        $articleContentParsed = $markdownHelper->parse($articleContent);
         // ...
     }
 }
