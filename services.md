@@ -155,6 +155,9 @@ Autowiring only works with class or interface type-hints.
 
 ### Named Autowiring
 
+There are multiple services in the container that implement the same interface. 
+It's possible to choose the one we want.
+
 This command will show all implementations of `Psr\Log\LoggerInterface`:
 
 ```bash
