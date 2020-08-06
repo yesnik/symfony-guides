@@ -55,6 +55,8 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+            $isDebug: '%kernel.debug%'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -71,6 +73,8 @@ This is a special key `_defaults` sets default config values that
 should be applied to *all services* that are registered in this file.
 
 We could set autowiring to `false` on just one service to override these defaults.
+
+When we add a `bind` to `_defaults`, we can use `$isDebug` argument in *any* of our services.
 
 This makes all classes inside `src/` available as services in the container.
 
