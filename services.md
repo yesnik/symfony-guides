@@ -153,6 +153,38 @@ Some services are just *aliases* to another service.
 If you ask for the `AdapterInterface` service, Symfony will give you the `cache.app` service.
 Autowiring only works with class or interface type-hints.
 
+### Named Autowiring
+
+This command will show all implementations of `Psr\Log\LoggerInterface`:
+
+```bash
+php bin/console debug:autowiring log
+```
+Let's create 'markdown' logger chanel. Create `config/packages/monolog.yaml`:
+
+```yaml
+monolog:
+    channels: ['markdown']
+```
+
+Use different argument's name to get access to this channel:
+
+```php
+class MarkdownHelper
+{
+    public function __construct(LoggerInterface $markdownLogger)
+    {
+        $this->logger = $markdownLogger;
+    }
+    
+    public function parse(string $source): string
+    {
+        $this->logger->info('Hello!');
+    }
+}
+```
+This message will go to `markdown` channel.
+
 ## Config parameters
 
 Show a list of the *parameters* in the container:
