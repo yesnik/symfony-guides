@@ -69,14 +69,13 @@ services:
             - '../src/Tests/'
 ```
 
-This is a special key `_defaults` sets default config values that 
-should be applied to *all services* that are registered in this file.
+This makes all classes inside `src/` available as services in the container.
 
+Key `_defaults` sets default config values that 
+should be applied to *all services* that are registered in this file.
 We could set autowiring to `false` on just one service to override these defaults.
 
 When we add a `bind` to `_defaults`, we can use `$isDebug` argument in *any* of our services.
-
-This makes all classes inside `src/` available as services in the container.
 
 Does that mean that all of our classes are instantiated on every single request? 
 No: this line simply tells the container to *be aware* of these classes. 
