@@ -45,6 +45,8 @@ knp_markdown:
 
 When Symfony loads, it needs to figure out all of the services that should be in the container. 
 
+### Service auto-registration
+
 Look at `config/services.yaml`:
 
 ```yaml
@@ -53,23 +55,7 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-        public: false
-        
-    App\Service\MarkdownService:
-        autowire: false
-```
 
-This is a special key `_defaults` sets default config values that 
-should be applied to all services that are registered in this file.
-
-We could set autowiring to `false` on just one service to override these defaults.
-
-### Service auto-registration
-
-Look at `config/services.yaml`:
-
-```yaml
-services:
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:
@@ -80,6 +66,11 @@ services:
             - '../src/Kernel.php'
             - '../src/Tests/'
 ```
+
+This is a special key `_defaults` sets default config values that 
+should be applied to *all services* that are registered in this file.
+
+We could set autowiring to `false` on just one service to override these defaults.
 
 This makes all classes inside `src/` available as services in the container.
 
