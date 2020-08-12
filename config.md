@@ -164,6 +164,8 @@ We can use `%kernel.secret%` to get it in *yaml config* files.
 
 ### Envirinment variables
 
+After Symfony loads `.env`, it looks for another file called `.env.local`.
+
 **Set variable**
 
 Edit `.env`:
