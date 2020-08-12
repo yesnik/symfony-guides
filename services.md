@@ -149,7 +149,7 @@ php bin/console debug:autowiring
 ```
 
 When Symfony sees a type-hinted argument `Psr\Log\LoggerInterface $mdLogger`, it looks for a service in the container with this exact id. 
-First looks for a service whose id is the *type-hint + the argument name*. In this case it looks for a service whose id is `Psr\Log\LoggerInterface $mdLogger`.
+First it looks for a service whose id is the *type-hint + the argument name*. In this case it looks for a service with id `Psr\Log\LoggerInterface $mdLogger`.
 
 We can create this binding in `config/services.yaml`:
 
