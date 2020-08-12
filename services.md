@@ -188,6 +188,19 @@ class MarkdownHelper
 ```
 This message will go to `markdown` channel.
 
+### Bind service to argument
+
+Edit `config/services.yaml`:
+
+```yaml
+services:
+    _defaults:
+        bind:
+            Psr\Log\LoggerInterface $mdLogger: '@monolog.logger.markdown'
+```
+
+Prefix the service id with `@` to tell the Symfony that it's not a simple string.
+
 ## Config parameters
 
 Show a list of the *parameters* in the container:
