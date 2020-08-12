@@ -24,25 +24,28 @@ class ArticleController extends AbstractController
 
 ### Autowiring
 
-Before Symfony executes our controller, it looks at each argument. For simple arguments like $slug, it passes us the wildcard value from the router:
+Controllers are also services that live in the container. But additionally they have the ability to autowire arguments into its methods.
+
+Before Symfony executes the controller, it looks at each argument. 
+For simple arguments like `$slug`, it passes us the wildcard value from the router:
 
 ```php
 public function toggleArticleHeart($slug, LoggerInterface $logger) { ... }
 ```
 
-But for `$logger` (we call it *type-hinted argument*), it looks at the *type-hint* and realizes that we want Symfony to pass us the logger object. 
-Oh, and the order of the arguments does not matter.
+But for type-hinted argument `LoggerInterface $logger` it looks at the *type-hint* and realizes that we want to get the logger object. 
+The order of the arguments does not matter.
 
 Autowiring works in 2 places:
 
 - the controller actions
 - the `__construct()` method of services
 
-The container's job is really to *instantiate* services. 
+The container's job is to *instantiate* services. 
 And so autowiring should really only work for `__construct()` functions! 
 In fact, the only reason that it also works for controller actions is for convenience!
 
-This is a very powerful idea called autowiring: 
+This is a very powerful idea called *autowiring*: 
 if you need a service object, you just need to know the correct type-hint to use!
 
 Every service is stored inside another object called the *container*. 
