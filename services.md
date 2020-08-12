@@ -201,6 +201,8 @@ services:
 
 Prefix the service id with `@` to tell the Symfony that it's not a simple string.
 
+The `bind` key will help to configure any argument that can't be autowired.
+
 ## Config parameters
 
 Show a list of the *parameters* in the container:
