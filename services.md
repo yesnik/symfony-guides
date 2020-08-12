@@ -148,7 +148,16 @@ php bin/console debug:container
 php bin/console debug:autowiring
 ```
 
-When Symfony sees an argument type-hinted with `Symfony\Component\Cache\Adapter\AdapterInterface`, it looks for a service in the container with this exact id.
+When Symfony sees a type-hinted argument `Psr\Log\LoggerInterface $mdLogger`, it looks for a service in the container with this exact id. 
+First looks for a service whose id is the *type-hint + the argument name*. In this case it looks for a service whose id is `Psr\Log\LoggerInterface $mdLogger`.
+
+We can create this binding in `config/services.yaml`:
+
+```yaml
+services:
+    Psr\Log\LoggerInterface $mdLogger: '@monolog.logger.markdown'
+```
+
 Some services are just *aliases* to another service. 
 If you ask for the `AdapterInterface` service, Symfony will give you the `cache.app` service.
 Autowiring only works with class or interface type-hints.
