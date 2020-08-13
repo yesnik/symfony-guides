@@ -3,8 +3,9 @@
 ## Install doctrine
 
 ```
-composer require doctrine
+composer require orm
 ```
+This command will require packages from [orm-pack](https://github.com/symfony/orm-pack).
 
 Edit `.env` to define `DATABASE_URL`:
 
