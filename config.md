@@ -241,3 +241,9 @@ php bin/console secrets:set SENTRY_DSN --env=prod
 This command will create the file for this secret and initialize `prod` vault.
 
 **Important:** Don't commit `prod.decrypt.private.php` to Git.
+
+Show secret values for `prod` vault:
+
+```bash
+php bin/console secrets:list --reveal --env=prod
+```
