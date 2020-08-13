@@ -5,7 +5,7 @@
 ```
 composer require orm
 ```
-This command will require packages from [orm-pack](https://github.com/symfony/orm-pack).
+This command will require packages from [orm-pack](https://github.com/symfony/orm-pack). A pack is just a shortcut to install several packages.
 
 Edit `.env` to define `DATABASE_URL`:
 
