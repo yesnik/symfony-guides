@@ -1,5 +1,11 @@
 # Logs
 
+## Show log messages
+
+```bash
+tail var/log/dev.log 
+```
+
 ## Monolog config
 
 And Monolog has a feature called *channels*, which are kind of like categories. 
