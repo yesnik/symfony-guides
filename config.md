@@ -157,7 +157,7 @@ framework:
 
 **Remember**: anything surrounded by percent signs is a parameter (eg. `cache_adapter%`)
 
-**kerner.secret**
+**kernel.secret**
 
 If you ever need a cryptographic secret, Symfony has a parameter called `kernel.secret`.
 We can use `%kernel.secret%` to get it in *yaml config* files.
@@ -184,9 +184,6 @@ To save the name of this variable to version control edit `.env.dist`:
 SLACK_WEBHOOK_ENDPOINT=https://hooks.slack.com/services/...
 ### END CUSTOM VARS
 ```
-
-**Important**: Using `.env` isn't recommended for production is mostly because the logic to parse this file isn't optimized. 
-So, you'll lose a small amount of performance - probably just a couple of milliseconds.
 
 **Read variable**
 
@@ -216,3 +213,24 @@ We can open a file, and then decode its JSON:
 ```
 app.secrets: '%env(json:file:SECRETS_FILE)%'
 ```
+
+### Secret vault
+
+Symfony has *secrets vault* - a collection of encrypted values. It allows us to commit sensitive values into Git.
+
+Symfony has two vaults:
+
+- for the dev environment. It contains non-sensitive default values
+- for the prod environment. It contains the real values.
+
+**Create the vault**
+
+```bash
+php bin/console secrets:set SENTRY_DSN
+```
+This command will:
+
+- create the file `config/secrets/dev/dev.SENTRY_DSN.25b27f.php`.
+- initialize the `dev` vault:
+  * `dev.encrypt.public.php` file contains the key that is used to encrypt secrets.
+  * `dev.decrypt.private.php` file contains the key to decrypt the secrets and use them in our app. It's OK to commit the decrypt key for the `dev` vault, but not for the `prod` vault.
