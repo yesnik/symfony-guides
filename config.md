@@ -234,3 +234,10 @@ This command will:
 - initialize the `dev` vault:
   * `dev.encrypt.public.php` file contains the key that is used to encrypt secrets.
   * `dev.decrypt.private.php` file contains the key to decrypt the secrets and use them in our app. It's OK to commit the decrypt key for the `dev` vault, but not for the `prod` vault.
+
+```bash
+php bin/console secrets:set SENTRY_DSN --env=prod
+```
+This command will create the file for this secret and initialize `prod` vault.
+
+**Important:** Don't commit `prod.decrypt.private.php` to Git.
