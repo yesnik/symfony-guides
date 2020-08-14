@@ -18,3 +18,9 @@ Run mysql console in the running container:
 ```bash
 docker-compose exec db mysql -u root --password=password
 ```
+
+### Show vars exported by Symfony binary
+
+```bash
+symfony var:export --multiline
+```
