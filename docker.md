@@ -24,3 +24,9 @@ docker-compose exec db mysql -u root --password=password
 ```bash
 symfony var:export --multiline
 ```
+
+### Create database
+
+```bash
+symfony console doctrine:database:create
+```
