@@ -11,6 +11,15 @@ This command will create 2 files:
 - src/Entity/Question.php
 - src/Repository/QuestionRepository.php
 
+### Generate migration
+
+```bash
+# This command reads env variables from Docker
+symfony console make:migration
+
+# This command doesn't have access to Docker's env vars
+php bin/console make:migration
+```
 
 ### Trait TimestampableEntity
 
