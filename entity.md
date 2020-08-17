@@ -22,6 +22,16 @@ php bin/console make:migration
 ```
 This command created file `migrations/Version20200816103937.php`
 
+### Apply migration
+
+```bash
+php bin/console doctrine:migrations:migrate
+
+symfony console doctrine:migrations:migrate
+```
+
+Each time we execute a migration file, Symfony adds a new row to the `doctrine_migration_versions` table.
+
 ### Trait TimestampableEntity
 
 Edit file of entity:
