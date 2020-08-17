@@ -1,5 +1,7 @@
 # Doctrine
 
+Doctrine doesn't want you to think about tables or columns, it wants you to think about classes and properties.
+
 ## Install doctrine
 
 ```
