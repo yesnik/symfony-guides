@@ -57,7 +57,6 @@ private $id;
 ```php
 /**
  * @ORM\Column(type="string", length=180, unique=true)
- * @Groups("main")
  */
 private $email;
 ```
