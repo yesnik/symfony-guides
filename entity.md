@@ -20,6 +20,7 @@ symfony console make:migration
 # This command doesn't have access to Docker's env vars
 php bin/console make:migration
 ```
+This command created file `migrations/Version20200816103937.php`
 
 ### Trait TimestampableEntity
 
