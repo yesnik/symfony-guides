@@ -13,6 +13,8 @@ This command will create 2 files:
 
 ### Generate migration
 
+If you made changes to Entity's code, run this command to create corresponding migration:
+
 ```bash
 # This command reads env variables from Docker
 symfony console make:migration
