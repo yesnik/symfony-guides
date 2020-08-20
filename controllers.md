@@ -106,6 +106,19 @@ This command will show a full list of all of the type-hints that you can use to 
 Notice that most of them say that they are an alias to something.
 Whenever you install a new package, you'll get more and more services in this list.
 
+### Param converter
+
+Symfony will see the type-hint and automatically query for a `Question` object `WHERE slug =` the `{slug}` route wildcard value.
+
+```php
+    public function show(Question $question)
+    {
+        return $this->render('question/show.html.twig', [
+            'question' => $question,
+        ]);
+    }
+```
+
 ### Return JSON
 
 ```php
