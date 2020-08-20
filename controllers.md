@@ -111,6 +111,11 @@ Whenever you install a new package, you'll get more and more services in this li
 Symfony will see the type-hint and automatically query for a `Question` object `WHERE slug =` the `{slug}` route wildcard value.
 
 ```php
+    /**
+     * @Route("/questions/{slug}", name="app_question_show")
+     * @param Question $question
+     * @return Response
+     */
     public function show(Question $question)
     {
         return $this->render('question/show.html.twig', [
@@ -118,6 +123,12 @@ Symfony will see the type-hint and automatically query for a `Question` object `
         ]);
     }
 ```
+
+This works because our wildcard is called `slug`, which matches the property name. 
+Quite literally this makes a query where slug equals the `{slug}` part of the URL. 
+If we add `{id}` in the URL, then the query would be `WHERE slug = {slug} AND id = {id}`.
+
+It even handles the 404 for us! If we add foo to the slug in the URL... we still get a 404!
 
 ### Return JSON
 
