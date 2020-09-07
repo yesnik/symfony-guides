@@ -33,7 +33,7 @@ class ArticleFixtures extends Fixture
 This command allows us to create fixture:
 
 ```
-php bin/console make:fixture
+symfony console make:fixture
 
 > CommentFixture
 ```
@@ -45,7 +45,7 @@ This command will create file `src/DataFixtures/CommentFixture.php`.
 Run command to purge database and load fixtures to database:
 
 ```
-php bin/console doctrine:fixtures:load
+symfony console doctrine:fixtures:load
 ```
 
 *Note:* Add `-vvv` to make command's output verbose.
