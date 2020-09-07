@@ -2,15 +2,13 @@
 
 Do you want to populate your development database automatically?
 
-```
+```bash
 composer require orm-fixtures --dev
 ```
 
 Add fixture file `/src/DataFixtures/ArticleFixtures.php`:
 
 ```php
-<?php
-
 namespace App\DataFixtures;
 use App\Entity\Article;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -32,10 +30,10 @@ class ArticleFixtures extends Fixture
 
 This command allows us to create fixture:
 
-```
+```bash
 symfony console make:fixture
 
-> CommentFixture
+#> CommentFixture
 ```
 
 This command will create file `src/DataFixtures/CommentFixture.php`.
@@ -44,7 +42,7 @@ This command will create file `src/DataFixtures/CommentFixture.php`.
 
 Run command to purge database and load fixtures to database:
 
-```
+```bash
 symfony console doctrine:fixtures:load
 ```
 
