@@ -84,3 +84,8 @@ composer require security
 composer require annotations
 ```
 
+## StofDoctrineExtensionsBundle 
+
+[StofDoctrineExtensionsBundle](https://github.com/stof/StofDoctrineExtensionsBundle) 
+provides integration for [DoctrineExtensions](https://github.com/Atlantic18/DoctrineExtensions) in your Symfony Project.
+
