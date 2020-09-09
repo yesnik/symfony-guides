@@ -47,3 +47,19 @@ symfony console doctrine:fixtures:load
 ```
 
 *Note:* Add `-vvv` to make command's output verbose.
+
+### Foundry
+
+We can generate fixtures easier with [zenstruck / foundry](https://github.com/zenstruck/foundry).
+It allows to create factories for Entities and define default values.
+
+```php
+class AppFixtures extends Fixture
+{
+    public function load(ObjectManager $manager)
+    {
+        QuestionFactory::new()->createMany(30);
+        $manager->flush();
+    }
+}
+```
