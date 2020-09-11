@@ -8,11 +8,7 @@ can add some features to our entities.
 composer require stof/doctrine-extensions-bundle
 ```
 
-## Sluggable
-
-It urlizes your specified fields into single unique slug.
-
-Edit `config/packages/stof_doctrine_extensions.yaml`:
+To activate desired feature edit `config/packages/stof_doctrine_extensions.yaml`:
 
 ```yaml
 stof_doctrine_extensions:
@@ -20,7 +16,12 @@ stof_doctrine_extensions:
     orm:
         default:
             sluggable: true
+            timestampable: true
 ```
+
+## Sluggable
+
+It urlizes your specified fields into single unique slug.
 
 Let's apply `@Gedmo\Slug` annotation to the field where we want store slug.
 
@@ -47,6 +48,17 @@ class Question
 ## Timestampable
 
 Updates date fields on create, update and even property change.
+
+Edit `src/Entity/Question.php`:
+
+```php
+use Gedmo\Timestampable\Traits\TimestampableEntity;
+
+class Question
+{
+    use TimestampableEntity;
+}
+```
 
 ## Loggable 
 
