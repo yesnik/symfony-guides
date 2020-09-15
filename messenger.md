@@ -31,6 +31,12 @@ php bin/console debug:config framework messenger
 php bin/console config:dump framework messenger
 ```
 
+**Failed messages**
+
+```bash
+php bin/console messenger:failed:show
+```
+
 ## Doctrine Transport
 
 Starting from Symfony 5.1, the Doctrine transport has moved to a separate package. Install it by running:
