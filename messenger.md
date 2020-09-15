@@ -18,6 +18,12 @@ php bin/console debug:messenger
 php bin/console messenger:consume -vv
 ```
 
+**Show default config for Messenger**
+
+```bash
+php bin/console config:dump framework messenger
+```
+
 ## Doctrine Transport
 
 Starting from Symfony 5.1, the Doctrine transport has moved to a separate package. Install it by running:
