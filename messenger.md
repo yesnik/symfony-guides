@@ -11,3 +11,17 @@ Show messages and handlers:
 ```bash
 php bin/console debug:messenger
 ```
+
+## Doctrine Transport
+
+Starting from Symfony 5.1, the Doctrine transport has moved to a separate package. Install it by running:
+
+```bash
+composer require symfony/doctrine-messenger
+```
+
+The Doctrine transport can be used to store messages in a database table. Edit `.env`:
+
+```
+MESSENGER_TRANSPORT_DSN=doctrine://default
+```
