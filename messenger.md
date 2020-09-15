@@ -12,7 +12,7 @@ Show messages and handlers:
 php bin/console debug:messenger
 ```
 
-Process messages in the queue:
+Run worker to process images (add `-vv` option to see logs about consumed messages):
 
 ```bash
 php bin/console messenger:consume
