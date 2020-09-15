@@ -12,6 +12,12 @@ Show messages and handlers:
 php bin/console debug:messenger
 ```
 
+Process messages in the queue:
+
+```bash
+php bin/console messenger:consume
+```
+
 ## Doctrine Transport
 
 Starting from Symfony 5.1, the Doctrine transport has moved to a separate package. Install it by running:
