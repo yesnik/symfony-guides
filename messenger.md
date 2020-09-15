@@ -16,6 +16,9 @@ php bin/console debug:messenger
 
 ```bash
 php bin/console messenger:consume -vv
+
+# Consume messages from async transport
+php bin/console messenger:consume -vv async
 ```
 
 **Show config for Messenger**
