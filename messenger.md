@@ -35,6 +35,8 @@ php bin/console config:dump framework messenger
 
 ```bash
 php bin/console messenger:failed:show
+
+php bin/console messenger:failed:retry
 ```
 
 ## Doctrine Transport
