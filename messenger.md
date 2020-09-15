@@ -25,3 +25,4 @@ The Doctrine transport can be used to store messages in a database table. Edit `
 ```
 MESSENGER_TRANSPORT_DSN=doctrine://default
 ```
+The transport will automatically create a table `messenger_messages`.
