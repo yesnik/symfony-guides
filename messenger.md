@@ -18,9 +18,13 @@ php bin/console debug:messenger
 php bin/console messenger:consume -vv
 ```
 
-**Show default config for Messenger**
+**Show config for Messenger**
 
 ```bash
+# Current config
+php bin/console debug:config framework messenger
+
+# Example config
 php bin/console config:dump framework messenger
 ```
 
