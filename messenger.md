@@ -39,6 +39,12 @@ php bin/console messenger:failed:show
 php bin/console messenger:failed:retry
 ```
 
+**Show activated middlewares**
+
+```bash
+php bin/console debug:container --show-arguments messenger.bus.default.inner
+```
+
 ## Doctrine Transport
 
 Starting from Symfony 5.1, the Doctrine transport has moved to a separate package. Install it by running:
