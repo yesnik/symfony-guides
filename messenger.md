@@ -5,3 +5,9 @@
 ```bash
 composer require symfony/messenger
 ```
+
+Show messages and handlers:
+
+```bash
+php bin/console debug:messenger
+```
