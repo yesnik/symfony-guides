@@ -6,16 +6,16 @@
 composer require symfony/messenger
 ```
 
-Show messages and handlers:
+**Show messages and handlers**
 
 ```bash
 php bin/console debug:messenger
 ```
 
-Run worker to process images (add `-vv` option to see logs about consumed messages):
+**Run worker to process messages**
 
 ```bash
-php bin/console messenger:consume
+php bin/console messenger:consume -vv
 ```
 
 ## Doctrine Transport
