@@ -15,10 +15,10 @@ php bin/console debug:messenger
 **Run worker to process messages**
 
 ```bash
-php bin/console messenger:consume -vv
+symfony console messenger:consume -vv
 
-# Consume messages from async transport
-php bin/console messenger:consume -vv async
+# Consume messages from `async_priority_high` and then from `async` transport
+symfony console messenger:consume -vv async_priority_high async
 ```
 
 **Show config for Messenger**
@@ -118,14 +118,32 @@ class AddPonkaToImageHandler implements MessageHandlerInterface
 }
 ```
 
-3. Tell Messenger to pass messages to *async* transport. Edit `config/packages/messenger.yaml`:
+3. Tell Messenger to pass messages to *async_priority_high* transport. Edit `config/packages/messenger.yaml`:
 
 ```yaml
 framework:
     messenger:
+        # Uncomment this (and the failed transport below) to send failed messages to this transport for later handling.
+        failure_transport: failed
+        
         transports:
-            async: '%env(MESSENGER_TRANSPORT_DSN)%'
+            async:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                retry_strategy:
+                    delay: 500
+            async_priority_high:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                options:
+                    queue_name: high
+            failed: 'doctrine://default?queue_name=failed'
+            # sync: 'sync://'
         routing:
-            # Route your messages to the transports
-            'App\Message\AddPonkaToImage': async
+            'App\Message\AddPonkaToImage': async_priority_high
+            'App\Message\DeletePhotoFile': async
+```
+
+4. Run worker to consume messages from `async_priority_high` and then from `async` transport:
+
+```bash
+symfony console messenger:consume -vv async_priority_high async
 ```
