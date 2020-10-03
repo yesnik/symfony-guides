@@ -30,6 +30,7 @@ We can pass *option* to this command:
 ```bash
 php ./bin/console messenger:consume async_priority_high async --time-limit=3600
 ```
+Worker will be stoped *gracefully*, not in the middle of some operation.
 
 **Show config for Messenger**
 
