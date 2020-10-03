@@ -12,13 +12,16 @@ composer require symfony/messenger
 php bin/console debug:messenger
 ```
 
-**Run worker to process messages**
+**Run worker to consume messages**
 
 ```bash
 symfony console messenger:consume -vv
 
 # Consume messages from `async_priority_high` and then from `async` transport
-symfony console messenger:consume -vv async_priority_high async
+php ./bin/console messenger:consume -vv async_priority_high async
+
+# Use the `--time-limit` option to stop the worker when the given time limit (in seconds) is reached:
+php ./bin/console messenger:consume async_priority_high async --time-limit=3600
 ```
 
 **Show config for Messenger**
