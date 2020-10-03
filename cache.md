@@ -1,6 +1,11 @@
 # Cache
 
-In Symfony Profiler there are a number of things called *pools* - different cache systems (most are used internally by Symfony). The one we're using is called `cache.app`. 
+In Symfony Profiler there are a number of things called *pools* - different cache systems (most are used internally by Symfony). 
+
+That's a fancy way of saying that Symfony has two main cache systems: 
+
+- `cache.system` (which is cleared between deploys).
+- `cache.app` (which persists between deploys). The cache "pool" that's created for the "restart" signal uses `cache.app` as its parent.
 
 Cache has it's own config file: `config/packages/cache.yaml`.
 
