@@ -37,6 +37,9 @@ Worker will be stoped *gracefully*, not in the middle of some operation.
 ```bash
 php bin/console messenger:stop-workers
 ```
+To send this signal, Symfony actually sets a flag in the cache system - and each worker checks this flag. 
+If you have a multi-server setup, you'll need to make sure that your Symfony "app cache" is stored in something 
+like Redis or Memcache instead of the filesystem so that everyone can read those keys.
 
 **Show config for Messenger**
 
