@@ -32,6 +32,12 @@ php ./bin/console messenger:consume async_priority_high async --time-limit=3600
 ```
 Worker will be stoped *gracefully*, not in the middle of some operation.
 
+**Stop workers gracefully**
+
+```bash
+php bin/console messenger:stop-workers
+```
+
 **Show config for Messenger**
 
 ```bash
