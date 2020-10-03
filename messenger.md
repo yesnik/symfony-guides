@@ -19,8 +19,15 @@ symfony console messenger:consume -vv
 
 # Consume messages from `async_priority_high` and then from `async` transport
 php ./bin/console messenger:consume -vv async_priority_high async
+```
 
-# Use the `--time-limit` option to stop the worker when the given time limit (in seconds) is reached:
+We can pass *option* to this command:
+
+- `--time-limit=3600` - worker will stop when the given time limit in seconds is reached
+- `--limit=10` - stop the worker if it exceeds a given limit of processed messages
+- `--memory-limit=128M`- stop the worker if it exceeds a given memory usage limit. You can use shorthand byte values [K, M or G]
+
+```bash
 php ./bin/console messenger:consume async_priority_high async --time-limit=3600
 ```
 
