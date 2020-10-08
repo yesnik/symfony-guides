@@ -6,7 +6,7 @@
 composer require symfony/messenger
 ```
 
-**Show messages and handlers**
+**Show buses, messages and handlers**
 
 ```bash
 php bin/console debug:messenger
