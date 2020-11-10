@@ -5,6 +5,8 @@ It hooks into the installation process. When it detects a package for which it h
 It automates the most common tasks of Symfony applications, 
 like installing and removing bundles and other Composer dependencies. 
 
+The main entry point of a Symfony Recipe is a `manifest.json` file that describes the operations that need to be done to automatically register the package in a Symfony application. Look at [framework-bundle](https://github.com/symfony/recipes/tree/master/symfony/framework-bundle) recipe.
+
 ## Symfony Recipes Server
 
 Link: https://flex.symfony.com/
