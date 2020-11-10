@@ -27,9 +27,12 @@ or `config/bundles.php` so that the library instantly works without any extra se
 ## Where do these Flex recipes live?
 
 Visit https://flex.symfony.com/ and try to find "mailer". You'll see `symfony/mailer` package. 
-Click "Recipie" link, that will lead you to GitHub: https://github.com/symfony/recipes/tree/master/symfony/mailer
+Click "Recipe" link, that will lead you to GitHub: https://github.com/symfony/recipes/tree/master/symfony/mailer
 
-Unofficial packages host their recipies at https://github.com/symfony/recipes-contrib
+Repository for recipes:
+
+- Official: https://github.com/symfony/recipes
+- Unofficial: https://github.com/symfony/recipes-contrib
 
 ## Console commands
 
