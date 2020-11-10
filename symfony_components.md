@@ -1,6 +1,7 @@
 # Useful Symfony components
 
-[Symfony Components](https://symfony.com/doc/current/components/index.html) implement common features needed to develop websites. They are the foundation of the Symfony full-stack framework, but they can also be used standalone.
+[Symfony Components](https://symfony.com/doc/current/components/index.html) implement common features needed to develop websites: routing, console, HTTP client, mailer, cache, etc. 
+They are the foundation of the Symfony full-stack framework, but they can also be used standalone.
 
 ## symfony / asset
 
