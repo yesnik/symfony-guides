@@ -31,4 +31,10 @@ This command will extract packages from the pack.
 
 ### Logs
 
+Logs will help us to investigate issues not only in development, but also in production.
+
+```bash
+composer require logger
+```
+
 Log files can be found at `var/log/dev.log`
