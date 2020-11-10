@@ -1,6 +1,7 @@
 # Symfony Flex
 
 [Symfony Flex](https://github.com/symfony/flex) is a Composer plugin for Symfony. 
+It hooks into the installation process. When it detects a package for which it has a recipe, it executes it.
 It automates the most common tasks of Symfony applications, 
 like installing and removing bundles and other Composer dependencies. 
 
