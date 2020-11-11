@@ -1,6 +1,7 @@
 # Routes
 
 A route is the link between the request path and a PHP callable, a function that creates the HTTP response for that request.
+These callables are called *controllers*.
 
 Edit `config/routes.yaml`:
 
