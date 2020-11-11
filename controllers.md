@@ -28,7 +28,7 @@ class ArticleController extends AbstractController
 }
 ```
 
-The `{slug}` part of the route is a dynamic route parameter - it works like a wildcard. 
+The `{slug}` part of the route is a dynamic route parameter - placeholder. 
 You can get the value of the `{slug}` parameter by adding a controller argument with the same name.
 
 ### Autowiring
