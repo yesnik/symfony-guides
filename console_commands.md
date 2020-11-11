@@ -175,6 +175,14 @@ php bin/console config:dump-reference security
 php bin/console config:dump knp_markdown
 ```
 
+### Run psql console
+
+The Symfony CLI automatically detects the Docker services running for the project and exposes the environment variables that psql needs to connect to the database.
+
+```bash
+symfony run psql
+```
+
 ### Clear app's cache
 
 ```
