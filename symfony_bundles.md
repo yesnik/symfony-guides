@@ -65,7 +65,7 @@ It allows you to get string '2 days ago' from DateTime object.
 [MakerBundle](https://github.com/symfony/maker-bundle) is the fastest way to generate the most common code you'll need in a Symfony app: commands, controllers, form classes, event subscribers and more.
 
 ```
-composer require maker
+composer require maker --dev
 ```
 
 ## SecurityBundle
