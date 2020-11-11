@@ -2,8 +2,8 @@
 
 ### Create controller
 
-```
-bin/console make:controller
+```bash
+symfony console make:controller
 ```
 
 File `src/Controller/ArticleController.php`:
