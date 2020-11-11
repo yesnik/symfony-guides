@@ -1,5 +1,7 @@
 ## Controllers
 
+The main responsibility of a controller is to return an HTTP Response for the request.
+
 ### Create controller
 
 ```bash
