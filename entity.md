@@ -3,7 +3,7 @@
 ### Create entity / Edit entity
 
 ```bash
-php bin/console make:entity
+symfony console make:entity
 ```
 
 This command will create 2 files:
