@@ -70,6 +70,10 @@ File: `templates/companies/index.html.twig`:
 </a>
 ```
 
+## Twig filters
+
+- `{{ word | raw }}` - display HTML, disable escaping of HTML tags
+
 ## Twig extensions
 
 ### Install
