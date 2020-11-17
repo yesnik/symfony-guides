@@ -6,6 +6,11 @@ composer req twig
 
 Available tags, filters see in the documentation: https://twig.symfony.com/
 
+### Syntax
+
+- `{{ }}` notation is used to display something. `{{ conference }}` displays the conference representation (the result of calling `__toString` on the `Conference` object).
+- `{% %}` notation in a template indicates actions and structure (blocks).
+
 ### Simple example
 
 Controller file `src/Controller/QuestionController.php`:
