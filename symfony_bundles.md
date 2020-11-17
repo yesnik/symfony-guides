@@ -81,7 +81,7 @@ composer require security
 [SensioFrameworkExtraBundle](https://github.com/sensiolabs/SensioFrameworkExtraBundle) allows to configure controllers with annotations.
 
 ```
-composer require annotations
+composer require sensio/framework-extra-bundle
 ```
 
 ## StofDoctrineExtensionsBundle 
