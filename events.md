@@ -20,3 +20,11 @@ The command asks you about which event you want to listen to. Events:
 - `Symfony\Component\HttpKernel\Event\ControllerEvent` - is dispatched just before the controller is called.
 
 This command will create file `src/EventSubscriber/TwigEventSubscriber.php`.
+
+### Show event's listeners
+
+Run this command to find out which listeners are registered for `kernel.controller` event and their priorities:
+
+```bash
+symfony console debug:event-dispatcher kernel.controller
+```
