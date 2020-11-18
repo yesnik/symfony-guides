@@ -3,6 +3,8 @@
 During the execution of a Symfony application, lots of event notifications are triggered. 
 Your application can listen to these notifications and respond to them by executing any piece of code.
 
+See [Built-in Symfony Events](https://symfony.com/doc/current/reference/events.html)
+
 ## Creating an Event Subscriber
 
 Another way to listen to events is via an *event subscriber*, 
