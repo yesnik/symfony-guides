@@ -133,19 +133,21 @@ private $articles;
 
 ### UniqueEntity constraint
 
-If you want to validate that the value of an entity property is unique among all entities of the same type (e.g. the registration email of all users) use the `UniqueEntity` constraint.
+If you want to validate that the value of an entity property is unique among all entities of the same type (e.g. the registration email of all users) use the [UniqueEntity](https://symfony.com/doc/current/reference/constraints/UniqueEntity.html) constraint.
 
 ```php
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @UniqueEntity(fields={"username"})
- * @UniqueEntity(fields={"email"})
+ * @UniqueEntity("username")
+ * @UniqueEntity("email")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User implements UserInterface { }
 ```
+
+In this example we need to require two fields to be individually unique (e.g. a unique `email` and a unique `username`), so we use two `UniqueEntity` entries, each with a single field.
 
 ### Create entity (Entity create) / Add column / Add field
 
