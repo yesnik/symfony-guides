@@ -48,6 +48,63 @@ class Comment
 }
 ```
 
+### 2. Doctrine Lifecycle Listeners
+
+Lifecycle listeners are defined as PHP classes that listen to a single Doctrine event on all the application entities. 
+For example, suppose that you want to update some search index whenever a new entity is persisted in the database.
+
+*(custom example here is needed)*
+
+### 3. Doctrine Entity Listeners
+
+Entity listeners are defined as PHP classes that listen to a single Doctrine event on a single entity class.
+For example, suppose that we want to call `computeSlug()` method whenever the conference is updated.
+
+1. Define a listener for the `prePersist` and `preUpdate` Doctrine events. Create file `src/EntityListener/ConferenceEntityListener.php`:
+
+```php
+namespace App\EntityListener;
+
+use App\Entity\Conference;
+use Doctrine\ORM\Event\LifecycleEventArgs;
+use Symfony\Component\String\Slugger\SluggerInterface;
+
+class ConferenceEntityListener
+{
+    private $slugger;
+
+    public function __construct(SluggerInterface $slugger)
+    {
+        $this->slugger = $slugger;
+    }
+
+    public function prePersist(Conference $conference, LifecycleEventArgs $event)
+    {
+        $conference->computeSlug($this->slugger);
+    }
+
+    public function preUpdate(Conference $conference, LifecycleEventArgs $event)
+    {
+        $conference->computeSlug($this->slugger);
+    }
+}
+```
+
+Note that the slug is updated when a new conference is created (`prePersist()`) and whenever it is updated (`preUpdate()`).
+
+2. The next step is to enable the Doctrine listener in the Symfony application by creating a new service for it and tagging it with the `doctrine.orm.entity_listener` tag. Edit `config/services.yaml`:
+
+```yaml
+services:
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+    App\EntityListener\ConferenceEntityListener:
+        tags:
+            - { name: 'doctrine.orm.entity_listener', event: 'prePersist', entity: 'App\Entity\Conference'}
+            - { name: 'doctrine.orm.entity_listener', event: 'preUpdate', entity: 'App\Entity\Conference'}
+```
+
+**Note:** Don’t confuse Doctrine event listeners and Symfony ones. Even if they look very similar, they are not using the same infrastructure under the hood.
 
 ## Creating an Event Subscriber
 
