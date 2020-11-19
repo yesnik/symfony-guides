@@ -21,6 +21,34 @@ They can reuse logic among different entities and can access Symfony services bu
 3. **Entity listeners**, they are similar to lifecycle listeners, but they are called only for the entities of a certain class.
 They have the same advantages of lifecycle listeners and they have better performance because they only apply to a single entity class.
 
+### 1. Doctrine Lifecycle Callbacks
+
+Lifecycle callbacks are defined as methods inside the entity you want to modify. 
+For example, suppose you want to set a `createdAt` date column to the current date, but only when the entity is first persisted (i.e. inserted). To do so, define a callback for the `prePersist` Doctrine event:
+
+```php
+namespace App\Entity;
+
+use App\Repository\CommentRepository;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass=CommentRepository::class)
+ * @ORM\HasLifecycleCallbacks()
+ */
+class Comment
+{
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtValue()
+    {
+        $this->createdAt = new \DateTime();
+    }
+}
+```
+
+
 ## Creating an Event Subscriber
 
 Another way to listen to events is via an *event subscriber*, 
