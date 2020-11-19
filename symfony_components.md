@@ -37,6 +37,22 @@ The [serializer](https://github.com/symfony/serializer) component is meant to be
 composer require serializer
 ```
 
+## symfony / string
+
+The [string](https://symfony.com/doc/current/components/string.html) component provides a single object-oriented API to work with strings.
+
+```bash
+composer require string
+```
+In some contexts, such as URLs and file/directory names, it’s not safe to use any Unicode character. A slugger transforms a given string into another string that only includes safe ASCII characters:
+
+```php
+use Symfony\Component\String\Slugger\AsciiSlugger;
+
+$slugger = new AsciiSlugger();
+$slug = $slugger->slug('Wôrķšƥáçè ~~sèťtïñğš~~'); // 'Workspace-settings'
+```
+
 ## symfony / translation
 
 The [translation](https://github.com/symfony/translation) component provides tools to internationalize your application.
