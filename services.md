@@ -212,6 +212,32 @@ Prefix the service id with `@` to tell the Symfony that it's not a simple string
 
 The `bind` key will help to configure any argument that can't be autowired.
 
+### Bind parameter to argument
+
+In the controller:
+
+```php
+class ConferenceController extends AbstractController
+{
+    public function show(Request $request, string $photoDir): Response {}
+}
+```
+
+Here `$photoDir` is a string and not a service. How can Symfony know what to inject here? 
+The Symfony Container is able to store parameters in addition to services. 
+Parameters are scalars that help configure services. These parameters can be injected into services explicitly, or they can be bound by name.
+
+Edit `config/services.yaml`:
+
+```yaml
+services:
+    _defaults:
+        bind:
+            $photoDir: "%kernel.project_dir%/public/uploads/photos"
+```
+
+The bind setting allows Symfony to inject the value whenever a service has a `$photoDir` argument.
+
 ## Config parameters
 
 Show a list of the *parameters* in the container:
