@@ -2,14 +2,14 @@
 
 Install form component:
 
-```
+```bash
 composer require form
 ```
 
 Create form / generate form:
 
-```
-php bin/console make:form
+```bash
+symfony console make:form
 ```
 
 Call the class, `UserRegistrationFormType`. This will ask if you want this form to be bound to a class. 
