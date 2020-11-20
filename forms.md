@@ -96,6 +96,11 @@ class ArticleAdminController extends AbstractController
     }
 ```
 
+You should never instantiate the form type directly. Instead, use the `createForm()` method.
+This method is part of `AbstractController` and eases the creation of forms.
+
+When passing a form to a template, use `createView()` to convert the data to a format suitable for templates.
+
 Edit view `templates/article_admin/new.html.twig`:
 
 **Short version**
