@@ -2,7 +2,7 @@
 
 ## Installation
 
-Install `test-pack`, which comes with the *PHPUnit bridge*: a Symfony component that wraps around PHPUnit.
+Install [test-pack](https://github.com/symfony/test-pack), which comes with the [PHPUnit bridge](https://symfony.com/doc/current/components/phpunit_bridge.html): a Symfony component that wraps around PHPUnit.
 
 ```bash
 composer require test --dev
@@ -15,13 +15,13 @@ composer require test --dev
 It holds sensible default config for PHPUnit itself.
 
 One of the keys here is called `SYMFONY_PHPUNIT_VERSION`. 
-You can leave this or change it to the latest version of PHPUnit, which for me is 8.5
+You can leave this or change it to the latest version of PHPUnit, which for me is 9.0.
 
 ```xml
 <php>
     <!-- ... -->
     <server name="SYMFONY_PHPUNIT_REMOVE" value="" />
-    <server name="SYMFONY_PHPUNIT_VERSION" value="8.5" />
+    <server name="SYMFONY_PHPUNIT_VERSION" value="9.0" />
 </php>
 ```
 
