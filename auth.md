@@ -2,8 +2,10 @@
 
 ## Create authenticator
 
+Symfony supports several authentication strategies. Let’s use a classic and popular *form authentication system*.
+
 ```
-php bin/console make:auth
+symfony console make:auth
 ```
 
 Choose `Empty authenticator` and define `LoginFormAuthenticator` as the class name of authenticator.
