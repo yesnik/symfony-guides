@@ -118,19 +118,21 @@ File of template `templates/partners/index.html.twig`:
 ### Create Entity, add column, add field
 
 ```bash
-php bin/console make:entity
+symfony console make:entity
 ```
 
 ### Create CRUD for entity
 
 ```
-php bin/console make:crud
+symfony console make:crud
 ```
+
 This command will create controller, form, templates for entity.
 
 ### Show available routes
-```
-./bin/console debug:router
+
+```bash
+symfony console debug:router
 ```
 
 ### Show available services that we can include in our app:
