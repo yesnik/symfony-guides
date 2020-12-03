@@ -1,6 +1,6 @@
 # Logs
 
-Install `MonologBundle`:
+Install [MonologBundle](https://github.com/symfony/monolog-bundle):
 
 ```bash
 composer require log
@@ -61,6 +61,7 @@ It will make available the following service - `monolog.logger.markdown`:
 ```
 
 Tell Symfony that you want to save logs from `markdown` channel to `markdown.log` file. 
+
 Edit: `/config/packages/dev/monolog.yaml`:
 
 ```yaml
