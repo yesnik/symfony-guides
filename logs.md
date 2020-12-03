@@ -1,10 +1,29 @@
 # Logs
 
-## Show log messages
+## Log in controller
 
-```bash
-tail var/log/dev.log 
+```php
+namespace App\Controller;
+
+use Psr\Log\LoggerInterface;
+
+class ConferenceController extends AbstractController
+{
+        /**
+     * @Route("/conference/{slug}", name="conference")
+     */
+    public function show(Request $request, LoggerInterface $logger): Response {
+
+        $logger->info('Spam check result');
+        $logger->error('An error occurred');
+        $logger->critical('Redis is down', [
+            // include extra "context" info in your logs
+            'message_type' => 'report',
+        ]);
+}
 ```
+
+Logs are stored at `var/log/dev.log`
 
 ## Monolog config
 
