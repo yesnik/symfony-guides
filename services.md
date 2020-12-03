@@ -234,9 +234,20 @@ services:
     _defaults:
         bind:
             $photoDir: "%kernel.project_dir%/public/uploads/photos"
+            $akismetKey: "%env(AKISMET_KEY)%"
 ```
 
 The bind setting allows Symfony to inject the value whenever a service has a `$photoDir` argument.
+
+We certainly don’t want to hard-code the value of the Akismet key in this file, so we are using an environment variable instead (`AKISMET_KEY`).
+
+It is then up to each developer to set a "real" environment variable or to store the value in a `.env.local` file:
+
+```
+AKISMET_KEY=abcdef
+```
+
+For production, a "real" environment variable should be defined.
 
 ## Config parameters
 
