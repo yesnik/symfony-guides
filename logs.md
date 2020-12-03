@@ -1,5 +1,11 @@
 # Logs
 
+Install `MonologBundle`:
+
+```bash
+composer require log
+```
+
 ## Log in controller
 
 ```php
