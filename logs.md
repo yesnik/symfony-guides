@@ -1,9 +1,19 @@
 # Logs
 
+## Installation
+
 Install [MonologBundle](https://github.com/symfony/monolog-bundle):
 
 ```bash
 composer require log
+```
+Ensure that `MonologBundle` is included at `config/bundles.php`:
+
+```php
+return [
+    // ...
+    Symfony\Bundle\MonologBundle\MonologBundle::class => ['all' => true],
+];
 ```
 
 ## Log in controller
