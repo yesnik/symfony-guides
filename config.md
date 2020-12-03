@@ -249,3 +249,8 @@ php bin/console secrets:list --reveal --env=prod
 If we use `%env(SENTRY_DSN)%` syntax, Symfony first looks to see if an environment variable called `SENTRY_DSN` exists. 
 If there is not, it then looks for a secret in the vault called `SENTRY_DSN`. 
 You should set a value as an environment variable or a secret, but not both.
+
+**Why do we need Secret Vault?**
+
+All secrets are stored in the repository and the only environment variable you need to manage for production is the *decryption key*. 
+That makes it possible for *anyone in the team to add production secrets* even if they don’t have access to production servers.
