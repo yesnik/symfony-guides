@@ -25,8 +25,11 @@ You can leave this or change it to the latest version of PHPUnit, which for me i
 </php>
 ```
 
-When we use Symfony's PHPUnit bridge, we don't require PHPUnit directly. 
+**Important**: 
+
+1. When we use Symfony's PHPUnit bridge, *we don't require PHPUnit directly*. 
 Instead, you tell it which version you want, and it downloads it in the background.
+2. PHPUnit will be installed to `your_project_folder/bin/.phpunit/phpunit-9.0-0`
 
 ### File `.env.test`
 
