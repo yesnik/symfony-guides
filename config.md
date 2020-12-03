@@ -25,11 +25,7 @@ php bin/console config:dump-reference FrameworkBundle
 php bin/console debug:config FrameworkBundle
 ```
 
-Also we can use alias:
-
-```
-php bin/console config:dump-reference knp_markdown
-```
+Symfony analyses defined bundles at `config/bundles.php`.
 
 Copy this bundle's config to file `config/packages/knp_makrdown.yaml`:
 
