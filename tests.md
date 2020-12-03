@@ -42,7 +42,7 @@ DATABASE_URL=mysql://root:root@127.0.0.1:3306/api_platform_demo_test?serverVersi
 ## PHPStorm symfony/phpunit-bridge config
 
 1. Open settings *Languages & Frameworks* > *PHP* > *Test frameworks*
-2. Chose radio button *Path to phpunit.phar* and define *Path to phpunit.phar*: `your_project_folder/bin/phpunit`
+2. Choose radio button *Path to phpunit.phar* and define *Path to phpunit.phar*: `your_project_folder/bin/phpunit`
 3. Activate checkbox *Default configuration file:* `your_project_folder/phpunit.xml.dist`
 
 ## Console commands
