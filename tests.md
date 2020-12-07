@@ -64,3 +64,11 @@ php bin/console doctrine:database:create --env=test
 ```bash
 php bin/console doctrine:schema:create --env=test
 ```
+
+## Reset database before test
+
+Install a bundle that ensures that each test is run with the same unmodified database:
+
+```
+composer require --dev dama/doctrine-test-bundle
+```
