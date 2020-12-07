@@ -10,6 +10,18 @@ A consumer runs continuously in the background to read new messages on the queue
 composer require symfony/messenger
 ```
 
+## Console commands
+
+**Make message and message handler**
+
+```bash
+symfony console make:message
+```
+Enter name `CommentMessage`. Command will generate files:
+
+- `src/Message/CommentMessage.php`
+- `src/MessageHandler/CommentMessageHandler.php`
+
 **Show buses, messages and handlers**
 
 ```bash
