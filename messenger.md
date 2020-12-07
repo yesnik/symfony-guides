@@ -123,7 +123,7 @@ class AddPonkaToImage
 
 2. Create file `src/MessageHandler/AddPonkaToImageHandler.php`. 
 
-**Important:** Your Message Handler class must implement `MessageHandlerInterface` - a *marker* interface. It only helps Symfony auto-register and auto-configure the class as a Messenger handler. By convention, the logic of a handler lives in the `__invoke()` method. 
+**Important:** Your Message Handler class must implement `MessageHandlerInterface` - a *marker* interface. It only helps Symfony auto-register and auto-configure the class as a Messenger handler. By convention, the logic of a handler lives in the `__invoke()` method. The `AddPonkaToImage` type hint on this method’s one argument tells Messenger which class this will handle.
 
 ```php
 namespace App\MessageHandler;
