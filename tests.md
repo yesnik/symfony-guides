@@ -72,3 +72,17 @@ Install a bundle that ensures that each test is run with the same unmodified dat
 ```
 composer require --dev dama/doctrine-test-bundle
 ```
+
+Enable it as a PHPUnit extension:
+
+```xml
+<!-- phpunit.xml.dist -->
+<phpunit>
+    <!-- ... -->
+
+    <!-- Add this for PHPUnit 7.5 or higher -->
+    <extensions>
+        <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension"/>
+    </extensions>
+</phpunit>
+```
