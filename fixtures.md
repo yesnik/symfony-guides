@@ -45,6 +45,16 @@ Run command to purge database and load fixtures to database:
 ```bash
 symfony console doctrine:fixtures:load
 ```
+Load fixtures in the test database:
+
+```bash
+php bin/console doctrine:fixtures:load --env=test
+```
+Ensure that you defined connection to you test DB in `.env.test` (in this case we have DB in the Docker):
+
+```
+DATABASE_URL=postgres://main:main@127.0.0.1:32769/crm_test?sslmode=disable&charset=utf8
+```
 
 *Note:* Add `-vvv` to make command's output verbose.
 
