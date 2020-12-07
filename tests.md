@@ -86,3 +86,15 @@ Enable it as a PHPUnit extension:
     </extensions>
 </phpunit>
 ```
+
+## Useful methods
+
+### `self::$container->get()`
+
+From a PHPUnit test, it helps you to get any service from the container. It also gives access to non-public services.
+
+```php
+$comment = self::$container->get(CommentRepository::class)->findOneByEmail($email);
+$comment->setState('published');
+self::$container->get(EntityManagerInterface::class)->flush();
+```
