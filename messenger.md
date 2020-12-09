@@ -30,14 +30,21 @@ php bin/console debug:messenger
 
 **Run worker to consume messages**
 
+*Run worker in the background:*
+
+```bash
+symfony run -d --watch=config,src,templates,vendor symfony console messenger:consume async
+```
+
+The `--watch` option tells Symfony that the command must be restarted whenever there is a filesystem change in the config/, src/, templates/, or vendor/ directories.
+
+*Run worker in the foreground:*
+
 ```bash
 symfony console messenger:consume -vv
 
 # Consume messages from `async_priority_high` and then from `async` transport
 php ./bin/console messenger:consume -vv async_priority_high async
-
-# Run worker in the background
-symfony run -d --watch=config,src,templates,vendor symfony console messenger:consume async
 ```
 
 We can pass *option* to this command:
