@@ -177,12 +177,26 @@ php bin/console config:dump-reference security
 php bin/console config:dump knp_markdown
 ```
 
-### Run psql console
+### PostgreSQL
+
+**Run psql console**
 
 The Symfony CLI automatically detects the Docker services running for the project and exposes the environment variables that psql needs to connect to the database.
 
 ```bash
 symfony run psql
+```
+
+**Create dump**
+
+```bash
+symfony run pg_dump --data-only > dump.sql
+```
+
+**Restore db from dump**
+
+```bash
+symfony run psql < dump.sql
 ```
 
 ### Clear app's cache
