@@ -177,6 +177,13 @@ php bin/console config:dump-reference security
 php bin/console config:dump knp_markdown
 ```
 
+### Show background workers
+
+```bash
+# List all background workers managed for the current project
+symfony server:status
+```
+
 ### PostgreSQL
 
 **Run psql console**
