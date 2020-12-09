@@ -169,26 +169,35 @@ class AddPonkaToImageHandler implements MessageHandlerInterface
 ```yaml
 framework:
     messenger:
-        # Uncomment this (and the failed transport below) to send failed messages to this transport for later handling.
+        # after retrying, messages will be sent to the "failed" transport
         failure_transport: failed
         
         transports:
             async:
                 dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
                 retry_strategy:
+                    max_retries: 2
+                    # milliseconds delay
                     delay: 500
+                    # causes the delay to be higher before each retry
+                    # e.g. 1 second delay, 3 seconds, 9 seconds
+                    multiplier: 3
+                    
             async_priority_high:
                 dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
                 options:
                     queue_name: high
+                    
             failed: 'doctrine://default?queue_name=failed'
-            # sync: 'sync://'
+
         routing:
             'App\Message\AddPonkaToImage': async_priority_high
             'App\Message\DeletePhotoFile': async
 ```
 
 Messenger has a retry mechanism for when an exception occurs while handling a message. See `transports:failed` param.
+If a problem occurs while handling a message, the consumer will retry 2 times before giving up. 
+But instead of discarding the message, it will store it in a more permanent storage, the `failed` queue, which uses the Doctrine database.
 
 4. Run worker to consume messages from `async_priority_high` and then from `async` transport:
 
