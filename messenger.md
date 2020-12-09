@@ -188,6 +188,8 @@ framework:
             'App\Message\DeletePhotoFile': async
 ```
 
+Messenger has a retry mechanism for when an exception occurs while handling a message. See `transports:failed` param.
+
 4. Run worker to consume messages from `async_priority_high` and then from `async` transport:
 
 ```bash
