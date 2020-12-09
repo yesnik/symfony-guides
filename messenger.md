@@ -35,6 +35,9 @@ symfony console messenger:consume -vv
 
 # Consume messages from `async_priority_high` and then from `async` transport
 php ./bin/console messenger:consume -vv async_priority_high async
+
+# Run worker in the background
+symfony run -d --watch=config,src,templates,vendor symfony console messenger:consume async
 ```
 
 We can pass *option* to this command:
