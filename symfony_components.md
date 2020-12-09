@@ -68,3 +68,14 @@ The [validator](https://github.com/symfony/validator) component provides tools t
 ```
 composer require validator
 ```
+
+## symfony / workflow
+
+The [workflow](https://github.com/symfony/workflow) component provides tools for managing a workflow or finite state machine.
+
+```bash
+composer require symfony/workflow
+
+# Generate visual representation
+symfony console workflow:dump comment | dot -Tpng -o workflow.png
+```
