@@ -101,3 +101,8 @@ curl -I http://127.0.0.1:8000/
 # ...
 # X-Symfony-Cache: HEAD /: fresh;
 ```
+
+## Avoiding SQL Requests with ESI
+
+When you want to cache a fragment of a page, move it outside of the current HTTP request by creating a sub-request. [ESI](https://symfony.com/doc/current/http_cache/esi.html) (Edge Side Includes) is a perfect match for this use case. An ESI is a way to embed the result of an HTTP request into another.
+
