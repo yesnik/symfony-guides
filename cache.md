@@ -16,6 +16,9 @@ The cache is stored in a `var/cache/prod` directory.
 - `symfony console cache:clear` - clear cache. On next request new cache will be built. 
 - `rm -rf var/cache/dev/http_cache/` - clear HTTP Cache
 
+**Note:** If you need to purge the cache often, it probably means that the *caching strategy* should be tweaked 
+(by lowering the TTL or by using a validation strategy instead of an expiration one).
+
 ## Example
 
 Cache has it's own config file: `config/packages/cache.yaml`.
