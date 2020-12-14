@@ -52,3 +52,52 @@ php bin/console cache:clear
 
 On next request new cache will be built. 
 The cache is stored in a `var/cache/prod` directory.
+
+## Symfony HTTP Cache Kernel
+
+To test the HTTP cache strategy, edit `public/index.php`:
+
+```php
+use Symfony\Bundle\FrameworkBundle\HttpCache\HttpCache;
+// ...
+$kernel = new Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']);
+
+if ('dev' === $kernel->getEnvironment()) {
+    $kernel = new HttpCache($kernel);
+}
+// ...
+```
+
+### Cache in controller
+
+Let’s cache the homepage for an hour. Edit `src/Controller/ConferenceController.php`:
+
+```php
+class ConferenceController extends AbstractController
+{
+    // ...
+
+    /**
+     * @Route("/", name="homepage")
+     */
+    public function index(ConferenceRepository $conferenceRepository): Response
+    {
+        $response = new Response(
+            $this->twig->render('conference/index.html.twig', [
+                'conferences' => $conferenceRepository->findAll(),
+            ])
+        );
+        $response->setSharedMaxAge(3600);
+
+        return $response;
+    }
+```
+
+### Check caching
+
+```bash
+curl -I http://127.0.0.1:8000/
+
+# ...
+# X-Symfony-Cache: HEAD /: fresh;
+```
