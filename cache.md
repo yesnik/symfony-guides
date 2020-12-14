@@ -9,6 +9,8 @@ That's a fancy way of saying that Symfony has two main cache systems:
 
 The cache is stored in a `var/cache/prod` directory.
 
+**Note:** Don’t use the Symfony reverse proxy in production. Always prefer a reverse proxy like Varnish on your infrastructure or a commercial CDN.
+
 ## Console commands
 
 - `symfony console cache:clear` - clear cache. On next request new cache will be built. 
