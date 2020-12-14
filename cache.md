@@ -7,6 +7,15 @@ That's a fancy way of saying that Symfony has two main cache systems:
 - `cache.system` (which is cleared between deploys).
 - `cache.app` (which persists between deploys). The cache "pool" that's created for the "restart" signal uses `cache.app` as its parent.
 
+The cache is stored in a `var/cache/prod` directory.
+
+## Console commands
+
+- `symfony console cache:clear` - clear cache. On next request new cache will be built. 
+- `rm -rf var/cache/dev/http_cache/` - clear HTTP Cache
+
+## Example
+
 Cache has it's own config file: `config/packages/cache.yaml`.
 
 In `src/Controller/QuestionController.php`:
@@ -43,15 +52,6 @@ class QuestionController extends AbstractController
     }
 }
 ```
-
-## Clear cache
-
-```bash
-php bin/console cache:clear
-```
-
-On next request new cache will be built. 
-The cache is stored in a `var/cache/prod` directory.
 
 ## Symfony HTTP Cache Kernel
 
@@ -121,5 +121,3 @@ framework:
 
 The cache strategy can be different from the main page and its ESIs. 
 If we have an "about" page, we might want to store it for a week in the cache, and still have the header be updated every hour.
-
-
