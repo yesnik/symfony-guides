@@ -106,3 +106,20 @@ curl -I http://127.0.0.1:8000/
 
 When you want to cache a fragment of a page, move it outside of the current HTTP request by creating a sub-request. [ESI](https://symfony.com/doc/current/http_cache/esi.html) (Edge Side Includes) is a perfect match for this use case. An ESI is a way to embed the result of an HTTP request into another.
 
+1. Enable ESI support. Edit `config/packages/framework.yaml`:
+
+```yml
+framework:
+    esi: true
+```
+
+2. Update the Twig layout to call the controller's action. Use `render_esi` instead of `render`. Edit `templates/base.html.twig`:
+
+```
+{{ render_esi(path('conference_header')) }}
+```
+
+The cache strategy can be different from the main page and its ESIs. 
+If we have an "about" page, we might want to store it for a week in the cache, and still have the header be updated every hour.
+
+
