@@ -21,6 +21,14 @@ The [HttpClient](https://github.com/symfony/http-client) component provides powe
 composer require symfony/http-client
 ```
 
+## symfony / notifier
+
+The [Notifier](https://github.com/symfony/notifier) sends notifications via one or more channels (email, SMS, ...).
+
+```bash
+composer require symfony/notifier
+```
+
 ## symfony / security
 
 The [security](https://github.com/symfony/security) component provides a complete security system for your web application.
