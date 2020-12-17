@@ -250,3 +250,12 @@ You should set a value as an environment variable or a secret, but not both.
 
 All secrets are stored in the repository and the only environment variable you need to manage for production is the *decryption key*. 
 That makes it possible for *anyone in the team to add production secrets* even if they don’t have access to production servers.
+
+### Where to store a parameter
+
+Here are some rules of thumb to decide:
+
+- If the value is sensitive (passwords, API tokens, …), use the Symfony secret storage or a Vault;
+- If the value is dynamic and you should be able to change it without re-deploying, use an environment variable;
+- If the value can be different between environments, use a container parameter;
+- For everything else, store the value in code, like in a class constant.
