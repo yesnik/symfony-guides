@@ -154,7 +154,7 @@ framework:
 If you ever need a cryptographic secret, Symfony has a parameter called `kernel.secret`.
 We can use `%kernel.secret%` to get it in *yaml config* files.
 
-### Envirinment variables
+### Environment variables
 
 After Symfony loads `.env`, it looks for file `.env.local`.
 Variables in this file will override the values in `.env`.
