@@ -100,6 +100,42 @@ class CheeseListing { // ... }
 ```
 This will change GET route to `/api/i_love_cheeses/{id}`.
 
+## Modify search query
+
+If we need to restrict the items returned by the API, create a service that implements:
+- `QueryCollectionExtensionInterface` if we need to control the Doctrine query used for collections
+- `QueryItemExtensionInterface` if we need to control items.
+
+Create file `src/Api/FilterPublishedCommentQueryExtension.php`:
+
+```php
+namespace App\Api;
+
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use App\Entity\Comment;
+use Doctrine\ORM\QueryBuilder;
+
+class FilterPublishedCommentQueryExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
+{
+    public function applyToCollection(QueryBuilder $qb, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, string $operationName = null)
+    {
+        if (Comment::class === $resourceClass) {
+            $qb->andWhere(sprintf("%s.state = 'published'", $qb->getRootAliases()[0]));
+        }
+    }
+
+    public function applyToItem(QueryBuilder $qb, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, array $identifiers, string $operationName = null, array $context = [])
+    {
+        if (Comment::class === $resourceClass) {
+            $qb->andWhere(sprintf("%s.state = 'published'", $qb->getRootAliases()[0]));
+        }
+    }
+}
+```
+The query extension class applies its logic only for the `Comment` resource and modify the Doctrine query builder to only consider comments in the published state.
+
 ## Groups
 
 Use annotations to edit groups:
