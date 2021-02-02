@@ -50,7 +50,11 @@ DATABASE_URL=mysql://root:root@127.0.0.1:3306/api_platform_demo_test?serverVersi
 **Run tests**
 
 ```bash
+# Way 1
 php bin/phpunit
+
+# Way 2
+symfony run bin/phpunit tests/
 ```
 
 **Create test database**
