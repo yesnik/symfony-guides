@@ -130,6 +130,7 @@ Edit common config file `config/services.yaml`:
 ```yaml
 parameters:
     cache_adapter: cache.adapter.apcu
+    app.supported_locales: 'en|ru'
 ```
 
 For *development environment* we create `config/services_dev.yaml`:
@@ -139,6 +140,8 @@ parameters:
     cache_adapter: cache.adapter.filesystem
 ```
 
+**Usage in .yaml config**
+
 After that we can use this *cache_adapter* param in `config/packages/framework.yaml`:
 
 ```yaml
@@ -147,7 +150,20 @@ framework:
         app: '%cache_adapter%'
 ```
 
-**Remember**: anything surrounded by percent signs is a parameter (eg. `cache_adapter%`)
+**Usage in controller's annotations**
+
+```php
+// src/Controller/ConferenceController.php
+class ConferenceController extends AbstractController
+{
+    /**
+     * @Route("/{_locale<%app.supported_locales%>}/", name="homepage")
+     */
+    public function index(): Response {}
+}
+```
+
+**Remember**: anything surrounded by percent signs is a parameter (eg. `%cache_adapter%`)
 
 **kernel.secret**
 
