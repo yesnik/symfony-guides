@@ -129,6 +129,7 @@ Edit common config file `config/services.yaml`:
 
 ```yaml
 parameters:
+    app.env: '%env(APP_ENV)%'
     cache_adapter: cache.adapter.apcu
     app.supported_locales: 'en|ru'
 ```
@@ -148,6 +149,18 @@ After that we can use this *cache_adapter* param in `config/packages/framework.y
 framework:
     cache:
         app: '%cache_adapter%'
+```
+
+**Usage in controller**
+
+```php
+class EsiaController extends AbstractController
+{
+    #[Route('/esia/auth/{id}', name: 'esia_auth')]
+    public function auth(string $id): RedirectResponse
+    {
+        $env = $this->getParameter('app.env');
+        // ...
 ```
 
 **Usage in controller's annotations**
