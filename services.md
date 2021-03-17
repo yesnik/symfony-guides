@@ -249,6 +249,44 @@ AKISMET_KEY=abcdef
 
 For production, a "real" environment variable should be defined.
 
+### Bind different service for dev environment
+
+We have these files at `src/Services/Esia/` folder: `EsiaInterface.php`, `Esia.php`, `EsiaDummy.php` (emulates responses).
+
+We have `src/Controller/EsiaController.php`:
+
+```php
+class EsiaController extends AbstractController
+{
+    #[Route('/esia/auth/{id}', name: 'esia_auth')]
+    public function auth(string $id, Esia\EsiaInterface $esia): RedirectResponse
+    {
+        $url = $esia->getAuthUrl($id);
+        // ..
+```
+
+We want in `dev` environment use `EsiaDummy` implementation of `EsiaInterface`. To do this edit `config/services_dev.yaml`:
+
+```yaml
+services:
+  app.services.esia:
+    class: App\Services\Esia\EsiaDummy
+```
+
+After that edit `config/services.yaml`:
+
+```yaml
+services:
+    # ...
+    # the id is not a class, so it won't be used for autowiring
+    app.services.esia:
+        class: App\Services\Esia\Esia
+
+    # the `@app.services.esia` service will be injected when
+    # an `App\Services\Esia\EsiaInterface` type-hint is detected
+    App\Services\Esia\EsiaInterface: '@app.services.esia'
+```
+
 ## Config parameters
 
 Show a list of the *parameters* in the container:
