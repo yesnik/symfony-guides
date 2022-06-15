@@ -1,3 +1,3 @@
 # Symfony guides
 
-Guides for PHP framework [Symfony 5](https://symfony.com/).
+Guides for [Symfony](https://symfony.com/) PHP framework
