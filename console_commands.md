@@ -10,17 +10,11 @@ Show available commands:
 
 *Way 1*
 
-- Install [Symfony client](https://symfony.com/download):
-
-```
-wget https://get.symfony.com/cli/installer -O - | bash
-```
-
+- Install [Symfony CLI](https://symfony.com/download):
 - Create new project:
-
-```
-symfony new mysite
-```
+    ```
+    symfony new mysite
+    ```
 
 *Way 2*
 
