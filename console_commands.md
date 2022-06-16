@@ -191,7 +191,13 @@ symfony run psql
 **Create dump**
 
 ```bash
-symfony run pg_dump --data-only > dump.sql
+symfony run pg_dump > dump.sql
+
+# Only schema
+symfony run pg_dump --schema-only > schema.sql
+
+# Only data, without schema
+symfony run pg_dump --data-only > data.sql
 ```
 
 **Restore db from dump**
