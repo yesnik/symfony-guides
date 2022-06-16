@@ -14,22 +14,21 @@ File `src/Controller/ArticleController.php`:
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/articles/{slug}/toggle", name="article_toggle")
- */
 class ArticleController extends AbstractController
 {
-    public function toggleArticleHeart(string $slug)
+    #[Route('/article/{slug}', name: 'articles')]
+    public function view(string $slug): Response
     {
-        return $this->json(['hearts' => rand(5, 100)]);
+        return $this->json(['slug' => $slug]);
     }
 }
 ```
 
 The `{slug}` part of the route is a dynamic route parameter - placeholder. 
-You can get the value of the `{slug}` parameter by adding a controller argument with the same name.
+To get the value of the `{slug}` parameter add a controller argument with the same name: `string $slug`
 
 ### Autowiring
 
