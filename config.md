@@ -183,7 +183,23 @@ class ConferenceController extends AbstractController
 If you ever need a cryptographic secret, Symfony has a parameter called `kernel.secret`.
 We can use `%kernel.secret%` to get it in *yaml config* files.
 
-### Environment variables
+## Environment variables
+
+### Symfony Environment Variable Conventions
+
+The local port to PostgreSQL exposed by Docker can change. 
+Instead of hard-coding `DATABASE_URL` in a file, we can prefix all commands with `symfony`. 
+This will detect services ran by Docker and set the environment variable automatically.
+
+Docker Compose work seamlessly with Symfony thanks to these environment variables.
+
+Check all exposed environment variables:
+
+```bash
+symfony var:export
+```
+
+### .env variables
 
 After Symfony loads `.env`, it looks for file `.env.local`.
 Variables in this file will override the values in `.env`.
