@@ -28,7 +28,7 @@ Repository for recipes:
 
 ## Console commands
 
-- Show installed recipes in project:
+- Show project's installed recipes:
     ```bash
     composer recipes
     ```
