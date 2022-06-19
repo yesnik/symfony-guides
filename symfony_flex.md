@@ -36,3 +36,7 @@ Repository for recipes:
     ```bash
     composer recipes symfony/routing
     ```
+- Update recipes:
+    ```bash
+    composer recipes:update
+    ```
