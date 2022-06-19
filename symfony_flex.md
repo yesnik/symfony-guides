@@ -7,16 +7,11 @@ like installing and removing bundles and other Composer dependencies.
 
 The main entry point of a Symfony Recipe is a `manifest.json` file that describes the operations that need to be done to automatically register the package in a Symfony application. Look at [framework-bundle](https://github.com/symfony/recipes/tree/master/symfony/framework-bundle) recipe.
 
-## Symfony Recipes Server
-
-Link: https://flex.symfony.com/
-
-This site allows us to run this command:
+## Symfony Recipes
 
 ```
 composer require mailer
 ```
-On this site you can find recipe by alias. For example, `mailer` is alias for `symfony/swiftmailer-bundle`.
 
 In your project `symfony.lock` will be created. This file is managed by Flex. 
 It keeps track of which recipes have been installed. 
@@ -26,9 +21,6 @@ or `config/bundles.php` so that the library instantly works without any extra se
 
 ## Where do these Flex recipes live?
 
-Visit https://flex.symfony.com/ and try to find "mailer". You'll see `symfony/mailer` package. 
-Click "Recipe" link, that will lead you to GitHub: https://github.com/symfony/recipes/tree/master/symfony/mailer
-
 Repository for recipes:
 
 - Official: https://github.com/symfony/recipes
@@ -37,10 +29,10 @@ Repository for recipes:
 ## Console commands
 
 - Show installed recipes in project:
-```bash
-composer recipes
-```
+    ```bash
+    composer recipes
+    ```
 - Show details about recipe:
-```bash
-composer recipes symfony/routing
-```
+    ```bash
+    composer recipes symfony/routing
+    ```
