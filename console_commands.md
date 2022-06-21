@@ -133,6 +133,7 @@ symfony console debug:router
 
 ```bash
 symfony console router:match /api/product/1
+symfony console router:match /api/product/1 --method=POST
 ```
 
 ### Show available services that we can include in our app:
