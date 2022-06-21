@@ -129,6 +129,12 @@ This command will create controller, form, templates for entity.
 symfony console debug:router
 ```
 
+### Show what route matches URL
+
+```bash
+symfony console router:match /api/product/1
+```
+
 ### Show available services that we can include in our app:
 
 ```
