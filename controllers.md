@@ -30,6 +30,17 @@ class ArticleController extends AbstractController
 The `{slug}` part of the route is a dynamic route parameter - placeholder. 
 To get the value of the `{slug}` parameter add a controller argument with the same name: `string $slug`
 
+### Default param
+
+```php
+#[Route('/default/{id}', name: 'app_default', defaults: ['id' => 1])]
+public function index(int $id): JsonResponse
+{
+    dd($id);
+}
+```
+If we visit /default Symfony will set default value: `$id = 1`.
+
 ### Autowiring
 
 Controllers are also services that live in the container. But additionally they have the ability to autowire arguments into its methods.
@@ -73,9 +84,7 @@ Example file `src/Controller/CommentAdminController.php`:
 ```php
 class CommentAdminController extends AbstractController
 {
-    /**
-     * @Route("/admin/comment", name="comment_admin")
-     */
+    #[Route('admin/comment', name: 'comment_admin')]
     public function index(CommentRepository $repository, Request $request)
     {
         $q = $request->query->get('q');
@@ -119,17 +128,13 @@ Whenever you install a new package, you'll get more and more services in this li
 Symfony will see the type-hint and automatically query for a `Question` object `WHERE slug =` the `{slug}` route wildcard value.
 
 ```php
-    /**
-     * @Route("/questions/{slug}", name="app_question_show")
-     * @param Question $question
-     * @return Response
-     */
-    public function show(Question $question)
-    {
-        return $this->render('question/show.html.twig', [
-            'question' => $question,
-        ]);
-    }
+#[Route('/questions/{slug}', name: 'app_question_show')]
+public function show(Question $question)
+{
+    return $this->render('question/show.html.twig', [
+        'question' => $question,
+    ]);
+}
 ```
 
 This works because our wildcard is called `slug`, which matches the property name. 
@@ -149,10 +154,9 @@ $this->json(['amount' => 100]);
 ```php
 class PostController extends AbstractController
 {
-    /**
-     * @Route("/posts/{id}/vote/{direction}", methods={"POST"})
-     */
-    public function vote($id, $direction) {}
+    #[Route('/posts/{id}/vote/{direction}', methods={"POST"})]
+    public function vote($id, $direction) { }
+}
 ```
 
 ### Redirect
@@ -160,9 +164,7 @@ class PostController extends AbstractController
 ```php
 class SecurityController extends AbstractController
 {
-    /**
-     * @Route("/register", name="app_register")
-     */
+    #[Route('/register', name='app_register')]
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         if ($request->isMethod('POST')) {
