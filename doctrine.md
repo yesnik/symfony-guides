@@ -12,13 +12,17 @@ This command will require packages from [orm-pack](https://github.com/symfony/or
 Edit `.env` to define `DATABASE_URL`:
 
 ```
+# MySQL
 DATABASE_URL=mysql://db_user:db_password@127.0.0.1:3306/db_name
+# PostgreSQL
+DATABASE_URL="postgresql://db_user:db_password@127.0.0.1:5432/db_name?serverVersion=16&charset=utf8"
 ```
 
 ## Annotations 
 
 - Annotations *only support double quotes*. We cannot use single quotes there.
 - Every annotation has a concrete PHP class behind it
+- Since PHP 8 we can use attributes instead of annotations
 
 ### Annotations for entity's column
 
