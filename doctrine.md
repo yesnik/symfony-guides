@@ -211,13 +211,13 @@ Edit `src/Entity/Article.php`, remove property `author` and getter, setter metho
 
 Generate migration file: `php bin/console make:migration`
 
-## Alter column
+### Alter column
 
 Edit `src/Entity/User.php`, edit `nullable=true` to annotation of `$firstName` field.
 
 Generate migration file: `php bin/console make:migration`
 
-### Create record
+### Create record in a Controller
 
 Edit `src/Controller/ArticleAdminController.php`:
 
@@ -229,19 +229,17 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class ArticleAdminController extends AbstractController
 {
-    /**
-     * @Route("/admin/article/new")
-     */
+    #[Route('/admin/article/new')]
     public function new(EntityManagerInterface $em)
     {
-        $article = new Article();
-        $article->setTitle('Hello world')
-                ->setSlug('hello-world');
+        $article = (new Article())
+            ->setTitle('Hello world')
+            ->setSlug('hello-world');
         
-        // It simply says that you would like to save this article
+        // It simply says that we want to save this article
         $em->persist($article);
         
-        // This command executes INSERT query
+        // It executes INSERT query
         $em->flush();
 
         return new Response(sprintf(
@@ -253,41 +251,53 @@ class ArticleAdminController extends AbstractController
 }
 ```
 
-### Find records
+## `Doctrine\ORM\EntityRepository` methods
 
-Whenever you need to run a query, step one is to get that *entity's repository*. For example, when we generated the `Comment` class, the `make:entity` command also gave us a new `CommentRepository`.
+To run a query we need to get entity's repository. For example, `App\Repository\ArticleRepository`. If a Doctrine can't find a record it will return `null`.
 
-**.findOneBy**
+#### .find
 
-Edit `src/Controller/ArticleAdminController.php`:
-
-```php
-/** @var EntityManagerInterface $em */
-$repository = $em->getRepository(Article::class);
-
-$article = $repository->findOneBy(['slug' => $slug]);
-
-if (!$article) {
-    throw $this->createNotFoundException(sprintf('No article for slug "%s"', $slug));
-}
-```
-
-**.findAll**
+Finds an entity by its primary key / identifier.
 
 ```php
-$repository = $em->getRepository(Article::class);
-$articles = $repository->findAll();
+$article = $articleRepository->find(2);
 ```
 
-**.findBy**
-
-This will sort records by `publishedAt` in descending order.
+#### .findAll
 
 ```php
-$repository = $em->getRepository(Article::class);
-$articles = $repository->findBy(['published' => '1'], ['publishedAt' => 'DESC']);
+$articles = $articleRepository->findAll();
 ```
 
+#### .findBy
+
+Find records by params and sort them by `id` in descending order.
+
+```php
+$articles = $articleRepository->findBy(['published' => '1'], ['id' => 'DESC']);
+
+// Find 5 first records
+$articles = $articleRepository->findBy(['published' => '1'], ['id' => 'DESC'], 5);
+
+// Find 5 first records, offset 10
+$articles = $articleRepository->findBy(['published' => '1'], ['id' => 'DESC'], 5, 10);
+```
+
+#### .findOneBy
+
+Finds a single entity by params.
+
+```php
+$article = $articleRepository->findOneBy(['slug' => $slug]);
+```
+
+#### .count
+
+Counts entities by a set of criteria.
+
+```php
+$count = $articleRepository->count(['published' => '1']);
+```
 
 ### Relations
 
