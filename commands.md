@@ -1,15 +1,6 @@
 # Commands
 
-### Create command
+## Make
 
-```bash
-php bin/console make:command
-```
-
-Define name `app:generate-report`. This command will create the file `src/Command/GenerateReportCommand.php`.
-
-### Run command
-
-```bash
-php bin/console app:generate-report
-```
+- `php bin/console make:command` - create command
+- `php bin/console make:crud` - create CRUD files for entity
