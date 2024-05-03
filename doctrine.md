@@ -1,17 +1,18 @@
 # Doctrine
 
-Doctrine doesn't want you to think about tables or columns, it wants you to think about classes and properties.
+[Doctrine](https://www.doctrine-project.org/) doesn't want you to think about tables or columns, it wants you to think about classes and properties.
 
 ## Install doctrine
 
-```
+```bash
 composer require orm
 ```
+
 This command will require packages from [orm-pack](https://github.com/symfony/orm-pack). A pack is just a shortcut to install several packages.
 
 Edit `.env` to define `DATABASE_URL`:
 
-```
+```.env
 # MySQL
 DATABASE_URL=mysql://db_user:db_password@127.0.0.1:3306/db_name
 # PostgreSQL
@@ -36,13 +37,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use App\Repository\UserRepository;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- */
+#[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface
 {
-    // We place annotation here
+    // We place PHP attribute (or annotation) here
     private $some_column;
 }
 ```
@@ -50,12 +50,16 @@ class User implements UserInterface
 **primary key**
 
 ```php
-/**
- * @ORM\Id()
- * @ORM\GeneratedValue()
- * @ORM\Column(type="integer")
- */
-private $id;
+#[ORM\Id]
+#[ORM\GeneratedValue]
+#[ORM\Column]
+private ?int $id = null;
+```
+
+**string - not null**
+```php
+#[ORM\Column(length: 255)]
+private ?string $title = null;
 ```
 
 **string - unique**
@@ -153,84 +157,65 @@ class User implements UserInterface { }
 
 In this example we need to require two fields to be individually unique (e.g. a unique `email` and a unique `username`), so we use two `UniqueEntity` entries, each with a single field.
 
-### Create entity (Entity create) / Add column / Add field
+## Entity
 
-```
+### Create entity / Add column / Add field
+
+```bash
 bin/console make:entity
 ```
 
-Enter the name of new or existing entity. This command allows you to add new column.
+Enter the name of a new or existing entity. This command also allows you to add a new column.
 
 If you define `Article` as name then this command will create the file `src/Entity/Article.php`:
 
 ```php
 namespace App\Entity;
 
+use App\Repository\ArticleRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
- */
+#[ORM\Entity(repositoryClass: ArticleRepository::class)]
 class Article
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $title;
+    #[ORM\Column(length: 255)]
+    private ?string $title = null;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $content;
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $content = null;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $publishedAt;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $publishedAt = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
-    
     // ...
 }
 ```
 
-What makes this class special are the **annotations**! 
-The `@ORM\Entity` above the class tells Doctrine that this is an entity that should be mapped to the database.
+The `ORM\Entity` above the class tells Doctrine that this is an entity that should be mapped to the database.
 
-Above each property, we have some annotations that help doctrine know how to store that exact column.
+Above each property, we have some PHP attributes that help Doctrine know how to store that exact column.
 
 ### Drop column / remove column
 
 Edit `src/Entity/Article.php`, remove property `author` and getter, setter methods - `getAuthor()`, `setAuthor()`.
 
-Run command:
+Generate migration file: `php bin/console make:migration`
 
-```
-php bin/console make:migration
-```
-This command will create migration file `src/Migrations/Version20190206071030.php`.
-
-### Alter column
+## Alter column
 
 Edit `src/Entity/User.php`, edit `nullable=true` to annotation of `$firstName` field.
 
-Run command:
-
-```
-php bin/console make:migration
-```
-
-This command will create migration file `src/Migrations/Version20190214111526.php`.
+Generate migration file: `php bin/console make:migration`
 
 ### Create record
 
