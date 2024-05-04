@@ -19,6 +19,9 @@ npm install bootstrap --save-dev
 
 # Compile assets during development
 npm run watch
+
+# On deploy: create producton build
+npm run build
 ```
 
 ### Import bootstrap styles
