@@ -7,18 +7,26 @@ Encore's job (via Webpack) is simple: to read and follow all of the require stat
 Install [Encore](https://symfony.com/doc/current/frontend/encore/installation.html) in Symfony app:
 
 ```
-composer require encore
-yarn install
+composer require symfony/webpack-encore-bundle
+npm install
 ```
 
 ### Console commands
 
 ```bash
-# Add jquery package
-yarn add jquery --dev
+# Add bootstrap package
+npm install bootstrap --save-dev
 
 # Compile assets during development
-yarn watch
+npm run watch
+```
+
+### Import bootstrap styles
+
+Edit `/assets/css/app.css`:
+
+```css
+@import "~bootstrap";
 ```
 
 ### Config
@@ -73,12 +81,4 @@ Edit base template `templates/base.html.twig`:
         <script src="/build/runtime.js"></script>
         <script src="/build/app.js"></script> -->
 {% endblock %}
-```
-
-### Import bootstrap styles
-
-Edit `/assets/css/app.css`:
-
-```css
-@import "~bootstrap";
 ```
