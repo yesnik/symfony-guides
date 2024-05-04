@@ -32,7 +32,7 @@ Edit `/assets/css/app.css`:
 @import "~bootstrap";
 ```
 
-#### Enable bootstrap for forms
+### Enable bootstrap theme for forms
 
 Edit `config/packages/twig.yaml`:
 
@@ -41,7 +41,9 @@ twig:
     file_name_pattern: '*.twig'
     form_themes: ['bootstrap_5_layout.html.twig']
 ```
-This file will be loaded from `vendor\symfony\twig-bridge\Resources\views\Form\bootstrap_5_layout.html.twig`
+This file will be loaded from `vendor\symfony\twig-bridge\Resources\views\Form\bootstrap_5_layout.html.twig`.
+
+Read more: [How to Work with Form Themes](https://symfony.com/doc/current/form/form_themes.html#applying-themes-to-all-forms)
 
 ### Config
 
