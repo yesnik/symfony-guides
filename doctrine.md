@@ -2,7 +2,7 @@
 
 [Doctrine](https://www.doctrine-project.org/) doesn't want you to think about tables or columns, it wants you to think about classes and properties.
 
-## Install doctrine
+## Install Doctrine
 
 ```bash
 composer require orm
@@ -47,7 +47,7 @@ class User implements UserInterface
 }
 ```
 
-**primary key**
+#### primary key
 
 ```php
 #[ORM\Id]
@@ -56,86 +56,69 @@ class User implements UserInterface
 private ?int $id = null;
 ```
 
-**string - not null**
+#### string - not null
 ```php
 #[ORM\Column(length: 255)]
 private ?string $title = null;
 ```
 
-**string - unique**
+#### string - unique
 
 ```php
-/**
- * @ORM\Column(type="string", length=180, unique=true)
- */
+#[ORM\Column(type="string", length=180, unique=true)]
 private $email;
 ```
 
-**string - allow null**
+#### string - allow null
 
 ```php
-/**
- * @ORM\Column(type="string", length=255, nullable=true)
- * @Groups("main")
- */
+#[ORM\Column(type="string", length=255, nullable=true)]
 private $firstName;
 ```
 
-**integer**
+#### integer
 
 ```php
-/**
- * @ORM\Column(type="integer")
- */
+#[ORM\Column(type="integer")
 private $likesCount = 0;
 ```
 
-**boolean**
+#### boolean
 
 ```php
-/**
- * @ORM\Column(type="boolean")
- */
+#[ORM\Column(type="boolean")]
 private $isDeleted = false;
 ```
 
 For MySQL it'll create `TINYINT` data type.
 
-**text**
+#### text
 
 ```php
-/**
- * @ORM\Column(type="text")
- */
+#[ORM\Column(type="text")]
 private $content;
 ```
 
-**datetime**
+#### datetime
 
 ```php
-/**
- * @ORM\Column(type="datetime")
- */
+#[ORM\Column(type="datetime")]
 private $expiresAt;
 ```
 
-**JSON column**
+#### JSON column
 
 ```php
-/**
- * @ORM\Column(type="json")
- */
+#[ORM\Column(type="json")]
 private $roles = [];
 ```
 
-**relation - one to many**
+#### relation - one to many
 
 User has many articles. At `Article` we have `author` field.
 
 ```php
-/**
- * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="author")
- */
+#[ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="author")]
 private $articles;
 ```
 
@@ -391,13 +374,8 @@ class Article {
 
 ## Query Builder
 
-To write a custom query, you can either create a *DQL* (Doctrine query language) string directly, 
-or you can use the *query builder* that helps create a DQL string.
-
-Method returns a array of Comment objects. It does not, for example, now return Comment and Article objects.
-
-Instead, Doctrine takes that extra article data and stores it in the background for later. 
-But, the new `addSelect()` does not affect the return value. That's way different than using raw SQL.
+Doctrine also provides a [Query Builder](https://www.doctrine-project.org/projects/doctrine-orm/en/current/reference/query-builder.html), an object-oriented way to write queries. 
+It is recommended to use this when queries are built dynamically (i.e. based on PHP conditions).
 
 Edit `src/Repository/ArticleRepository.php`:
 
@@ -412,7 +390,48 @@ class ArticleRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-    // ...
+}
+```
+
+### Use filter
+
+Filter file `src\Filter\BlogFilter.php`:
+
+```php
+class BlogFilter
+{
+    private ?string $title = null;
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(?string $title): BlogFilter
+    {
+        $this->title = $title;
+        return $this;
+    }
+}
+```
+
+File `src\Repository\BlogRepository.php`:
+
+```php
+class BlogRepository extends ServiceEntityRepository
+{
+    public function findByBlogFilter(BlogFilter $blogFilter): array
+    {
+        $qb = $this->createQueryBuilder('b');
+
+        if ($blogFilter->getTitle()) {
+            $qb->andWhere('b.title LIKE :title')
+                ->setParameter('title', '%' . $blogFilter->getTitle() . '%')
+                ->orderBy('b.title');
+        }
+
+        return $qb->getQuery()->getResult();
+    }
 ```
 
 ### Join article to comment
