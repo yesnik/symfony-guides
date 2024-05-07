@@ -69,6 +69,29 @@ $builder->add('title', TextType::class, [
 
 It adds custom attributes to the input.
 
+#### mapped
+
+```php
+$builder
+    ->setMethod('GET')
+    ->add('content', TextType::class, [
+        'required' => false,
+        'mapped' => false,
+    ])
+```
+
+Data of the content field won't be mapped to the Entity. We can get value in the controller:
+
+```php
+$blog = new Blog();
+$form = $this->createForm(BlogType::class, $blog);
+$form->handleRequest($request);
+
+if ($form->isSubmitted() && $form->isValid()) {
+    dd($form->get('content')->getData());
+}
+```
+
 ### EntityType
 
 ```php
