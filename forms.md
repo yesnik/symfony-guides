@@ -15,6 +15,50 @@ symfony console make:form
 Call the class, `UserRegistrationFormType`. This will ask if we want this form to be bound to a class. 
 That's usually what we want, but it's optional. Bind our form to the `User` class.
 
+## Form Builder
+
+### Options
+
+#### required
+
+```php
+$builder->add('title', TextType::class, [
+    'required' => true,
+]);
+```
+
+It adds `required` attribute to the form:
+
+```html
+<input type="text" id="blog_title" name="blog[title]" required="required" class="form-control">
+```
+
+#### help
+
+```php
+$builder->add('title', TextType::class, [
+    'help' => 'Some title for your Blog',
+]);
+```
+
+It adds help text below the field:
+
+```html
+<div id="blog_title_help" class="form-text mb-0 help-text">Some title for your Blog</div>
+```
+
+#### attr
+
+```php
+$builder->add('title', TextType::class, [
+    'attr' => [
+        'class' => 'title-header'
+    ]
+]);
+```
+
+It adds custom attributes to the input.
+
 ## Method 1. Create form using `data_class`
 
 Create `src/Form/ArticleFormType.php`:
