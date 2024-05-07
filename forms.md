@@ -19,6 +19,16 @@ That's usually what we want, but it's optional. Bind our form to the `User` clas
 
 ### Options
 
+```php
+$builder->add('title', TextType::class, [
+    'required' => true,
+    'help' => 'Some title for your Blog',
+    'attr' => [
+        'class' => 'title-header',
+    ]
+]);
+```
+
 #### required
 
 ```php
@@ -58,6 +68,21 @@ $builder->add('title', TextType::class, [
 ```
 
 It adds custom attributes to the input.
+
+### EntityType
+
+```php
+$builder->add('category', EntityType::class, [
+    'class' => Category::class,
+    'placeholder' => 'No category',
+    'required' => false,
+    'query_builder' => function (CategoryRepository $er): QueryBuilder {
+        return $er->createQueryBuilder('u')
+            ->orderBy('u.name', 'ASC');
+    },
+    'choice_label' => 'name',
+]);
+```
 
 ## Method 1. Create form using `data_class`
 
