@@ -1,4 +1,4 @@
-## Symfony forms
+# Symfony forms
 
 Install form component:
 
@@ -12,11 +12,10 @@ Create form / generate form:
 symfony console make:form
 ```
 
-Call the class, `UserRegistrationFormType`. This will ask if you want this form to be bound to a class. 
+Call the class, `UserRegistrationFormType`. This will ask if we want this form to be bound to a class. 
 That's usually what we want, but it's optional. Bind our form to the `User` class.
 
-
-### Method 1. With using data_class
+## Method 1. Create form using `data_class`
 
 Create `src/Form/ArticleFormType.php`:
 
@@ -103,7 +102,7 @@ When passing a form to a template, use `createView()` to convert the data to a f
 
 Edit view `templates/article_admin/new.html.twig`:
 
-**Short version**
+### Short version
 
 ```php
 {% extends 'content_base.html.twig' %}
@@ -120,7 +119,7 @@ Edit view `templates/article_admin/new.html.twig`:
 {% endblock %}
 ```
 
-**Descriptive version**
+### Descriptive version
 
 Instead of `form_widget` we can use `form_row` to describe each form's field:
 
@@ -148,19 +147,17 @@ Instead of `form_widget` we can use `form_row` to describe each form's field:
 
 ```
 
-**Add bootstrap design to forms**
+### Add bootstrap design to forms
 
-If you're using Bootstrap CSS or Foundation CSS, ah, you're in luck! Symfony comes with a built-in form theme that makes your forms render exactly how these systems want.
+Symfony comes with a built-in form theme that makes your forms render exactly how Bootstrap CSS or Foundation CSS want.
 
 ```
 twig:
-    form_themes:
-        - bootstrap_4_layout.html.twig
+    file_name_pattern: '*.twig'
+    form_themes: ['bootstrap_5_layout.html.twig']
 ```
-This template lives deep inside the core of Symfony.
 
-
-### Method 2. Manual way
+## Method 2. Create form manually
 
 If you have a super complex form that looks different than your entity, it's perfectly okay to not use `data_class`. 
 Sometimes it's simpler to build the form exactly how you want, call `$form->getData()` and use that associative array in your controller to update what you need.
@@ -190,10 +187,8 @@ Edit controller `src/Controller/ArticleAdminController.php`:
 ```php
 class ArticleAdminController extends AbstractController
 {
-    /**
-     * @Route("/admin/article/new", name="admin_article_new")
-     * @IsGranted("ROLE_ADMIN_ARTICLE")
-     */
+    #[Route("/admin/article/new", name="admin_article_new")]
+    #[IsGranted("ROLE_ADMIN_ARTICLE")]
     public function new(EntityManagerInterface $em, Request $request)
     {
         $form = $this->createForm(ArticleFormType::class);
@@ -220,10 +215,8 @@ class ArticleAdminController extends AbstractController
         ]);
     }
     
-    /**
-     * @Route("/admin/article/{id}/edit", name="admin_article_edit")
-     * @IsGranted("MANAGE", subject="article")
-     */
+    #[Route('/admin/article/{id}/edit', name='admin_article_edit')]
+    #[IsGranted('MANAGE', subject='article')]
     public function edit(Article $article, Request $request, EntityManagerInterface $em)
     {
         $form = $this->createForm(ArticleFormType::class, $article);
@@ -291,7 +284,9 @@ class SecurityController extends AbstractController
 ```
 
 *Explanation:* When you call `$this->createForm()`, it creates a `Form` object that represents the whole form. 
-But also, each individual field is also represented as its own `Form` object, and it's a child of that top-level form. Yep, `$form['plainPassword']` gives us a `Form` object that knows everything about this one field. When we call `->getData()` on it, yep! That's the value for this one field.
+But also, each individual field is also represented as its own `Form` object, and it's a child of that top-level form. 
+Yep, `$form['plainPassword']` gives us a `Form` object that knows everything about this one field. 
+When we call `->getData()` on it we get the value for this one field.
 
 ## Form theming
 
