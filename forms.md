@@ -1,6 +1,6 @@
 # Symfony forms
 
-Install form component:
+Install [form](https://github.com/symfony/form) component:
 
 ```bash
 composer require form
