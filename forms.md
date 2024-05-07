@@ -293,10 +293,33 @@ class SecurityController extends AbstractController
 *Explanation:* When you call `$this->createForm()`, it creates a `Form` object that represents the whole form. 
 But also, each individual field is also represented as its own `Form` object, and it's a child of that top-level form. Yep, `$form['plainPassword']` gives us a `Form` object that knows everything about this one field. When we call `->getData()` on it, yep! That's the value for this one field.
 
-### Form theming
+## Form theming
 
 When Symfony renders any part of your form, it looks for a specific block in this 
 core `form_div_layout.html.twig` template. 
 For example, to render the "row" part of any field, it looks for `form_row`. 
 Also this system has some hierarchy to it: to render the `label` part of a TextType field, 
 it first looks for `text_label` and then falls back to using `form_label`.
+
+## CSRF protection disable
+
+By default Symfony generate hidden field inside form tag:
+
+```html
+<input type="hidden" id="blog__token" name="blog[_token]" value="21f74a218fd687e9780.sgIYNSskXtC6wKT4NVph0yyzagLBm4IUXOioHBGbKBw.611RYl9XCeXps82xByMWhnbBJjK17-kjKLKef3TyeErYekxnWGcHmtDw0w">
+```
+
+We can disable it:
+
+```php
+class BlogType extends AbstractType
+{
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => Blog::class,
+            'csrf_protection' => false,
+        ]);
+    }
+}
+```
