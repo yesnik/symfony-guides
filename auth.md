@@ -8,6 +8,18 @@ composer require symfony/security-bundle
 
 This command will create: `app\config\packages\security.yaml`
 
+## The User
+
+Permissions in Symfony are always linked to a user object. 
+If you need to secure (parts of) your application, you need to create a user class. This is a class that implements UserInterface. 
+This is often a Doctrine entity, but you can also use a dedicated Security user class.
+
+Generate a `User` class:
+
+```bash
+php bin/console make:user
+```
+
 ## Create authenticator
 
 Symfony supports several authentication strategies. Let’s use a classic and popular *form authentication system*.
