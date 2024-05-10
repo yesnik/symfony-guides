@@ -1,5 +1,13 @@
 # Authentication & Authorization
 
+The [SecurityBundle](https://github.com/symfony/security-bundle) provides a tight integration of the Security component into the Symfony full-stack framework.
+
+```bash
+composer require symfony/security-bundle
+```
+
+This command will create: `app\config\packages\security.yaml`
+
 ## Create authenticator
 
 Symfony supports several authentication strategies. Let’s use a classic and popular *form authentication system*.
