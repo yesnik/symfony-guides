@@ -34,6 +34,17 @@ Generate registration form:
 php bin/console make:registration-form
 ```
 
+## Form Login
+
+Most websites have a login form where users authenticate using an identifier (e.g. email address or username) and a password.
+This functionality is provided by the built-in FormLoginAuthenticator.
+
+You can run the following command to create everything needed to add a login form in your application:
+
+```bash
+php bin/console make:security:form-login
+```
+
 ## Create authenticator
 
 Symfony supports several authentication strategies. Let’s use a classic and popular *form authentication system*.
