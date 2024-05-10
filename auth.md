@@ -20,6 +20,20 @@ Generate a `User` class:
 php bin/console make:user
 ```
 
+### Install email verification bundle
+
+[VerifyEmailBundle](https://github.com/SymfonyCasts/verify-email-bundle) generates - and validates - a secure, signed URL that can be emailed to users to confirm their email address. 
+It does this without needing any storage, so you can use your existing entities with minor modifications.
+
+```bash
+composer require symfonycasts/verify-email-bundle
+```
+Generate registration form:
+
+```bash
+php bin/console make:registration-form
+```
+
 ## Create authenticator
 
 Symfony supports several authentication strategies. Let’s use a classic and popular *form authentication system*.
