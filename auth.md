@@ -316,6 +316,9 @@ class SecurityController extends AbstractController
 
 ## Voters
 
+[Voters](https://symfony.com/doc/current/security/voters.html) are Symfony's most powerful way of managing permissions. 
+They allow you to centralize all permission logic, then reuse them in many places.
+
 If you're just checking for a role, no problem: use `is_granted('ROLE_ADMIN')`. 
 But if your logic gets any more complex, use a voter.
 
@@ -324,6 +327,7 @@ But if your logic gets any more complex, use a voter.
 ```bash
 php bin/console make:voter
 ```
+
 This command will create a file `src/Security/Voter/CheeseListingVoter.php`.
 
 ### How voters work
@@ -335,65 +339,85 @@ Symfony has 2 core voters:
 1. The first knows how to decide access when you call `is_granted()` and pass it `ROLE_` something, like `ROLE_USER` or `ROLE_ADMIN`. It determines that by looking at the roles on the authenticated user. 
 2. The second voter knows how to decide access if you call `is_granted()` and pass it one of the `IS_AUTHENTICATED_` strings: `IS_AUTHENTICATED_FULLY`, `IS_AUTHENTICATED_REMEMBERED` or `IS_AUTHENTICATED_ANONYMOUSLY`.
 
-Now that we've created a class and made it extend Symfony's Voter base class, our app has a third voter. This means that, whenever someone calls `is_granted()`, Symfony will call the `supports()` method and pass it the `$attribute` - that's the string `EDIT`, or `ROLE_USER` - and the `$subject`, which will be the `CheeseListing` object in our case.
+Now that we've created a class and made it extend Symfony's Voter base class, our app has a third voter. 
+This means that, whenever someone calls `is_granted()`, Symfony will call the `supports()` method and pass it the `$attribute` - that's the string `EDIT`, 
+or `ROLE_USER` - and the `$subject`, which will be the `CheeseListing` object in our case.
 
-Our job here is to answer the question: do we know how to decide access for this `$attribute` and `$subject` combination? Or should another voter handle this?
+Our job here is to answer the question: do we know how to decide access for this `$attribute` and `$subject` combination? 
+Or should another voter handle this?
 
 We're going to design our voter to decide access if the `$attribute` is `EDIT` and if `$subject` is an `instanceof CheeseListing`.
 
 If anything else is passed (e.g. `ROLE_ADMIN`) `supports()` will return `false` and Symfony will know to ask a different voter.
 
-But if we return `true` from `supports()`, Symfony will call `voteOnAttribute()` and pass us the same `$attribute` string - `EDIT` - the same `$subject` - `CheeseListing` object - and a `$token`, which contains the authenticated `User` object. Our job in this method is clear: return `true` if the user should have access or `false` if they should not.
+But if we return `true` from `supports()`, Symfony will call `voteOnAttribute()` and pass us the same `$attribute` string - `EDIT` - the same `$subject` - `Blog` object - 
+and a `$token`, which contains the authenticated `User` object. 
+This method returns `true` if the user should have an access or `false` otherwise.
 
 ```php
-// src/Security/Voter/CheeseListingVoter.php
-
+// src/Security/Voter/BlogVoter.php
 namespace App\Security\Voter;
 
-use App\Entity\CheeseListing;
+use App\Entity\Blog;
+use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\Security;
 
-class CheeseListingVoter extends Voter
+class BlogVoter extends Voter
 {
-    private $security;
+    // these strings are just invented: you can use anything
+    const VIEW = 'view';
+    const EDIT = 'edit';
 
-    public function __construct(Security $security)
+    protected function supports(string $attribute, mixed $subject): bool
     {
-        $this->security = $security;
-    }
-    
-    protected function supports($attribute, $subject)
-    {
-        // replace with your own logic
-        // https://symfony.com/doc/current/security/voters.html
-        return in_array($attribute, ['EDIT'])
-            && $subject instanceof CheeseListing;
-    }
-
-    protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
-    {
-        $user = $token->getUser();
-        // if the user is anonymous, do not grant access
-        if (!$user instanceof UserInterface) {
+        // if the attribute isn't one we support, return false
+        if (!in_array($attribute, [self::VIEW, self::EDIT])) {
             return false;
         }
-        /** @var CheeseListing $subject */
-        // ... (check conditions and return true to grant permission) ...
-        switch ($attribute) {
-            case 'EDIT':
-                if ($subject->getOwner() === $user) {
-                    return true;
-                }
-                
-                if ($this->security->isGranted('ROLE_ADMIN')) {
-                    return true;
-                }
-                return false;
+
+        // only vote on `Blog` objects
+        if (!$subject instanceof Blog) {
+            return false;
         }
-        throw new \Exception(sprintf('Unhandled attribute "%s"', $attribute));
+
+        return true;
+    }
+
+    protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
+    {
+        $user = $token->getUser();
+
+        if (!$user instanceof User) {
+            // the user must be logged in; if not, deny access
+            return false;
+        }
+
+        // you know $subject is a Blog object, thanks to `supports()`
+        /** @var Blog $blog */
+        $blog = $subject;
+
+        return match($attribute) {
+            self::VIEW => $this->canView($blog, $user),
+            self::EDIT => $this->canEdit($blog, $user),
+            default => throw new \LogicException('This code should not be reached!')
+        };
+    }
+
+    private function canView(Blog $blog, User $user): bool
+    {
+        // if they can edit, they can view
+        if ($this->canEdit($blog, $user)) {
+            return true;
+        }
+
+        // the Blog object could have, for example, a method `isPrivate()`
+        return !$blog->isPrivate();
+    }
+
+    private function canEdit(Blog $blog, User $user): bool
+    {
+        return $user === $blog->getUser();
     }
 }
 ```
