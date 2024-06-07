@@ -1,6 +1,6 @@
 # Fixtures
 
-Do you want to populate your development database automatically?
+[DoctrineFixturesBundle](https://symfony.com/bundles/DoctrineFixturesBundle/current/index.html) helps us to populate our development database automatically.
 
 ```bash
 composer require orm-fixtures --dev
