@@ -249,6 +249,36 @@ AKISMET_KEY=abcdef
 
 For production, a "real" environment variable should be defined.
 
+### Bind arguments to service
+
+Suppose we have a service at `src/Service/TextUniquenessCheck`:
+
+```php
+namespace App\Service;
+
+class TextUniquenessCheck
+{
+    public function __construct(
+        private readonly string $apiKey
+    ) {}
+    // ...
+}
+```
+
+To bind API key to this service we need to edit `config\services.yaml`:
+
+```yaml
+services:
+    App\Service\TextUniquenessCheck:
+        $apiKey: '%env(CONTENT_WATCH_API_KEY)%'
+```
+
+We can define value at `.env`:
+
+```
+CONTENT_WATCH_API_KEY=1s111UVNi313S
+```
+
 ### Bind different service for dev environment
 
 We have these files at `src/Services/Esia/` folder: `EsiaInterface.php`, `Esia.php`, `EsiaDummy.php` (emulates responses).
