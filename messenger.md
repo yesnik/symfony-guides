@@ -204,5 +204,5 @@ But instead of discarding the message, it will store it in a more permanent stor
 4. Run worker to consume messages from `async_priority_high` and then from `async` transport:
 
 ```bash
-symfony console messenger:consume -vv async_priority_high async
+php bin/console messenger:consume -vv async_priority_high async
 ```
