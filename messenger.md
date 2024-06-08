@@ -93,7 +93,8 @@ php bin/console debug:container --show-arguments messenger.bus.default.inner
 
 ## Doctrine Transport
 
-Starting from Symfony 5.1, the Doctrine transport has moved to a separate package. Install it by running:
+The Doctrine transport can be used to store messages in a database table. 
+Starting from Symfony 5.1, the Doctrine transport has moved to a separate package.
 
 ```bash
 composer require symfony/doctrine-messenger
@@ -102,8 +103,9 @@ composer require symfony/doctrine-messenger
 The Doctrine transport can be used to store messages in a database table. Edit `.env`:
 
 ```
-MESSENGER_TRANSPORT_DSN=doctrine://default
+MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0
 ```
+
 The transport will automatically create a table `messenger_messages`.
 
 ## Example
