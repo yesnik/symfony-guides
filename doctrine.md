@@ -19,15 +19,14 @@ DATABASE_URL=mysql://db_user:db_password@127.0.0.1:3306/db_name
 DATABASE_URL="postgresql://db_user:db_password@127.0.0.1:5432/db_name?serverVersion=16&charset=utf8"
 ```
 
-## Annotations 
+## Attributes 
 
-- Annotations *only support double quotes*. We cannot use single quotes there.
-- Every annotation has a concrete PHP class behind it
-- Since PHP 8 we can use attributes instead of annotations
+- Before PHP 8 we had to use annotations that *only support double quotes*. We can't use single quotes there.
+- Every attribute (annotation) has a concrete PHP class behind it
 
-### Annotations for entity's column
+### Attributes for entity's column
 
-Let's suppose that we have class at `src/Entity/User.php`
+Let's suppose that we have a class at `src/Entity/User.php`
 
 ```php
 namespace App\Entity;
@@ -57,6 +56,7 @@ private ?int $id = null;
 ```
 
 #### string - not null
+
 ```php
 #[ORM\Column(length: 255)]
 private ?string $title = null;
@@ -65,28 +65,28 @@ private ?string $title = null;
 #### string - unique
 
 ```php
-#[ORM\Column(type="string", length=180, unique=true)]
+#[ORM\Column(type: 'string', length: 180, unique: true)]
 private $email;
 ```
 
 #### string - allow null
 
 ```php
-#[ORM\Column(type="string", length=255, nullable=true)]
+#[ORM\Column(type: 'string', length: 255, nullable: true)]
 private $firstName;
 ```
 
 #### integer
 
 ```php
-#[ORM\Column(type="integer")
+#[ORM\Column(type: 'integer')
 private $likesCount = 0;
 ```
 
 #### boolean
 
 ```php
-#[ORM\Column(type="boolean")]
+#[ORM\Column(type: 'boolean')]
 private $isDeleted = false;
 ```
 
@@ -95,31 +95,31 @@ For MySQL it'll create `TINYINT` data type.
 #### text
 
 ```php
-#[ORM\Column(type="text")]
+#[ORM\Column(type: 'text')]
 private $content;
 ```
 
 #### datetime
 
 ```php
-#[ORM\Column(type="datetime")]
+#[ORM\Column(type: 'datetime')]
 private $expiresAt;
 ```
 
 #### JSON column
 
 ```php
-#[ORM\Column(type="json")]
+#[ORM\Column(type: 'json')]
 private $roles = [];
 ```
 
 #### relation - one to many
 
-User has many articles. At `Article` we have `author` field.
+One User can have many articles. At `Article` we have `author` field.
 
 ```php
-#[ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="author")]
-private $articles;
+#[ORM\OneToMany(targetEntity= Article::class, mappedBy: 'author')]
+private Collection $articles;
 ```
 
 ### UniqueEntity constraint
