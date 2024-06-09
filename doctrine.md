@@ -379,6 +379,33 @@ class Article {
 }
 ```
 
+### Doctrine Lifecycle Callbacks
+
+[Lifecycle callbacks](https://symfony.com/doc/7.2/doctrine/events.html#doctrine-lifecycle-callbacks) are defined as public methods inside the entity you want to modify. For example, suppose you want to set a createdAt date column to the current date, but only when the entity is first persisted (i.e. inserted). To do so, define a callback for the prePersist Doctrine event:
+
+```php
+// src/Entity/Product.php
+namespace App\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+// Don't forget to add #[ORM\HasLifecycleCallbacks]
+// to the class of the entity where you define the callback
+
+#[ORM\Entity]
+#[ORM\HasLifecycleCallbacks]
+class Product
+{
+    // ...
+
+    #[ORM\PrePersist]
+    public function setCreatedAtValue(): void
+    {
+        $this->createdAt = new \DateTimeImmutable();
+    }
+}
+```
+
 ## Query Builder
 
 Doctrine also provides a [Query Builder](https://www.doctrine-project.org/projects/doctrine-orm/en/current/reference/query-builder.html), an object-oriented way to write queries. 
