@@ -65,15 +65,22 @@ private ?string $title = null;
 #### string - unique
 
 ```php
-#[ORM\Column(type: 'string', length: 180, unique: true)]
-private $email;
+#[ORM\Column(length: 180, unique: true)]
+private ?string $email = null;
 ```
 
 #### string - allow null
 
 ```php
-#[ORM\Column(type: 'string', length: 255, nullable: true)]
-private $firstName;
+#[ORM\Column(length: 255, nullable: true)]
+private ?string $firstName = null;
+```
+
+#### string - default value
+
+```php
+#[ORM\Column(length: 255, options: ['default' => 'active'])]
+private ?string $status = null;
 ```
 
 #### integer
