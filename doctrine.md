@@ -406,6 +406,8 @@ class Product
 }
 ```
 
+**Note**: We can't use services in the callback.
+
 ## Query Builder
 
 Doctrine also provides a [Query Builder](https://www.doctrine-project.org/projects/doctrine-orm/en/current/reference/query-builder.html), an object-oriented way to write queries. 
