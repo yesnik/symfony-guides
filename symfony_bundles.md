@@ -89,3 +89,8 @@ composer require sensio/framework-extra-bundle
 [StofDoctrineExtensionsBundle](https://github.com/stof/StofDoctrineExtensionsBundle) 
 provides integration for [DoctrineExtensions](https://github.com/Atlantic18/DoctrineExtensions) in your Symfony Project.
 
+Allows to add `Timestampable` - updates date fields on create (created_at), update (updated_at) and even property change.
+
+```bash
+composer require stof/doctrine-extensions-bundle
+```
