@@ -94,3 +94,25 @@ Allows to add `Timestampable` - updates date fields on create (created_at), upda
 ```bash
 composer require stof/doctrine-extensions-bundle
 ```
+
+Activate `timestampable` feature at `config\packages\stof_doctrine_extensions.yaml`:
+
+```yaml
+# Read the documentation: https://symfony.com/doc/current/bundles/StofDoctrineExtensionsBundle/index.html
+# See the official DoctrineExtensions documentation for more details: https://github.com/doctrine-extensions/DoctrineExtensions/tree/main/doc
+stof_doctrine_extensions:
+    default_locale: en_US
+    orm:
+        default:
+            timestampable: true
+```
+
+After this add `TimestampableEntity` trait to your entity:
+
+```php
+class Blog
+{
+    use TimestampableEntity;
+    // ...
+}
+```
