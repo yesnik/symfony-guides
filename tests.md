@@ -63,13 +63,13 @@ symfony run bin/phpunit tests/
 **Create test database**
 
 ```bash
-php bin/console doctrine:database:create --env=test
+php bin/console --env=test doctrine:database:create
 ```
 
-**Create database schema**
+**Create test database schema**
 
 ```bash
-php bin/console doctrine:schema:create --env=test
+php bin/console --env=test doctrine:schema:create
 ```
 
 ## Reset database before test
