@@ -94,6 +94,15 @@ Enable it as a PHPUnit extension:
 </phpunit>
 ```
 
+## ZenstruckFoundryBundle
+
+[Foundry](https://github.com/zenstruck/foundry) makes creating fixtures data fun again, via an expressive, 
+auto-completable, on-demand fixtures system with Symfony and Doctrine.
+
+```bash
+composer require zenstruck/foundry --dev
+```
+
 ## Useful methods
 
 ### `self::$container->get()`
