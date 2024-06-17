@@ -1,9 +1,12 @@
 # Console commands
 
+The Symfony framework provides lots of commands through the `bin/console` script. 
+These commands are created with the [Console component](https://symfony.com/doc/current/components/console.html). You can also use it to create your own commands.
+
 Show available commands:
 
 ```
-./bin/console
+php bin/console
 ```
 
 ### Create project
