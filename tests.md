@@ -1,11 +1,14 @@
 # Tests
 
+See [Symfony docs](https://symfony.com/doc/current/testing.html)
+
 ## Installation
 
-Install [test-pack](https://github.com/symfony/test-pack), which comes with the [PHPUnit bridge](https://symfony.com/doc/current/components/phpunit_bridge.html): a Symfony component that wraps around PHPUnit.
+Before creating your first test, install [test-pack](https://github.com/symfony/test-pack), 
+which installs some other packages needed for testing (such as [phpunit/phpunit](https://github.com/sebastianbergmann/phpunit)):
 
 ```bash
-composer require test --dev
+composer require --dev symfony/test-pack
 ```
 
 ## Configuration
@@ -15,13 +18,13 @@ composer require test --dev
 It holds sensible default config for PHPUnit itself.
 
 One of the keys here is called `SYMFONY_PHPUNIT_VERSION`. 
-You can leave this or change it to the latest version of PHPUnit, which for me is 9.0.
+You can leave this or change it to the latest version of PHPUnit, which for me is 9.6.
 
 ```xml
 <php>
     <!-- ... -->
     <server name="SYMFONY_PHPUNIT_REMOVE" value="" />
-    <server name="SYMFONY_PHPUNIT_VERSION" value="9.0" />
+    <server name="SYMFONY_PHPUNIT_VERSION" value="9.6" />
 </php>
 ```
 
