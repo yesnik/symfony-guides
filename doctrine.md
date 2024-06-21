@@ -122,11 +122,34 @@ private $roles = [];
 
 #### relation - one to many
 
-One User can have many articles. At `Article` we have `author` field.
+One `Blog` can have many `comments`:
 
 ```php
-#[ORM\OneToMany(targetEntity= Article::class, mappedBy: 'author')]
-private Collection $articles;
+#[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'blog', cascade: ['persist'], orphanRemoval: true)]
+private Collection $comments;
+```
+
+#### relation - many to one
+
+Many `Comment`-s can belong to one `Blog`:
+
+```php
+#[ORM\ManyToOne(inversedBy: 'comments')]
+#[ORM\JoinColumn(nullable: false)]
+private ?Blog $blog = null;
+```
+
+#### relation - persist
+
+On `Blog` save also `Comment`-s will be saved.
+
+```php
+/**
+ * @var Collection<int, Comment>
+ */
+#[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'blog', cascade: ['persist'], orphanRemoval: true)]
+#[ORM\OrderBy(['id' => 'DESC'])]
+private Collection $comments;
 ```
 
 ### UniqueEntity constraint
