@@ -147,6 +147,14 @@ class User implements UserInterface { }
 
 In this example we need to require two fields to be individually unique (e.g. a unique `email` and a unique `username`), so we use two `UniqueEntity` entries, each with a single field.
 
+### Order by
+
+```php
+#[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'blog', orphanRemoval: true)]
+#[ORM\OrderBy(['id' => 'DESC'])]
+private Collection $comments;
+```
+
 ## Entity
 
 ### Create entity / Add column / Add field
