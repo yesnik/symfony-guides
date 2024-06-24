@@ -9,8 +9,72 @@
  ```bash
  composer require symfony/serializer
  ```
- 
- ## Serializing an Object
+
+## Serialize Entity
+
+In a controller:
+
+```php
+class BlogController extends AbstractController
+{
+    #[Route('/api/blog', name: 'app_api_blog')]
+    public function index(BlogRepository $blogRepository): Response
+    {
+        $blogs = $blogRepository->getBlogs();
+
+        return $this->json($blogs);
+    }
+}
+```
+
+### Fix circular reference error
+
+Modify `config/services.yaml`:
+
+```yml
+services:
+    app.normalizer.object_normalizer:
+        class: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+        tags: ['serializer.normalizer']
+        arguments:
+            $defaultContext:
+                circular_reference_handler: '@App\Serializer\CircularReferenceHandler'
+                ignored_attributes: ['createdAt', 'updatedAt']
+```
+
+Add a handler `src\Serializer\CircularReferenceHandler.php`:
+
+```php
+namespace App\Serializer;
+
+class CircularReferenceHandler
+{
+    public function __invoke($object)
+    {
+        return $object->getId();
+    }
+}
+```
+
+### Ignore entity's field
+
+File `src/Entity/Blog.php`:
+
+```php
+namespace App\Entity;
+
+use Symfony\Component\Serializer\Attribute\Ignore;
+
+#[ORM\Entity(repositoryClass: BlogRepository::class)]
+#[ORM\HasLifecycleCallbacks]
+class Blog
+{
+    #[ORM\ManyToOne(cascade:['persist'], inversedBy: 'blogs')]
+    #[Ignore]
+    private ?User $user = null;
+```
+
+## Serialize Object
  
 ```php
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
