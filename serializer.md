@@ -39,8 +39,10 @@ services:
         arguments:
             $defaultContext:
                 circular_reference_handler: '@App\Serializer\CircularReferenceHandler'
-                ignored_attributes: ['createdAt', 'updatedAt']
+                ignored_attributes: ['createdOn', 'updatedOn']
 ```
+
+In `ignored_attributes` option we define what entity's fields should not be included in the output.
 
 Add a handler `src\Serializer\CircularReferenceHandler.php`:
 
@@ -72,6 +74,44 @@ class Blog
     #[ORM\ManyToOne(cascade:['persist'], inversedBy: 'blogs')]
     #[Ignore]
     private ?User $user = null;
+```
+
+### Format attribute
+
+Modify `config/services.yaml` - define callback for the field `updatedAt`:
+
+```yml
+services:
+    app.normalizer.object_normalizer:
+        class: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+        tags: ['serializer.normalizer']
+        arguments:
+            $defaultContext:
+                circular_reference_handler: '@App\Serializer\CircularReferenceHandler'
+                ignored_attributes: ['createdOn', 'updatedOn']
+                callbacks: {
+                    'updatedAt': '@App\Serializer\UpdatedAtCallback',
+                }
+```
+
+File `src/Serializer/UpdatedAtCallback.php`
+
+```php
+class UpdatedAtCallback
+{
+    public function __invoke(null|string|DateTimeInterface $innerObject): DateTimeInterface|string|null
+    {
+        if ($innerObject === null) {
+            return null;
+        }
+
+        if (!($innerObject instanceof DateTimeInterface)) {
+            return $innerObject;
+        }
+
+        return $innerObject->format('Y-m-d H:i:s');
+    }
+}
 ```
 
 ## Serialize Object
