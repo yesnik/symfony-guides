@@ -60,6 +60,8 @@ class CircularReferenceHandler
 
 ### Ignore entity's field
 
+#### Via `Ignore`
+
 File `src/Entity/Blog.php`:
 
 ```php
@@ -75,6 +77,41 @@ class Blog
     #[Ignore]
     private ?User $user = null;
 ```
+
+#### Via `context` param for `json()` method
+
+In a controller:
+
+```php
+  return $this->json($blogs, context: [AbstractNormalizer::IGNORED_ATTRIBUTES => [
+          'category',
+          'createdAt',
+      ]
+  ]);
+```
+
+#### Via `Groups`
+
+Entity:
+
+```php
+class Blog
+{
+    #[Groups(['groupOne'])]
+    #[Assert\NotBlank]
+    #[ORM\Column(length: 255)]
+    private ?string $title = null;
+```
+
+Controller:
+
+```php
+    return $this->json($blogs, context: [
+        AbstractNormalizer::GROUPS => ['groupOne'],
+    ]);
+```
+
+Fields marked with `groupOne` will be in the response.
 
 ### Format attribute
 
