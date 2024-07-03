@@ -195,3 +195,26 @@ class BlogController extends AbstractController
 ```
 
 This will help to map `title` query param /api/blog/filter?title=title to `$blogFilter`.
+
+### Map Request Payload
+
+```php
+class BlogController extends AbstractController
+{
+    #[Route('/api/blog/dto', name: 'app_api_blog_create_dto', methods: ['POST'], format: 'json')]
+    public function createDto(#[MapRequestPayload] BlogDto $blogDto): Response
+    {}
+}
+```
+
+`BlogDto.php`:
+
+```php
+class BlogDto
+{
+    public function __construct(
+        public readonly ?string $title,
+        public readonly ?string $description,
+    ) {}
+}
+```
