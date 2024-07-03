@@ -185,11 +185,11 @@ use Symfony\Component\HttpKernel\Attribute\MapQueryString;
 class BlogController extends AbstractController
 {
     #[Route('/api/blog/filter', name: 'app_api_blog_filter', methods: ['GET'], format: 'json')]
-    public function filter(#[MapQueryString] BlogFilter $blogFilter, EntityManagerInterface $em)
+    public function filter(#[MapQueryString] BlogFilter $blogFilter, BlogRepository $blogRepository)
     {
-        dd($blogFilter);
-        
-        return $this->json(['success' => true]);
+        $blogs = $blogRepository->findByBlogFilter($blogFilter);
+
+        return $this->json($blogs->getQuery()->getResult());
     }
 }
 ```
