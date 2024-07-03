@@ -102,6 +102,7 @@ class Blog
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 ```
+**Note:** Add this `Groups` attribute to related entities to display their info.
 
 Controller:
 
