@@ -176,3 +176,22 @@ class SecurityController extends AbstractController
     }
 }
 ```
+
+### Map Query String to Filter
+
+```php
+use Symfony\Component\HttpKernel\Attribute\MapQueryString;
+
+class BlogController extends AbstractController
+{
+    #[Route('/api/blog/filter', name: 'app_api_blog_filter', methods: ['GET'], format: 'json')]
+    public function filter(#[MapQueryString] BlogFilter $blogFilter, EntityManagerInterface $em)
+    {
+        dd($blogFilter);
+        
+        return $this->json(['success' => true]);
+    }
+}
+```
+
+This will help to map `title` query param /api/blog/filter?title=title to `$blogFilter`.
