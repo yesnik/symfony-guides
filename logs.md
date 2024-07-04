@@ -5,7 +5,7 @@
 Install [MonologBundle](https://github.com/symfony/monolog-bundle):
 
 ```bash
-composer require log
+composer require symfony/monolog-bundle
 ```
 Ensure that `MonologBundle` is included at `config/bundles.php`:
 
@@ -23,19 +23,18 @@ namespace App\Controller;
 
 use Psr\Log\LoggerInterface;
 
-class ConferenceController extends AbstractController
+class BlogController extends AbstractController
 {
-        /**
-     * @Route("/conference/{slug}", name="conference")
-     */
-    public function show(Request $request, LoggerInterface $logger): Response {
-
+    #[Route('/api/blog', name: 'app_api_blog', methods: ['GET'], format: 'json')]
+    public function index(LoggerInterface $logger): Response
+    {
         $logger->info('Spam check result');
         $logger->error('An error occurred');
         $logger->critical('Redis is down', [
             // include extra "context" info in your logs
             'message_type' => 'report',
         ]);
+    }
 }
 ```
 
