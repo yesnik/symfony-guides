@@ -82,6 +82,8 @@ monolog:
         my_markdown_logging:
             type: stream
             path: "%kernel.logs_dir%/markdown.log"
+            # "debug" is lowest level - all messages will be logged
+            # "error" - errors, critical messages will be logged
             level: debug
             channels: ["markdown"]
             
