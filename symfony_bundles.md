@@ -43,6 +43,10 @@ composer require friendsofsymfony/rest-bundle
 composer require friendsofsymfony/user-bundle
 ```
 
+## jwt-authentication-bundle
+
+[jwt-authentication-bundle](https://github.com/lexik/LexikJWTAuthenticationBundle) is JWT authentication for Symfony API.
+
 ## KnpMarkdownBundle
 
 [KnpMarkdownBundle](https://github.com/KnpLabs/KnpMarkdownBundle) provides markdown conversion for a Symfony project.
