@@ -41,6 +41,20 @@ public function index(int $id): JsonResponse
 ```
 If we visit /default Symfony will set default value: `$id = 1`.
 
+### Requirements param
+
+For URL `blog/12` it helps to run action `post`, not action `postBySlug`:
+
+```php
+#[Route('/{id}', name: 'blog_by_id', requirements: ['id' => '\d'])]
+public function post(int $id): JsonResponse
+{}
+
+#[Route('/{slug}', name: 'blog_by_slug')]
+public function postBySlug(string $slug): JsonResponse
+{}
+```
+
 ### Autowiring
 
 Controllers are also services that live in the container. But additionally they have the ability to autowire arguments into its methods.
