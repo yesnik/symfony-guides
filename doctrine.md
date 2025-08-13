@@ -14,7 +14,9 @@ Edit `.env` to define `DATABASE_URL`:
 
 ```.env
 # MySQL
-DATABASE_URL=mysql://db_user:db_password@127.0.0.1:3306/db_name
+DATABASE_URL=mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=8.0.32&charset=utf8mb4
+# MariaDB
+DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=10.4.32-MariaDB&charset=utf8mb4"
 # PostgreSQL
 DATABASE_URL="postgresql://db_user:db_password@127.0.0.1:5432/db_name?serverVersion=16&charset=utf8"
 ```
