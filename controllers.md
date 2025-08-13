@@ -191,6 +191,12 @@ class SecurityController extends AbstractController
 }
 ```
 
+### Generate URL
+
+```php
+echo $this->generateUrl('blog_by_id', ['id' => $item['id']]); // "/blog/1"
+```
+
 ### Map Query String to Filter
 
 ```php
