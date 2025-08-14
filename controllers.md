@@ -139,10 +139,12 @@ Whenever you install a new package, you'll get more and more services in this li
 
 ### Param converter
 
+A common routing need is to convert the value stored in some parameter (e.g. an integer acting as the user ID) into another value (e.g. the object that represents the user). 
+This feature is called a *"param converter"*.
 Symfony will see the type-hint and automatically query for a `Question` object `WHERE slug =` the `{slug}` route wildcard value.
 
 ```php
-#[Route('/questions/{slug}', name: 'app_question_show')]
+#[Route('/questions/{slug:question}', name: 'app_question_show')]
 public function show(Question $question)
 {
     return $this->render('question/show.html.twig', [
