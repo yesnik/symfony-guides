@@ -157,6 +157,27 @@ If we add `{id}` in the URL, then the query would be `WHERE slug = {slug} AND id
 
 It even handles the 404 for us! If we add foo to the slug in the URL... we still get a 404!
 
+Param converter helps us to replace this:
+
+```php
+#[Route('/{id}', name: 'blog_by_id', requirements: ['id' => '\d'], methods: ['GET'])]
+public function post(int $id, BlogPostRepository $blogPostRepository): JsonResponse
+{
+    $item = $blogPostRepository->find($id);
+    return $this->json($item);
+}
+```
+
+with this code:
+
+```php
+#[Route('/{id}', name: 'blog_by_id', requirements: ['id' => '\d'], methods: ['GET'])]
+public function post(BlogPost $blogPost): JsonResponse
+{
+    return $this->json($blogPost);
+}
+```
+
 ### Return JSON
 
 ```php
