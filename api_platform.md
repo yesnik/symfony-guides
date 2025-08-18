@@ -26,7 +26,7 @@ php bin/console make:entity
 
 Answer `yes` to this question: *Mark this class as an API Platform resource (expose a CRUD API for it) (yes/no)*
 
-This command will generate `/src/Entity/CheeseListing.php`.
+This command will generate `/src/Entity/BlogPost.php`.
 
 To tell API Platform that we want to expose a class as an API we can use:
 
@@ -50,6 +50,8 @@ class BlogPost
     #[ORM\Column]
     private ?int $id = null;
 ```
+
+This will create 5 CRUD actions for this entity. See it at URL: /api
 
 ### Generate User
 
