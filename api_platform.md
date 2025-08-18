@@ -27,27 +27,28 @@ php bin/console make:entity
 Answer `yes` to this question: *Mark this class as an API Platform resource (expose a CRUD API for it) (yes/no)*
 
 This command will generate `/src/Entity/CheeseListing.php`.
-Annotation `@ApiResource()` tells API Platform that you want to expose this class as an API:
+
+To tell API Platform that we want to expose a class as an API we can use:
+
+- *PHP >= 8.0*: Attribute `ApiResource` with `use ApiPlatform\Metadata\ApiResource` 
+- *PHP < 8.0*: Annotation `@ApiResource()` with `use ApiPlatform\Core\Annotation\ApiResource`
 
 ```php
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Metadata\ApiResource;
+use App\Repository\BlogPostRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ApiResource()
- * @ORM\Entity(repositoryClass="App\Repository\CheeseListingRepository")
- */
-class CheeseListing
+#[ORM\Entity(repositoryClass: BlogPostRepository::class)]
+#[ApiResource()]
+class BlogPost
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-}
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 ```
 
 ### Generate User
