@@ -71,9 +71,9 @@ This command will create:
 
 ## Operations
 
-API Platform provides 5 operations for us. We can enable only required operations.
+API Platform provides 5 operations for the resource by default. We can enable only required operations.
 
-Edit `/src/Entity/CheeseListing.php`:
+Edit `/src/Entity/User.php`:
 
 ```php
 use ApiPlatform\Metadata\ApiResource;
