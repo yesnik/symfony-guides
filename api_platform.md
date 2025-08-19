@@ -16,6 +16,12 @@ composer require api
 
 OpenAPI and JSON-LD documents do the same thing: they describe our API in a machine-readable format.
 
+**Show available routes**
+
+```
+php bin\console debug:router
+```
+
 ## Generate Entity
 
 ```bash
@@ -65,22 +71,33 @@ This command will create:
 
 ## Operations
 
-API Platform supports 2 types of operations: collection operations, item operations.
+API Platform provides 5 operations for us. We can enable only required operations.
 
 Edit `/src/Entity/CheeseListing.php`:
 
 ```php
-/**
- * @ApiResource(
- *     collectionOperations={"get", "post"},
- *     itemOperations={"get", "put", "delete"}
- * )
- * @ORM\Entity(repositoryClass="App\Repository\CheeseListingRepository")
- */
-class CheeseListing
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+
+#[ApiResource(
+    operations: [
+        new Get(),
+        new GetCollection(),
+        // new Post(),
+        // new Patch(),
+        // new Delete(),
+    ]
+)]
+class User implements PasswordAuthenticatedUserInterface
 {
     // ...
 ```
+
+The code above activates only 2 routes:
+
+- `/users`
+- `/users/5`
 
 ### Customize operation's URL
 
