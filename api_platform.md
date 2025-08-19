@@ -164,52 +164,31 @@ Use annotations to edit groups:
 These groups helps us to expose to our API only the fields that we want.
 
 ```php
-use ApiPlatform\Core\Annotation\ApiResource;
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation\Groups;
-/**
- * @ApiResource(
- *     shortName="cheeses",
- *     normalizationContext={"groups"={"cheese_listing:read"}, "swagger_definition_name"="Read"},
- *     denormalizationContext={"groups"={"cheese_listing:write"}, "swagger_definition_name"="Write"}
- * )
- * @ORM\Entity(repositoryClass="App\Repository\CheeseListingRepository")
- */
-class CheeseListing
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ApiResource(
+    operations: [
+        new Get(),
+    ],
+    normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']],
+)]
+class User implements PasswordAuthenticatedUserInterface
 {
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups({"cheese_listing:read", "cheese_listing:write"})
-     */
-    private $title;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    #[Groups(['read'])]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="text")
-     * @Groups({"cheese_listing:read"})
-     */
-    private $description;
-    
-    /**
-     * The description of the cheese as raw text.
-     *
-     * @Groups("cheese_listing:write")
-     */
-    public function setTextDescription(string $description): self
-    {
-        $this->description = nl2br($description);
-        return $this;
-    }
-    
-    /**
-     * How long ago in text that this cheese listing was added.
-     *
-     * @Groups("cheese_listing:read")
-     */
-    public function getCreatedAtAgo(): string
-    {
-        return Carbon::instance($this->getCreatedAt())->diffForHumans();
-    }
+    #[ORM\Column(length: 255)]
+    #[Groups(['read'])]
+    private ?string $username = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $password = null;
 ```
+
+If we open `/users/5` we will not see `password` param of the user, because we didn't assign `read` group to this param.
 
 ### Change items per page
 
