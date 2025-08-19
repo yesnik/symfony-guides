@@ -58,6 +58,14 @@ DATABASE_URL=postgres://main:main@127.0.0.1:32769/crm_test?sslmode=disable&chars
 
 *Note:* Add `-vvv` to make command's output verbose.
 
+### Faker
+
+[Faker](https://github.com/FakerPHP/Faker) is a PHP library that generates fake data for you.
+
+```
+composer require fakerphp/faker --dev
+```
+
 ### Foundry
 
 We can generate fixtures easier with [zenstruck / foundry](https://github.com/zenstruck/foundry).
