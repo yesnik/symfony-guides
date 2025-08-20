@@ -367,24 +367,20 @@ Edit file:
 ```php
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\CheeseListingRepository")
- */
-class CheeseListing
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ApiResource()]
+class User implements PasswordAuthenticatedUserInterface
 {
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
-     * @Assert\Length(
-     *     min=2,
-     *     max=50,
-     *     maxMessage="Describe your cheese in 50 chars or less"
-     * )
-     */
-    private $title;
+    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank()]
+    #[Assert\Length(
+        min: 2,
+        max: 20,
+    )]
+    private ?string $username = null;
     
  ```
- 
+
 If we don't define `groups` param on a constraint, the validator puts this constraint into `Default` group. 
 By default the validator executes constraints in this `Default` group.
 
