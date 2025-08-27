@@ -79,13 +79,14 @@ So, you couldn't make a query, for example. If Callback doesn't work, the soluti
 
 **UniqueEntity** - [docs](https://symfony.com/doc/current/reference/constraints/UniqueEntity.html)
 
-We apply unique validation to Entity:
+This validation won't allow us to create 2 users with the same `username` OR 2 users with the same `email`:
 
 ```php
 // DON'T forget the following use statement!!!
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[UniqueEntity('username')]
 #[UniqueEntity('email')]
 class User implements UserInterface
 {
