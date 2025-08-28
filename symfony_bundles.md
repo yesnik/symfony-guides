@@ -50,7 +50,13 @@ composer require friendsofsymfony/user-bundle
 Generate private, public keys at `config/jwt` folder:
 
 ```bash
+# Private key:
+# Way 1 - no pass phrase
 openssl genrsa -out config/jwt/private.pem
+# Way 2 - with pass phrase
+openssl genrsa -out .\config\jwt\private.pem -aes256 4096
+
+# Public key:
 openssl rsa -in config/jwt/private.pem -pubout > config/jwt/public.pem
 ```
 
