@@ -7,7 +7,7 @@ They are dependent from Symfony components.
 
 [AliceBundle](https://github.com/hautelook/AliceBundle) is a Symfony bundle to manage fixtures with Alice and Faker.
 
-```
+```bash
 composer require --dev hautelook/alice-bundle
 ```
 
@@ -15,7 +15,7 @@ composer require --dev hautelook/alice-bundle
 
 [EasyAdminBundle](https://github.com/EasyCorp/EasyAdminBundle) is new and simple admin generator for Symfony apps.
 
-```
+```bash
 composer require admin
 ```
 
@@ -23,7 +23,7 @@ composer require admin
 
 [FOSOAuthServerBundle](https://github.com/FriendsOfSymfony/FOSOAuthServerBundle) is a server side OAuth2 Bundle for Symfony/
 
-```
+```bash
 composer require friendsofsymfony/oauth-server-bundle
 ```
 
@@ -31,7 +31,7 @@ composer require friendsofsymfony/oauth-server-bundle
 
 [FOSRestBundle](https://github.com/FriendsOfSymfony/FOSRestBundle) provides various tools to rapidly develop RESTful API's with Symfony:
 
-```
+```bash
 composer require friendsofsymfony/rest-bundle
 ```
 
@@ -39,13 +39,20 @@ composer require friendsofsymfony/rest-bundle
 
 [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle) provides user management for Symfony project. Compatible with Doctrine ORM & ODM, and custom storages.
 
-```
+```bash
 composer require friendsofsymfony/user-bundle
 ```
 
 ## jwt-authentication-bundle
 
 [jwt-authentication-bundle](https://github.com/lexik/LexikJWTAuthenticationBundle) is JWT authentication for Symfony API.
+
+Generate private, public keys at `config/jwt` folder:
+
+```bash
+openssl genrsa -out config/jwt/private.pem
+openssl rsa -in config/jwt/private.pem -pubout > config/jwt/public.pem
+```
 
 ## KnpMarkdownBundle
 
@@ -55,7 +62,7 @@ composer require friendsofsymfony/user-bundle
 
 [KnpPaginatorBundle](https://github.com/KnpLabs/KnpPaginatorBundle) is SEO friendly Symfony paginator to sort and paginate:
 
-```
+```bash
 composer require knplabs/knp-paginator-bundle
 ```
 
@@ -68,7 +75,7 @@ It allows you to get string '2 days ago' from DateTime object.
 
 [MakerBundle](https://github.com/symfony/maker-bundle) is the fastest way to generate the most common code you'll need in a Symfony app: commands, controllers, form classes, event subscribers and more.
 
-```
+```bash
 composer require maker --dev
 ```
 
@@ -76,7 +83,7 @@ composer require maker --dev
 
 [SecurityBundle](https://github.com/symfony/security-bundle) integrates the [Security component](https://github.com/symfony/security) in Symfony applications. All these options are configured under the `security` key in your application configuration:
 
-```
+```bash
 composer require security
 ```
 
@@ -84,7 +91,7 @@ composer require security
 
 [SensioFrameworkExtraBundle](https://github.com/sensiolabs/SensioFrameworkExtraBundle) allows to configure controllers with annotations.
 
-```
+```bash
 composer require sensio/framework-extra-bundle
 ```
 
