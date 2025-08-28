@@ -141,26 +141,20 @@ symfony console router:match /api/product/1 --method=POST
 
 ### Show available services that we can include in our app:
 
-```
-./bin/console debug:autowiring
-```
-
-If you want to search available services that match the given word *log*:
-
-```
-./bin/console debug:container log
+```bash
+php bin/console debug:autowiring
 ```
 
-If you also want to see private services:
+Search available services that match the given word *log*:
 
-```
-./bin/console debug:container --show-private
+```bash
+php bin/console debug:container log
 ```
 
 ### Show parameters values
 
 ```
-./bin/console debug:container --parameters
+php bin/console debug:container --parameters
 ```
 
 *Useful parameters*:
@@ -172,6 +166,7 @@ If you also want to see private services:
 ```
 php bin/console debug:config framework
 php bin/console debug:config api_platform
+
 ```
 
 ### Dump available config options for the bundle
