@@ -690,12 +690,11 @@ When an object is being transformed into JSON (or another format), it goes throu
 The serializer has many normalizers. When it needs to normalize something, it loops over all the normalizers, calls `supportsNormalization()` and passes us the data that it needs to normalize. 
 If we return `true` from `supportsNormalization()`, the serializer will call `normalize()` method. 
 
-
 ## Authorization
 
 When a request comes in, API Platform goes through three steps in a specific order:
 
-1. It deserializes the JSON and updates the CheeseListing object
+1. It deserializes the JSON and updates the object
 2. It applies `security` param 
 3. It executes validation rules.
 
@@ -723,31 +722,33 @@ Edit `src/Entity/CheeseListing.php`:
 class CheeseListing { }
 ```
 
-If you're not logged in then you can't make POST request to create `CheeseListing`.
+If you're not logged in then you can't make a request `/api/users/21`.
 
 Edit `src/Entity/User.php`:
 
 ```php
-/**
- * @ApiResource(
- *     collectionOperations={
- *          "get"={"access_control"="is_granted('ROLE_USER')"},
- *          "post"
- *     },
- *     itemOperations={
- *          "get"={"access_control"="is_granted('ROLE_USER')"},
- *          "put"={"access_control"="is_granted('ROLE_USER') and object == user"},
- *          "delete"={"access_control"="is_granted('ROLE_ADMIN')"}
- *     },
- *     normalizationContext={"groups"={"user:read"}},
- *     denormalizationContext={"groups"={"user:write"}},
- * )
- * @UniqueEntity(fields={"username"})
- * @UniqueEntity(fields={"email"})
- * @ApiFilter(PropertyFilter::class)
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- */
-class User implements UserInterface {}
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ApiResource(
+    operations: [
+        new Get(
+            security: "is_granted('IS_AUTHENTICATED_FULLY')"
+        ),
+        // The GetCollection operation returns a list of Users.
+        // new GetCollection(),
+        new Post(
+            processor: UserPasswordHasher::class, 
+            validationContext: ['groups' => ['Default', 'user:create']]
+        ),
+        // new Patch(uriTemplate: '/users/{id}'),
+        // new Delete(uriTemplate: '/users/{id}'),
+    ],
+    normalizationContext: ['groups' => ['read']],
+    //denormalizationContext: ['groups' => ['write']],
+)]
+#[UniqueEntity('username')]
+#[UniqueEntity('email')]
+class User implements PasswordAuthenticatedUserInterface, UserInterface
+{}
 ```
 
 ## Testing API
