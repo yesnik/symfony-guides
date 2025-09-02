@@ -24,6 +24,15 @@ class Article
 }
 ```
 
+**DateTime** - [docs](https://symfony.com/doc/current/reference/constraints/DateTime.html)
+
+```php
+#[ORM\Column]
+#[Assert\NotBlank()]
+#[Assert\DateTime()]
+private ?\DateTime $published = null;
+```
+
 **NotBlank** - [docs](https://symfony.com/doc/current/reference/constraints/NotBlank.html)
 
 ```php
