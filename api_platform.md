@@ -19,7 +19,7 @@ OpenAPI and JSON-LD documents do the same thing: they describe our API in a mach
 **Show available routes**
 
 ```
-php bin\console debug:router
+php bin/console debug:router
 ```
 
 ## Generate Entity
@@ -32,7 +32,7 @@ Answer `yes` to this question: *Mark this class as an API Platform resource (exp
 
 This command will generate `/src/Entity/BlogPost.php`.
 
-To tell API Platform that we want to expose a class as an API we can use:
+To tell API Platform that we want to expose entity at `/src/Entity` folder as an API we can use:
 
 - *PHP >= 8.0*: Attribute `ApiResource` with `use ApiPlatform\Metadata\ApiResource` 
 - *PHP < 8.0*: Annotation `@ApiResource()` with `use ApiPlatform\Core\Annotation\ApiResource`
@@ -55,19 +55,7 @@ class BlogPost
     private ?int $id = null;
 ```
 
-This will create 5 CRUD actions for this entity. See it at URL: /api
-
-### Generate User
-
-```bash
-php bin/console make:user
-```
-
-This command will create:
-
-- src/Entity/User.php
-- src/Repository/UserRepository.php
-
+This will create 5 CRUD actions for the `BlogPost` entity. See it at URL: /api
 
 ## Operations
 
@@ -91,7 +79,6 @@ use ApiPlatform\Metadata\GetCollection;
 )]
 class User implements PasswordAuthenticatedUserInterface
 {
-    // ...
 ```
 
 The code above activates only 2 routes:
@@ -99,24 +86,94 @@ The code above activates only 2 routes:
 - `/users`
 - `/users/5`
 
-### Customize operation's URL
+### Add State Processor to the operation
 
-Each operation generates a route, and API Platform gives you full control over how that route looks.
+In API Platform, a state processor is a class responsible for handling data mutation operations during POST, PUT, PATCH, or DELETE requests. 
+It receives an instance of the API resource (typically an object marked with the `#[ApiResource]` attribute) 
+containing the data submitted by the client after deserialization.
+
+- *Purpose*: To persist, update, or delete data in the underlying persistence layer (e.g., database, external services).
+- *Customization*: You can create custom state processors by implementing the ProcessorInterface. 
+This allows you to integrate with various persistence systems (e.g., Elasticsearch, custom APIs) or implement complex business logic during data modification.
+- *Integration with Operations*: State processors are linked to specific API operations (e.g., Post, Put, Patch) within your resource definition, 
+allowing you to specify which processor handles which operation.
 
 ```php
-/**
- * @ApiResource(
- *     collectionOperations={"get", "post"},
- *     itemOperations={
- *          "get"={"path"="/i_love_cheeses/{id}"},
- *          "put"
- *     },
- *     shortName="cheeses"
- * )
- */
-class CheeseListing { // ... }
+#[ORM\Entity(repositoryClass: BlogPostRepository::class)]
+#[ApiResource(
+    operations: [
+        new Get(),
+        new GetCollection(),
+        new Post(
+            processor: BlogPostAuthorAssigner::class, 
+            security: "is_granted('IS_AUTHENTICATED_FULLY')"
+        ),
+    ]
+)]
+class BlogPost
+{
 ```
-This will change GET route to `/api/i_love_cheeses/{id}`.
+
+Here we added `BlogPostAuthorAssigner` processor for POST requests on creating entity:
+
+```php
+namespace App\State;
+
+use ApiPlatform\Metadata\Operation;
+use ApiPlatform\State\ProcessorInterface;
+use App\Entity\BlogPost;
+use App\Entity\User;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+
+/**
+ * @implements ProcessorInterface<User, User|void>
+ */
+final readonly class BlogPostAuthorAssigner implements ProcessorInterface
+{
+    public function __construct(
+        private ProcessorInterface $processor,
+        private TokenStorageInterface $tokenStorage,
+    )
+    {
+    }
+
+    /**
+     * @param User $data
+     */
+    public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): ?BlogPost
+    {
+        $blogPost = $data;
+
+        $token = $this->tokenStorage->getToken();
+
+        if (null === $token) {
+            return null;
+        }
+
+        /** @var User $author */
+        $author = $token->getUser();
+
+        if (!$blogPost instanceof BlogPost) {
+            return null;
+        }
+
+        $blogPost->setAuthor($author);
+
+        return $this->processor->process($blogPost, $operation, $uriVariables, $context);
+    }
+}
+```
+
+Edit `config/services.yaml` to register this processor:
+
+```yaml
+services:
+    # ...
+    App\State\BlogPostAuthorAssigner:
+        bind:
+            $processor: '@api_platform.doctrine.orm.state.persist_processor'
+            $tokenStorage: '@security.token_storage'
+```
 
 ## Modify search query
 
