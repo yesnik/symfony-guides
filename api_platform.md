@@ -713,21 +713,32 @@ class User implements UserInterface
 
 ### Subresources
 
-If you want to make the link `/api/users/4/cheese_listings` work use `@ApiSubresource()`:
+If we want to make the URL `/blog_posts/5/comments` work:
 
 ```php
-use ApiPlatform\Core\Annotation\ApiSubresource;
-
-class User implements UserInterface
-{
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\CheeseListing", mappedBy="owner", orphanRemoval=true, cascade={"persist"})
-     * @Groups({"user:read", "user:write"})
-     * @Assert\Valid()
-     * @ApiSubresource()
-     */
-    private $cheeseListings;
+#[ORM\Entity(repositoryClass: CommentRepository::class)]
+#[ApiResource(
+    operations: [
+        new Get(),
+        new Patch(),
+        new GetCollection(),
+        new Post(
+            processor: AuthorAssigner::class, 
+            security: "is_granted('IS_AUTHENTICATED_FULLY')"
+        ),
+    ]
+)]
+#[ApiResource(
+    uriTemplate: '/blog_posts/{blogPostId}/comments',
+    uriVariables: [
+        'blogPostId' => new Link(fromClass: BlogPost::class, toProperty: 'blogPost'),
+    ],
+    operations: [ new GetCollection() ]
+)]
+class Comment {}
 ```
+
+As we can see entity can have many `ApiResource` attributes.
 
 ## Normalizer
 
