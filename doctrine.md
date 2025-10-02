@@ -274,6 +274,19 @@ class ArticleAdminController extends AbstractController
 }
 ```
 
+### Update record
+
+```php
+$user = $this->userRepository->findOneBy([
+    'confirmationToken' => $userConfirmation->confirmationToken
+]);
+
+$user->setEnabled(true);
+
+// $this->em->persist($user); // No need to call 'persist'
+$this->em->flush(); // Just call 'flush' to update existing record
+```
+
 ## `Doctrine\ORM\EntityRepository` methods
 
 To run a query we need to get entity's repository. For example, `App\Repository\ArticleRepository`. If a Doctrine can't find a record it will return `null`.
