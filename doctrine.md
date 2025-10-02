@@ -259,10 +259,10 @@ class ArticleAdminController extends AbstractController
             ->setTitle('Hello world')
             ->setSlug('hello-world');
         
-        // It simply says that we want to save this article
+        // Tell Doctrine to manage this entity
         $em->persist($article);
         
-        // It executes INSERT query
+        // Execute INSERT query
         $em->flush();
 
         return new Response(sprintf(
@@ -283,8 +283,8 @@ $user = $this->userRepository->findOneBy([
 
 $user->setEnabled(true);
 
-// $this->em->persist($user); // No need to call 'persist'
-$this->em->flush(); // Just call 'flush' to update existing record
+// $this->em->persist($user); // No need to call 'persist' - entity is already managed
+$this->em->flush(); // Executes UPDATE query
 ```
 
 ## `Doctrine\ORM\EntityRepository` methods
