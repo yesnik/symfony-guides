@@ -115,13 +115,15 @@ File of template `templates/partners/index.html.twig`:
 ### Create Entity, add column, add field
 
 ```bash
-symfony console make:entity
+php bin/console make:entity
 ```
+
+Column `id` will be generated automatically.
 
 ### Create CRUD for entity
 
 ```
-symfony console make:crud
+php bin/console make:crud
 ```
 
 This command will create controller, form, templates for entity.
@@ -129,7 +131,7 @@ This command will create controller, form, templates for entity.
 ### Show available routes
 
 ```bash
-symfony console debug:router
+php bin/console debug:router
 ```
 
 ### Show what route matches URL
@@ -214,13 +216,13 @@ symfony run psql < dump.sql
 ### Clear app's cache
 
 ```
-./bin/console cache:pool:clear cache.app
+php bin/console cache:pool:clear cache.app
 ```
 
 Clear Symfony's internal cache that helps your app run:
 
 ```
-./bin/console cache:clear
+php bin/console cache:clear
 ```
 
 ### Create cache files
@@ -234,7 +236,7 @@ This command will create all cache files that Symfony will ever need.
 ### Show environment variables
 
 ```
-./bin/console about
+php bin/console about
 ```
 
 ### Show twig filters, functions
@@ -334,5 +336,5 @@ It will create a file `src/Command/ArticleStatsCommand.php`.
 We can run our new command:
 
 ```
-bin/console article:stats
+php bin/console article:stats
 ```
